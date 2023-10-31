@@ -7,6 +7,11 @@ const app = express();
 
 const pgp = require('pg-promise')(/* options */)
 const db = pgp('postgres://csce315_909_antonhugo1:password@csce-315-db.engr.tamu.edu:5432/csce315331_09b_db')
+// username: csce315_909_antonhugo1
+// password: password
+// host: csce-315-db.engr.tamu.edu
+// port name: 5432
+// db name: csce315331_09b_db
 
 const query = pgp.as.format('select * from recipe')
 console.log(query)

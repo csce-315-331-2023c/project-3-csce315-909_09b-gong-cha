@@ -1,2 +1,1 @@
-#ignore ALL files in directory node_modules
-node_modules/*
+node_modules/
