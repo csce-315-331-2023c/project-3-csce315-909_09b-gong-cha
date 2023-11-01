@@ -1,4 +1,5 @@
 const express = require('express');
+const { as } = require('pg-promise');
 const app = express();
 
 // app.get('/', (req, res) => {
@@ -21,7 +22,9 @@ db.any(query).then((data) => {
   });
   console.log(data);
 
-
+//send info to cashier.js
+//then cashier.js will send info to cashier.html
+//then cashier.html will display info
 //   for (var key in data) {
 //     if (data.hasOwnProperty(key)) {
 //         console.log(key + " -> " + data[key]);
@@ -42,4 +45,13 @@ app.listen(PORT, () => {
 });
 
 
+//view all recipes
+async function ReadRecipes() {
+  var result = await client.query("SELECT * FROM recipe");
+  return result.rows;
+}
 
+app.get('/recipe', async (req, res) => {
+  const result = await ReadRecipes();
+  res.send(result);
+})

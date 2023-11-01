@@ -29,12 +29,43 @@
           </ul>
         </div>
     </nav>
+
     <div class="row">
-      <div class="col-9">test</div>
+      <div class="col-9" id="RecipeButtons">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="milktea-tab" data-toggle="tab" href="#milktea" role="tab" aria-controls="milktea" aria-selected="true">Milk Tea</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="slushie-tab" data-toggle="tab" href="#slushie" role="tab" aria-controls="slushie" aria-selected="false">Slushie</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="coffee-tab" data-toggle="tab" href="#coffee" role="tab" aria-controls="coffee" aria-selected="false">Coffee</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Other</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="milktea" role="tabpanel" aria-labelledby="milktea-tab">
+            Content for milktea goes here.
+          </div>
+          <div class="tab-pane fade" id="slushie" role="tabpanel" aria-labelledby="slushie-tab">
+            Content for slushie goes here.
+          </div>
+          <div class="tab-pane fade" id="coffee" role="tabpanel" aria-labelledby="coffee-tab">
+            Content for coffee goes here.
+          </div>
+          <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+            Content for other goes here.
+          </div>
+        </div>
+        
+      </div>
       <div class="col-3">
         <div class="row row-cols-1 position-relative vh-100">
-          <div class="col border-start border-dark">test</div>
-          <div class="col border border-end-0 border-dark">test</div>
+          <div class="col border-start border-dark">test1</div>
+          <div class="col border border-end-0 border-dark">test2</div>
           <div class="col position-absolute bottom-0 end-0 border-start border-dark">hello</div>
         </div>
       </div>
