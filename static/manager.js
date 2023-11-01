@@ -8,18 +8,52 @@ function showInputBox() {
   document.getElementById(`inputBox${selectedOption}`).classList.remove("d-none");
 }
 
+// Adds a drink to the database
 function addDrink() {
 
 }
 
-function modDrink() {
-
-}
-
+// Adds an ingredient to the database
 function addIngredient() {
 
 }
 
-function modIngredient() {
-  
+// Modifies name of a drink given drinkID
+function modDrinkName() {
+
+}
+
+// Modifies ingredients & quantities of a drink given drinkID
+function modDrinkIngredients() {
+
+}
+
+// Modifies medium price of a drink given drinkID
+function modDrinkMediumPrice() {
+
+}
+
+// Modifies large price of a drink given drinkID
+function modDrinkLargePrice() {
+
+}
+
+// Modifies recipe price of a drink given drinkID
+function modDrinkRecipePrice() {
+
+}
+
+// Modifies an ingredient name given ingredientID
+function modIngredientName() {
+
+}
+
+// Modifies an ingredient unit price given ingredientID
+function modIngredientUnitPrice() {
+
+}
+
+// Modifies an ingredient stock given ingredientID
+function modIngredientStock() {
+
 }

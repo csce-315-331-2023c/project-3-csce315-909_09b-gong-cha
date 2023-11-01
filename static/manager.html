@@ -33,24 +33,147 @@
         </select>
       </div>
       <div id="inputBox1" class="d-none w-50">
-        <label for="input1">Drink Name:</label>
-        <input type="text" class="form-control" id="input1" name="input1">
-        <button type="submit" class="btn btn-primary" onclick="addDrink()">Add Drink</button>
+        <label for="add-drink-name">Drink Name:</label>
+        <input type="text" class="form-control" id="add-drink-name" name="add-drink-name">
+
+        <label for="add-ingredients">Ingredients (separated by ','):</label>
+        <input type="text" class="form-control" id="add-ingredients" name="add-ingredients">
+
+        <label for="add-ingredients-qty">Quantity of Ingredients (separated by ','):</label>
+        <input type="text" class="form-control" id="add-ingredients-qty" name="add-ingredients-qty">
+
+        <div>
+          <input class="form-check-input" type="radio" name="is-slushy" id="is-not-slushy" value="option1" checked>
+          <label class="form-check-label" for="is-not-slushy">Not Slushy</label>
+          <input class="form-check-input" type="radio" name="is-slushy" id="is-a-slushy" value="option2">
+          <label class="form-check-label" for="is-slushy">Slushy</label>
+        </div>
+
+        <label for="med-price-add">Medium Price:</label>
+        <input type="text" class="form-control" id="med-price-add" name="med-price-add">
+
+        <label for="lrg-price-add">Large Price:</label>
+        <input type="text" class="form-control" id="lrg-price-add" name="lrg-price-add">
+      
+        <label for="rcp-price-add">Recipe Price:</label>
+        <input type="text" class="form-control" id="rcp-price-add" name="rcp-price-add">
+
+        <button type="submit" class="btn btn-primary" onclick="addDrink()">Add New Drink</button>
       </div>
       <div id="inputBox2" class="d-none w-50">
-        <label for="input2">Drink ID:</label>
-        <input type="text" class="form-control" id="input2" name="input2">
-        <button type="submit" class="btn btn-primary" onclick="modDrink()">Modify Drink</button>
+        <label for="mod-drink-id">Drink ID (REQUIRED):</label>
+        <input type="text" class="form-control" id="mod-drink-id" name="mod-drink-id">
+        <div class="row">
+          <label for="mod-drink-name">Drink Name:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-drink-name" name="mod-drink-name">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkName()">Change Name</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-ingredients">Ingredients (separated by ','):</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-drink-ingredients" name="mod-drink-ingredients">
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-ingredients-qty">Quantity of Ingredients (in same order, separated by ','):</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-drink-ingredients-qty" name="mod-drink-ingredients-qty">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkIngredients()">Change Ingredients</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-med-price">Medium Price:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-drink-med-price" name="mod-drink-med-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkMediumPrice()">Change Medium Price</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-lrg-price">Large Price:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-drink-lrg-price" name="mod-drink-lrg-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkLargePrice()">Change Large Price</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-rcp-price">Recipe Price:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-drink-rcp-price" name="mod-drink-rcp-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkRecipePrice()">Change Recipe Price</button>
+          </div>
+        </div>
+
       </div>
       <div id="inputBox3" class="d-none w-50">
-        <label for="input3">Ingredient Name:</label>
-        <input type="text" class="form-control" id="input3" name="input3">
+        <label for="add-ingredient-name">Ingredient Name:</label>
+        <input type="text" class="form-control" id="add-ingredient-name" name="add-ingredient-name">
+
+        <label for="add-unit-price">Unit Price:</label>
+        <input type="text" class="form-control" id="add-unit-price" name="add-unit-price">
+
+        <label for="add-stock">Stock:</label>
+        <input type="text" class="form-control" id="add-stock" name="add-stock">
+
+        <div>
+          <input class="form-check-input" type="radio" name="is-topping" id="is-not-topping" value="option1" checked>
+          <label class="form-check-label" for="is-not-topping">Not Topping</label>
+          <input class="form-check-input" type="radio" name="is-topping" id="is-a-topping" value="option2">
+          <label class="form-check-label" for="is-topping">Topping</label>
+        </div>
+
         <button type="submit" class="btn btn-primary" onclick="addIngredient()">Add Ingredient</button>
       </div>
       <div id="inputBox4" class="d-none w-50">
-        <label for="input4">Ingredient ID:</label>
-        <input type="text" class="form-control" id="input4" name="input4">
-        <button type="submit" class="btn btn-primary" onclick="modIngredient()">Modify Ingredient</button>
+        <label for="mod-ingredient-id">Ingredient ID (REQUIRED):</label>
+        <input type="text" class="form-control" id="mod-ingredient-id" name="mod-ingredient-id">
+
+        <div class="row">
+          <label for="mod-ingredient-name">Ingredient Name:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-ingredient-name" name="mod-ingredient-name">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngreidentName()">Change Name</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-ingredient-unit-price">Unit Price:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-ingredient-unit-price" name="mod-ingredient-unit-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngredientUnitPrice()">Change Unit Price</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-ingredient-stock">Stock:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-ingredient-stock" name="mod-ingredient-stock">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngredientStock()">Change Stock</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
