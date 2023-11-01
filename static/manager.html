@@ -25,28 +25,33 @@
       <div class="form-group">
         <label for="options">What would you like to change?</label>
         <select class="form-select w-25" id="options" name="options" onchange="showInputBox()">
-          <option value="option1">Add Drink</option>
-          <option value="option2">Modify Drink</option>
-          <option value="option3">Add Ingredient</option>
-          <option value="option1">Modify Ingredient</option>
+          <option value="-">-</option>
+          <option value="1">Add Drink</option>
+          <option value="2">Modify Drink</option>
+          <option value="3">Add Ingredient</option>
+          <option value="4">Modify Ingredient</option>
         </select>
       </div>
-      <!-- <div id="inputBox1" class="d-none">
-        <label for="input1">Input for Option 1:</label>
+      <div id="inputBox1" class="d-none w-50">
+        <label for="input1">Drink Name:</label>
         <input type="text" class="form-control" id="input1" name="input1">
+        <button type="submit" class="btn btn-primary" onclick="addDrink()">Add Drink</button>
       </div>
-      <div id="inputBox2" class="d-none">
-        <label for="input2">Input for Option 2:</label>
+      <div id="inputBox2" class="d-none w-50">
+        <label for="input2">Drink ID:</label>
         <input type="text" class="form-control" id="input2" name="input2">
+        <button type="submit" class="btn btn-primary" onclick="modDrink()">Modify Drink</button>
       </div>
-      <div id="inputBox3" class="d-none">
-        <label for="input3">Input for Option 3:</label>
+      <div id="inputBox3" class="d-none w-50">
+        <label for="input3">Ingredient Name:</label>
         <input type="text" class="form-control" id="input3" name="input3">
+        <button type="submit" class="btn btn-primary" onclick="addIngredient()">Add Ingredient</button>
       </div>
-      <div id="inputBox4" class="d-none">
-        <label for="input4">Input for Option 4:</label>
+      <div id="inputBox4" class="d-none w-50">
+        <label for="input4">Ingredient ID:</label>
         <input type="text" class="form-control" id="input4" name="input4">
-      </div> -->
+        <button type="submit" class="btn btn-primary" onclick="modIngredient()">Modify Ingredient</button>
+      </div>
     </div>
 
     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">

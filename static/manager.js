@@ -7,3 +7,19 @@ function showInputBox() {
 
   document.getElementById(`inputBox${selectedOption}`).classList.remove("d-none");
 }
+
+function addDrink() {
+
+}
+
+function modDrink() {
+
+}
+
+function addIngredient() {
+
+}
+
+function modIngredient() {
+  
+}
