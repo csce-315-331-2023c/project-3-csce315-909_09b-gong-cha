@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
+
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Edit Database</a>
@@ -50,13 +51,13 @@
         </div>
 
         <label for="med-price-add">Medium Price:</label>
-        <input type="text" class="form-control" id="med-price-add" name="med-price-add">
+        <input type="number" class="form-control" id="med-price-add" name="med-price-add">
 
         <label for="lrg-price-add">Large Price:</label>
-        <input type="text" class="form-control" id="lrg-price-add" name="lrg-price-add">
+        <input type="number" class="form-control" id="lrg-price-add" name="lrg-price-add">
       
         <label for="rcp-price-add">Recipe Price:</label>
-        <input type="text" class="form-control" id="rcp-price-add" name="rcp-price-add">
+        <input type="number" class="form-control" id="rcp-price-add" name="rcp-price-add">
 
         <button type="submit" class="btn btn-primary" onclick="addDrink()">Add New Drink</button>
       </div>
@@ -93,7 +94,7 @@
         <div class="row">
           <label for="mod-drink-med-price">Medium Price:</label>
           <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-drink-med-price" name="mod-drink-med-price">
+            <input type="number" class="form-control" id="mod-drink-med-price" name="mod-drink-med-price">
           </div>
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" onclick="modDrinkMediumPrice()">Change Medium Price</button>
@@ -103,7 +104,7 @@
         <div class="row">
           <label for="mod-drink-lrg-price">Large Price:</label>
           <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-drink-lrg-price" name="mod-drink-lrg-price">
+            <input type="number" class="form-control" id="mod-drink-lrg-price" name="mod-drink-lrg-price">
           </div>
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" onclick="modDrinkLargePrice()">Change Large Price</button>
@@ -113,7 +114,7 @@
         <div class="row">
           <label for="mod-drink-rcp-price">Recipe Price:</label>
           <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-drink-rcp-price" name="mod-drink-rcp-price">
+            <input type="number" class="form-control" id="mod-drink-rcp-price" name="mod-drink-rcp-price">
           </div>
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" onclick="modDrinkRecipePrice()">Change Recipe Price</button>
@@ -126,10 +127,10 @@
         <input type="text" class="form-control" id="add-ingredient-name" name="add-ingredient-name">
 
         <label for="add-unit-price">Unit Price:</label>
-        <input type="text" class="form-control" id="add-unit-price" name="add-unit-price">
+        <input type="number" class="form-control" id="add-unit-price" name="add-unit-price">
 
         <label for="add-stock">Stock:</label>
-        <input type="text" class="form-control" id="add-stock" name="add-stock">
+        <input type="number" class="form-control" id="add-stock" name="add-stock">
 
         <div>
           <input class="form-check-input" type="radio" name="is-topping" id="is-not-topping" value="option1" checked>
@@ -157,7 +158,7 @@
         <div class="row">
           <label for="mod-ingredient-unit-price">Unit Price:</label>
           <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-ingredient-unit-price" name="mod-ingredient-unit-price">
+            <input type="number" class="form-control" id="mod-ingredient-unit-price" name="mod-ingredient-unit-price">
           </div>
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" onclick="modIngredientUnitPrice()">Change Unit Price</button>
@@ -167,7 +168,7 @@
         <div class="row">
           <label for="mod-ingredient-stock">Stock:</label>
           <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-ingredient-stock" name="mod-ingredient-stock">
+            <input type="number" class="form-control" id="mod-ingredient-stock" name="mod-ingredient-stock">
           </div>
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" onclick="modIngredientStock()">Change Stock</button>
