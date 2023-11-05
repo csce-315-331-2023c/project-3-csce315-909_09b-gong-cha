@@ -32,6 +32,10 @@ body {
     background-color: ghostwhite;
 }
 
+#myTab .active {
+    background-color: ghostwhite;
+}
+
 #myTab .nav-link {
     color: black;
 }
