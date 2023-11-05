@@ -50,3 +50,21 @@
   flex: .2;
   background-color: lightsteelblue;  
 }
+
+.btn-rectangle-lg {
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 160px !important;
+  text-align: center;
+  padding: 5px;
+  font-size:18px;
+  /* background-color:#B54949;
+  border: #B54949; */
+  margin: 5px;
+}
+
+/* .btn-rectangle-lg:hover {
+  background-color: #2F6386;
+  color: white;
+} */

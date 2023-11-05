@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
 });
 
+var drinks = new Array();
 
 function createButton(drinkname, json) {
     var button = document.createElement("button");
@@ -21,9 +22,7 @@ function createButton(drinkname, json) {
  */
 function insertIntoReceipt(json) {
     var itempane = document.getElementById("items-pane"); // Corrected ID
-    var div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = "test";
+
     /**
      * the div should allow for user to choose whether medium or large
      * also quantity of a drink
@@ -32,19 +31,91 @@ function insertIntoReceipt(json) {
      * this will be done via actionlistener to the toppings button
      */
     //remove button
-    var remove = document.createElement("button");
-    remove.type = "button";
-    remove.className = "btn rounded-5";
-    //add fontawesome icon
-    var icon = document.createElement("i");
-    icon.className = "fa-regular fa-circle-xmark fa-lg";
-    remove.appendChild(icon);
-    div.appendChild(remove);
-    //medium or large button
-    //quantity 
+
+    var subtotal = document.getElementById("subtotal").innerHTML;
+
+
+    const itemDiv = document.createElement("div");
+    itemDiv.classList.add("item");
+
+    const innerDiv1 = document.createElement("div");
+
+    const buttonElement = document.createElement("button");
+    buttonElement.setAttribute("type", "button");
+    buttonElement.classList.add("btn", "rounded-5");
+
+    const iconElement = document.createElement("i");
+    iconElement.classList.add("fa-regular", "fa-circle-xmark", "fa-lg");
+
+    iconElement.addEventListener("click", function () {
+        if (itemDiv.parentNode) {
+          itemDiv.parentNode.removeChild(itemDiv);
+          document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) - parseFloat(priceTextNode.data)).toFixed(2);
+
+          for(i = 0; i < drinks.length; i++)
+          {
+            if(drinks[i].recipe_name == itemDiv.children[0].textContent)
+            {
+                drinks.splice(i, 1);
+                break;
+            }
+          }
+        }
+      });
+
+    buttonElement.appendChild(iconElement);
+    
+    
+    const textNode = document.createTextNode(json.recipe_name);
+
+    innerDiv1.appendChild(buttonElement);
+    innerDiv1.appendChild(textNode);
+
+    const innerDiv2 = document.createElement("div");
+    innerDiv2.classList.add("d-flex");
+
+    const labelElement = document.createElement("label");
+    labelElement.setAttribute("for", "quantity");
+
+    const inputElement = document.createElement("input");
+    inputElement.classList.add("form-control");
+    inputElement.setAttribute("type", "number");
+    inputElement.setAttribute("value", "1");
+    inputElement.setAttribute("min", "1");
+    inputElement.setAttribute("max", "10");
+
+    const priceTextNode = document.createTextNode(json.med_price);
+
+    const editButton = document.createElement("button");
+    editButton.setAttribute("type", "button");
+    editButton.classList.add("btn", "rounded-5");
+
+    const editIcon = document.createElement("i");
+    editIcon.classList.add("fa-regular", "fa-pen-to-square", "fa-lg");
+
+    editButton.appendChild(editIcon);
+
+    labelElement.appendChild(inputElement);
+    innerDiv2.appendChild(labelElement);
+    innerDiv2.appendChild(priceTextNode);
+    innerDiv2.appendChild(editButton);
+
+    itemDiv.appendChild(innerDiv1);
+    itemDiv.appendChild(innerDiv2);
+
+    document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(priceTextNode.data)).toFixed(2);
+    drinks.push(json);
+
+    editButton.addEventListener("click", EditDrink);
+
+
+
+    // // Add the root div to the document's body or any desired location
+    // document.body.appendChild(itemDiv);
+
 
     
-    itempane.appendChild(div); // Corrected variable name
+    itempane.appendChild(itemDiv); // Corrected variable name
   }
 
 /**
@@ -90,8 +161,16 @@ async function insertinfo(){
 
 function Checkout(){
     //gather all info from the receipt, request for tip
-    itempane = document.getElementById("items-pane");
-    itempane.innerHTML = "";
+    items = document.getElementById("items-pane").getElementsByTagName("div");
+
+
+
+  const tipAmount = window.prompt("Enter a tip amount:", "0");
+  
+  if (tipAmount !== null) {
+    console.log(`You entered a tip of $${tipAmount}`);
+  
+}
     //send to the server
     //display the total cost
     //clear the items pane
