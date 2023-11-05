@@ -13,3 +13,7 @@ body {
 .btn.btn-primary:hover {
     color: black;
 }
+
+.submit {
+    background-color: #dc3545;
+}

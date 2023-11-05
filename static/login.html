@@ -31,7 +31,7 @@
       <div class="container mt-5 w-50">
         <div class="card p-4">
           <h2 class="text-center mb-4">GongCha</h2>
-          <form>
+          <form id="loginForm">
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input type="text" class="form-control" id="username" required placeholder="Email or Company ID">
@@ -41,6 +41,20 @@
               <input type="password" class="form-control" id="password" required placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-link" onclick="toggleForm()">Create Account</button>
+          </form>
+      
+          <form id="signupForm" style="display:none;">
+            <div class="mb-3">
+              <label for="new-username" class="form-label">New Username</label>
+              <input type="text" class="form-control" id="new-username" required placeholder="Email">
+            </div>
+            <div class="mb-3">
+              <label for="new-password" class="form-label">New Password</label>
+              <input type="password" class="form-control" id="new-password" required placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button type="button" class="btn btn-link" onclick="toggleForm()">Login</button>
           </form>
         </div>
       </div>
