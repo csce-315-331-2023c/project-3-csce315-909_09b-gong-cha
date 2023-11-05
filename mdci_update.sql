@@ -219,20 +219,29 @@ TO csce315_909_antonhugo1;
 GRANT ALL PRIVILEGES ON Ingredient 
 TO csce315_909_reid_jenkins;
 
-GRANT ALL PRIVILEGES ON Toppings 
+-- GRANT ALL PRIVILEGES ON Toppings 
+-- TO csce315_909_brenndancroteau;
+
+-- GRANT ALL PRIVILEGES ON Toppings 
+-- TO csce315_909_antonhugo1;
+
+-- GRANT ALL PRIVILEGES ON Toppings 
+-- TO csce315_909_reid_jenkins;
+
+GRANT ALL PRIVILEGES ON Recipe_Toppings 
 TO csce315_909_brenndancroteau;
 
-GRANT ALL PRIVILEGES ON Toppings 
+GRANT ALL PRIVILEGES ON Recipe_Toppings 
 TO csce315_909_antonhugo1;
 
-GRANT ALL PRIVILEGES ON Toppings 
+GRANT ALL PRIVILEGES ON Recipe_Toppings 
 TO csce315_909_reid_jenkins;
 
-GRANT ALL PRIVILEGES ON Recipe_Toppings 
+GRANT ALL PRIVILEGES ON Users 
 TO csce315_909_brenndancroteau;
 
-GRANT ALL PRIVILEGES ON Recipe_Toppings 
+GRANT ALL PRIVILEGES ON Users 
 TO csce315_909_antonhugo1;
 
-GRANT ALL PRIVILEGES ON Recipe_Toppings 
+GRANT ALL PRIVILEGES ON Users 
 TO csce315_909_reid_jenkins;
