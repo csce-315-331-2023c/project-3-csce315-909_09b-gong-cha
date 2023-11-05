@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Website</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="cashier.css">
 </head>
 
 <script src="cashier.js"></script>
@@ -32,46 +33,51 @@
         </div>
     </nav>
 
-    <div class="row">
-      <div class="col-9" id="RecipeButtons">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="milktea-tab" data-toggle="tab" href="#milktea" role="tab" aria-controls="milktea" aria-selected="true">Milk Tea</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="slushie-tab" data-toggle="tab" href="#slushie" role="tab" aria-controls="slushie" aria-selected="false">Slushie</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="coffee-tab" data-toggle="tab" href="#coffee" role="tab" aria-controls="coffee" aria-selected="false">Coffee</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Other</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="milktea" role="tabpanel" aria-labelledby="milktea-tab">
-          </div>
-          <div class="tab-pane fade" id="slushie" role="tabpanel" aria-labelledby="slushie-tab">
-          </div>
-          <div class="tab-pane fade" id="coffee" role="tabpanel" aria-labelledby="coffee-tab">
-          </div>
-          <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
-          </div>
-        </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-9" id="RecipeButtons">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="milktea-tab" data-toggle="tab" href="#milktea" role="tab" aria-controls="milktea" aria-selected="true">Milk Tea</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="slushie-tab" data-toggle="tab" href="#slushie" role="tab" aria-controls="slushie" aria-selected="false">Slushie</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="coffee-tab" data-toggle="tab" href="#coffee" role="tab" aria-controls="coffee" aria-selected="false">Coffee</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tea-tab" data-toggle="tab" href="#tea" role="tab" aria-controls="tea" aria-selected="false">Tea</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Other</a>
+            </li>
+          </ul>
         
-      </div>
-      <div class="col-3" id="receipt">
-        <div class="row row-cols-1 position-relative vh-100">
-          <div class="col border-start border-0">
-            Name
+          <!-- the tabpanel info -->
+          <div class="tab-content align-content-center display-6" id="myTabContent">
+            <div class="tab-pane fade show active" id="milktea" role="tabpanel" aria-labelledby="milktea-tab"></div>
+            <div class="tab-pane fade" id="slushie" role="tabpanel" aria-labelledby="slushie-tab"></div>
+            <div class="tab-pane fade" id="coffee" role="tabpanel" aria-labelledby="coffee-tab"></div>
+            <div class="tab-pane fade" id="tea" role="tabpanel" aria-labelledby="tea-tab"></div>
+            <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab"></div>
           </div>
-          <div class="col border-start border-0">test2</div>
-          <div class="col position-absolute bottom-0 end-0 border-start border-0">BUTTON</div>
         </div>
-      </div>
-    </div>  
+
+      <div class="col-3" id="receipt">
+        <div class="name-bar sticky-top" id="name-bar">Name</div>
+        <div class="items-pane overflow-auto" id="items-pane"></div>  
+        <div class="moneyinfo">
+          <div>Subtotal: $<span id="subtotal">0.00</span></div>
+          <div>Tip: $<span id="tip">0.00</span></div>
+          <div>Total: $<span id="total">0.00</span></div>
+          <button class="checkout-bar" onclick="Checkout()">Checkout</button>
+    </div>
+    </div>
+
       </nav>
       </nav>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

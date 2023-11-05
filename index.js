@@ -57,3 +57,39 @@ app.get('/recipe', async (req, res) => {
           res.send(query_res.rows);
       });
 })
+
+//get all drinks that have milk in the name
+app.get('/recipe/milk', async (req, res) => {
+  pool
+      .query('SELECT * FROM recipe WHERE recipe_name LIKE \'%Milk%\';')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
+//get all drinks that are slushies
+app.get('/recipe/slushie', async (req, res) => {
+  pool
+      .query('SELECT * FROM recipe WHERE is_Slush = true;')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
+//get all drinks that have coffee in the name
+app.get('/recipe/coffee', async (req, res) => {
+  pool
+      .query('SELECT * FROM recipe WHERE recipe_name LIKE \'%Coffee%\';')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
+//get all the other drinks that don't fit into the other categories
+app.get('/recipe/other', async (req, res) => {
+  pool
+      .query('SELECT * FROM recipe WHERE is_Slush = false AND recipe_name NOT LIKE \'%Coffee%\' AND recipe_name NOT LIKE \'%Milk%\';')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
