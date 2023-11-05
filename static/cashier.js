@@ -32,6 +32,14 @@ function insertIntoReceipt(json) {
      * this will be done via actionlistener to the toppings button
      */
     //remove button
+    var remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "btn rounded-5";
+    //add fontawesome icon
+    var icon = document.createElement("i");
+    icon.className = "fa-regular fa-circle-xmark fa-lg";
+    remove.appendChild(icon);
+    div.appendChild(remove);
     //medium or large button
     //quantity 
 
