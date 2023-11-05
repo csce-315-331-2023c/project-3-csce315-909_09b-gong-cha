@@ -1,0 +1,52 @@
+.btn-square-lg {
+    width: 130px !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    height: 130px !important;
+    text-align: center;
+    padding: 0px;
+    font-size:18px;
+    background-color:#B54949;
+    border: #B54949;
+    margin: 5px;
+}
+
+.btn-square-lg:hover {
+    background-color: #2F6386;
+    color: white;
+}
+
+
+.name-bar {
+    background-color: lightgray;
+    padding: 10px;
+  }
+  
+  #receipt {
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    background-color: ghostwhite;
+
+  }
+  
+  #items-pane {
+    flex: .80;
+    overflow: auto; /* Enable scrolling when content exceeds the height */
+  }
+  
+.checkout-bar {
+  background-color: lightgray;
+  padding: 10px;
+  /* bottom: 0px; */
+  width: 100%;
+  position: absolute;
+}
+
+.moneyinfo{
+  bottom: 0px;
+  width: 20%;
+  position: absolute;
+  flex: .2;
+  background-color: lightsteelblue;  
+}
