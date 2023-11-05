@@ -1,5 +1,4 @@
 url = "http://localhost:5000"; //changes this later
-
 //onload for body, run makeRecipeButtons
 document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
@@ -23,6 +22,8 @@ function createButton(drinkname, json) {
 function insertIntoReceipt(json) {
     var itempane = document.getElementById("items-pane"); // Corrected ID
     var div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = "test";
     /**
      * the div should allow for user to choose whether medium or large
      * also quantity of a drink
@@ -30,8 +31,11 @@ function insertIntoReceipt(json) {
      * and a toppings button that opens a modal, which has a list of toppings
      * this will be done via actionlistener to the toppings button
      */
-    div.className = "item";
-    div.innerHTML = "test";
+    //remove button
+    //medium or large button
+    //quantity 
+
+    
     itempane.appendChild(div); // Corrected variable name
   }
 
@@ -85,4 +89,14 @@ function Checkout(){
 
 }
 
+//open up a dropdown menu to ask for changing toppings, ice, sugar, or size
+//update the receipt
+//close the dropdown menu
+function EditDrink(){
+    console.log("edit drink");
+   //create the dropdown menu
+    //add actionlisteners to each of the buttons
+    //update the receipt
+    //close the dropdown menu
 
+}
