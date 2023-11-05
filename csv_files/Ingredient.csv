@@ -1,0 +1,45 @@
+Ingredient_ID,Ingredient_Name,Unit_Price,Stock,Minimum_Quantity,isTopping
+1,Cup,0.02,80,181,FALSE
+2,Straw,0.01,103,173,FALSE
+3,Napkin,0.02,156,143,FALSE
+4,To-Go Bag,0.01,465,184,FALSE
+5,Milk,0.5,265,172,FALSE
+6,Brown Sugar Syrup,0.25,152,174,FALSE
+7,Wintermelon,0.1,254,200,FALSE
+8,Creme Brulee Mix,0.15,354,151,FALSE
+9,Diced Strawberry,0.1,165,158,FALSE
+10,Chocolate Syrup,0.15,435,179,FALSE
+11,Diced Grapefruit,0.05,156,116,FALSE
+12,Cream,0.75,168,162,FALSE
+13,Sugar Syrup,0.15,215,194,FALSE
+14,Lychee Syrup,0.45,168,170,FALSE
+15,Honey,0.8,156,106,FALSE
+16,Green Tea,0.15,247,170,FALSE
+17,Caramel Syrup,0.35,158,163,FALSE
+18,Black Tea,0.2,189,146,FALSE
+19,Coconut Syrup,0.35,154,136,FALSE
+20,Lemon Juice,0.1,354,109,FALSE
+21,Taro Powder,0.25,186,192,FALSE
+22,Diced Peach,0.13,456,107,FALSE
+23,Passionfruit Pulp,0.5,248,126,FALSE
+24,Matcha,0.72,315,180,FALSE
+25,Diced Mango,0.45,186,107,FALSE
+26,Star Jelly,0.65,156,138,FALSE
+27,Diced Lychee,0.56,246,190,FALSE
+28,Yakult,0.6,354,182,FALSE
+29,Oolong Tea,0.25,135,139,FALSE
+30,Earl Grey Tea,0.15,315,129,FALSE
+31,Hibiscus Powder,0.1,216,109,FALSE
+32,Coffee,0.3,274,146,FALSE
+33,Chai Tea,0.13,118,144,FALSE
+34,Thai Tea,0.15,175,114,FALSE
+35,Slush Base,0.1,234,195,FALSE
+36,Lemonade,0.22,178,162,FALSE
+37,Milk Foam,0.15,100,176,TRUE
+38,White Pearl,0.35,100,198,TRUE
+39,Pearl,0.32,100,173,TRUE
+40,Coconut Jelly,0.51,100,164,TRUE
+41,Pudding,0.42,100,156,TRUE
+42,Herbal Jelly,0.5,10,122,TRUE
+43,Basil Seeds,0.03,100,105,TRUE
+44,Oreo Crumbs,0.05,100,100,TRUE
