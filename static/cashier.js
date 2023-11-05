@@ -82,9 +82,12 @@ async function insertinfo(){
 
 function Checkout(){
     //gather all info from the receipt, request for tip
+    itempane = document.getElementById("items-pane");
+    itempane.innerHTML = "";
     //send to the server
     //display the total cost
     //clear the items pane
+
 
 
 }
