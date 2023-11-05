@@ -64,24 +64,49 @@
             <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab"></div>
           </div>
         </div>
-        <!-- <div class="col-9" id="TipButtons">
+
+        <div class="col-9" id="TipButtons" style="display: none;">
           <div class="row gap-2 h-50">
-            <div class="col">
-              <button type="button position-absolute " class="btn btn-rectangle-lg btn-danger" onclick="">15%</button>
+            <div class="col align-self-end">
+              <button type="button" class="btn btn-rectangle-lg btn-danger" id="15" onclick="getTipAmount(15)"></button>
             </div>
-            <div class="col">
-              <button type="button" class="btn btn-rectangle-lg btn-danger" onclick="">18%</button>
+            <div class="col align-self-end">
+              <button type="button" class="btn btn-rectangle-lg btn-danger" id="18" onclick="getTipAmount(18)"></button>
             </div>
-            <div class="col">
-              <button type="button" class="btn btn-rectangle-lg btn-danger" onclick="">20%</button>
-            </div>
-          </div>
-          <div class="row h-50">
-            <div class="col gap-2">
-              <button type="button" class="btn btn-danger w-100" onclick="">other</button>
+            <div class="col align-self-end">
+              <button type="button" class="btn btn-rectangle-lg btn-danger" id="20" onclick="getTipAmount(20)"></button>
             </div>
           </div>
-        </div> -->
+          <div class="row gap-2">
+            <div class="col">
+              <button type="button" class="btn btn-danger w-100" id="none" onclick="getTipAmount(0)">No Tip</button>
+            </div>
+          </div>
+          <div class="row gap-5 g-3">
+            <div class="col-auto">
+              <label for="otherAmount" class="col-form-label">Other</label>
+            </div>
+            <div class="col">
+              <input type="text" id="otherAmount" class="form-control">
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-danger" id="otherTip" onclick="otherTip()">Submit</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-9" id="ConfirmCheckout" style="display: none;">
+          <div class="row gap-2 h-50">
+            <div class="col align-self-end text-center">
+              <h1>Confirm Checkout</h1>
+            </div>
+          </div>
+          <div class="row gap-2">
+            <div class="col">
+              <button type="button" class="btn btn-danger w-100 h-10" onclick="confirmCheckout()">Checkout</button>
+            </div>
+          </div>
+        </div>
 
       <div class="col-3" id="receipt">
         <div class="name-bar" id="name-bar">Name</div>
