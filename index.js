@@ -19,7 +19,7 @@ db.any(query).then((data) => {
   app.get('/', (req, res) => {
     res.send(JSON.stringify(data[60]));
   });
-  console.log(data);
+  // console.log(data);
 
 
 //   for (var key in data) {
@@ -34,6 +34,10 @@ app.use(express.static('static'));
 // This is used to link an HTML page to the respective page of our website, home being '/'
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
+  });
+
+app.get('/manager', (req, res) => {
+    res.sendFile(__dirname + '/static/manager.html');
   });
 
 const PORT = process.env.PORT || 5000;
