@@ -93,3 +93,8 @@ app.get('/recipe/other', async (req, res) => {
           res.send(query_res.rows);
       });
 })
+
+app.get('/amongus', async (req, res) => {
+    console.log("amongus");
+  })
+  
