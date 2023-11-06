@@ -47,6 +47,23 @@ app.listen(port, () => {
 
 //make it use the static folder
 app.use(express.static('static'));
+
+// This is used to link an HTML page to the respective page of our website, home being '/'
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
+  });
+
+app.get('/manager', (req, res) => {
+    res.sendFile(__dirname + '/static/manager.html');
+  });
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+
+
 app.use(express.json());
 //view all recipes
 
@@ -93,3 +110,8 @@ app.get('/recipe/other', async (req, res) => {
           res.send(query_res.rows);
       });
 })
+
+app.get('/amongus', async (req, res) => {
+    console.log("amongus");
+  })
+  
