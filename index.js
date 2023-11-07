@@ -115,14 +115,63 @@ app.get('/amongus', async (req, res) => {
 
 // add drink
 app.put('/addDrink', async (req, res) => {
-  const drink = (req.body); // json object!!!
-  // index like you normally would for a pandas dataframe
-  console.log(drink['drink_name'])
+  var recipe_name = req.body['drink_name'];
+  var is_slush = req.body['is_slushy'];
+  var med_price = req.body['med_price'];
+  var large_price = req.body['large_price'];
+  var recipe_price = req.body['recipe_price'];
+  var recipe_id = -1;
 
+  // get next available recipe id
+  const last_recipe = await pool
+    .query("SELECT * FROM recipe ORDER BY recipe_id DESC LIMIT 1;");
+  recipe_id = last_recipe.rows[0]['recipe_id']+1;
+  console.log(req.body);
+  // insert into recipe table
+  pool
+      .query("INSERT INTO recipe VALUES('" + recipe_id + "','" + recipe_name + "','" + is_slush + "','" + med_price + "', '" + large_price + "', '"+ recipe_price + "');" );
+  
+  // adding ingredients :)
+  var ingredients = req.body['ingredient_names'].split(",");
+  var quantities = req.body['ingredient_amount'].split(",");
+  var ingredient_ids = [];
+  for(var i = 0; i < ingredients.length; i++){
+    console.log(ingredients[i]);
+    const ingr_row = await pool
+    .query("SELECT * FROM ingredient WHERE ingredient_name = '" + ingredients[i] + "';");
+    ingredient_ids.push(ingr_row.rows[0]['ingredient_id']);
+  }
+  for(var i = 0; i < ingredient_ids.length; i++){
+    const ingr_row = await pool
+    .query("INSERT INTO recipe_ingredient VALUES('" + recipe_id + "','" + ingredient_ids[i] + "','" + quantities[i] + "');");
+  }
+  
   res.send("successful");
 
 });  
 
+app.put('/addIngredient', async (req, res) => {
+  var name = req.body['ingredient_name'];
+  var price = req.body['unit_price'];
+  var stock = req.body['stock'];
+  var is_topping = req.body['is_topping'];
+  var minimum_quantity = req.body['minimum_quantity']; 
+  var ingredient_id = -1;
+  
+  // get ingredient id
+
+  const last_ingredient = await pool
+    .query("SELECT * FROM ingredient ORDER BY ingredient_id DESC LIMIT 1;");
+  ingredient_id = last_ingredient.rows[0]['ingredient_id']+1;
+  console.log(req.body);
+
+  // sql query
+  pool
+  .query("INSERT INTO ingredient VALUES ('" + ingredient_id + "','" + name + "','" + price + "','" + stock + "', '" + minimum_quantity + "', '"+ is_topping + "');" );
+
+  res.send("successful");
+
+});  
 
 
 app.put('/modDrinkName', async (req, res) => {
@@ -136,17 +185,29 @@ app.put('/modDrinkName', async (req, res) => {
 });  
 
 app.put('/modDrinkIngredients', async (req, res) => {
-  var drink_id = (req.body['drink_id']); // json object!!!
-  var drink_ingredients = (req.body['drink_ingredients']); // json object!!!
-
+  var recipe_id = req.body['drink_id']; 
+  var ingredients_name = req.body['ingredients_name'].split(","); 
+  var ingredients_quantity = req.body['ingredients_quantity'].split(",");
   // sql query
+  // delete ingredients in recipe_ingredient
+  pool.query("DELETE FROM recipe_ingredient WHERE recipe_id = '" + recipe_id + "';");
+
+  var ingredient_ids = [];
+  for(var i = 0; i < ingredients_name.length; i++){
+    const ingr_row = await pool
+    .query("SELECT * FROM ingredient WHERE ingredient_name = '" + ingredients_name[i] + "';");
+    ingredient_ids.push(ingr_row.rows[0]['ingredient_id']);
+  }
+  for(var i = 0; i < ingredient_ids.length; i++){
+    pool.query("INSERT INTO recipe_ingredient VALUES('" + recipe_id + "','" + ingredient_ids[i] + "','" + ingredients_quantity[i] + "');");
+  }
 
   res.send("successful");
 });  
 
 app.put('/modDrinkMediumPrice', async (req, res) => {
-  var recipe_id = (req.body['drink_id']); // json object!!!
-  var med_price = (req.body['med_price']); // json object!!!
+  var recipe_id = (req.body['drink_id']); 
+  var med_price = (req.body['med_price']); 
 
   // sql query
   pool
@@ -156,8 +217,8 @@ app.put('/modDrinkMediumPrice', async (req, res) => {
 });  
 
 app.put('/modDrinkLargePrice', async (req, res) => {
-  var recipe_id = (req.body['drink_id']); // json object!!!
-  var large_price = (req.body['large_price']); // json object!!!
+  var recipe_id = (req.body['drink_id']); 
+  var large_price = (req.body['large_price']); 
 
   // sql query
   pool
@@ -169,8 +230,8 @@ app.put('/modDrinkLargePrice', async (req, res) => {
 });  
 
 app.put('/modDrinkRecipePrice', async (req, res) => {
-  var recipe_id = (req.body['drink_id']); // json object!!!
-  var recipe_price = (req.body['recipe']); // json object!!!
+  var recipe_id = (req.body['drink_id']); 
+  var recipe_price = (req.body['recipe']); 
 
   // sql query
   pool

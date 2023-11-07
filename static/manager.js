@@ -12,23 +12,14 @@ function showInputBox() {
 // Adds a drink to the database
 async function addDrink() {
 
-  var Drink_Name = document.getElementById("add-drink-name").value;
-  var Ingredient_Names = document.getElementById('add-ingredients').value;
-  var Ingredient_Amount = document.getElementById('add-ingredients-qty').value;
-  var Is_Slushy = document.getElementsByName("is-slushy")[0].checked;
-  var Med_Price = document.getElementById('med-price-add').value;
-  var Large_Price = document.getElementById('lrg-price-add').value;
-  var Recipe_Price = document.getElementById('rcp-price-add').value;
-  // var request = await fetch(url + "/amongus").then((res) => res.json());
-
   var drink = {
-    'drink_name': Drink_Name,
-    'ingredient_names': Ingredient_Names,
-    'ingredient_amount': Ingredient_Amount,
-    'is_slushy': Is_Slushy,
-    'med_price': Med_Price,
-    'large_price': Large_Price,
-    'recipe_price': Recipe_Price  
+    'drink_name': document.getElementById("add-drink-name").value,
+    'ingredient_names': document.getElementById('add-ingredients').value,
+    'ingredient_amount': document.getElementById('add-ingredients-qty').value,
+    'is_slushy': document.getElementsByName("is-slushy")[1].checked,
+    'med_price': document.getElementById('med-price-add').value,
+    'large_price': document.getElementById('lrg-price-add').value,
+    'recipe_price': document.getElementById('rcp-price-add').value
   };
 
 
@@ -49,20 +40,27 @@ async function addDrink() {
 }
 
 // Adds an ingredient to the database
-function addIngredient() {
-
-  var Ingredient_Name = document.getElementById("add-ingredient-name").value;
-  var Unit_Price = document.getElementById("add-unit-price").value;
-  var Stock = document.getElementById("add-stock").value;
-  var Is_Topping = document.getElementsByName("is-topping")[1].checked;
+async function addIngredient() {
 
   var ingredient = {
     'ingredient_name': document.getElementById("add-ingredient-name").value,
     'unit_price': document.getElementById("add-unit-price").value,
     'stock': document.getElementById("add-stock").value,
-    'is_topping': document.getElementsByName("is-topping")[1].checked; 
+    'is_topping': document.getElementsByName("is-topping")[1].checked,
+    'minimum_quantity': document.getElementById("add-minimum-quantity").value
+
   };
 
+  const response = await fetch(url + "/addIngredient", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ingredient),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
 
 }
 
@@ -88,9 +86,10 @@ async function modDrinkName() {
 // Modifies ingredients & quantities of a drink given drinkID
 async function modDrinkIngredients() {
 
-  var pair = {
+  var trio = {
     'drink_id': document.getElementById('mod-drink-id').value,
-    'drink_ingredients': document.getElementById('mod-drink-ingredients').value
+    'ingredients_name': document.getElementById('mod-drink-ingredients').value,
+    'ingredients_quantity': document.getElementById('mod-drink-ingredients-qty').value
   };
 
   const response = await fetch(url + "/modDrinkIngredients", {
@@ -98,7 +97,7 @@ async function modDrinkIngredients() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(pair),
+    body: JSON.stringify(trio),
   });
 
   const msg = await response.text();
