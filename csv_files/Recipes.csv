@@ -9,3 +9,44 @@
 8,Pearl Milk Tea,FALSE,10,12.5,8
 9,Strawberry Milk Tea,FALSE,10,12.5,8
 10,Wintermelon Milk Tea,FALSE,10,12.5,8
+11,Caramel Chocolate,FALSE,10,12.5,8
+12,Chocolate Drink,FALSE,8,10,6
+13,Coconut Milk Tea,FALSE,12.5,15,10
+14,Grapefruit Green Tea,FALSE,10,12.5,8
+15,Grapefruit Yogurt Drink,FALSE,10,12.5,8
+16,Hibiscus Green Tea,FALSE,10,12.5,8
+17,Honey Green Tea,FALSE,10,12.5,8
+18,Honey Lemon Green Tea,FALSE,10,12.5,8
+19,Lemon Ai-Yu White Pearls,FALSE,15,20,10
+20,Chai Tea Latte,FALSE,8,12.5,6
+21,Matcha Tea Latte,FALSE,8.5,12,5
+22,Thai Tea Latte,FALSE,9,15,7
+23,Strawberry Matcha Latte,FALSE,8,12.5,6
+24,Milk Coffee,FALSE,13,16,10
+25,Coffee Milk Tea,FALSE,8,19,9
+26,Milk Foam Black Coffee,FALSE,9,13,9
+27,Lemon Wintermelon Basil Seeds,FALSE,12,16,10
+28,Taro,FALSE,15,13,10
+29,Caramel Chocolate,FALSE,14,16,9
+30,Yogurt Drink,FALSE,12.5,16,5
+31,Green Tea,FALSE,10,14,5
+32,Black Tea,FALSE,15,16,5
+33,Green Tea,FALSE,11,18,10
+34,Oolong Tea,FALSE,14,18,6
+35,Earl Grey,FALSE,9,14,6
+36,Oreo Strawberry Milk Tea,FALSE,10,20,5
+37,Creme Brulee Brown Sugar Milk Tea,FALSE,15,20,12.5
+38,Creme Brulee Strawberry Latte,FALSE,10,12.5,8
+39,Caramel Chocolate Slush,TRUE,15,20,10
+40,Grapefruit Slush,TRUE,15,20,10
+41,Honey Lemon Slush,TRUE,15,20,10
+42,Lychee Slush,TRUE,15,20,10
+43,Mango Milk Slush,TRUE,15,20,10
+44,Matcha Milk Slush,TRUE,15,20,10
+45,Milk Foam Peach Slush Star Jelly,TRUE,15,20,10
+46,Passionfruit Yogurt Slush,TRUE,15,20,10
+47,Peach Slush,TRUE,15,20,10
+48,Strawberry Milk Slush,TRUE,15,20,10
+49,Taro Milk Slush,TRUE,15,20,10
+50,Strawberry Taro,FALSE,15,20,10
+51,Strawberry Lemonade,FALSE,15,20,10
