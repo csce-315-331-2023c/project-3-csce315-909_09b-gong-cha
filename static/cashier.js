@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 var drinks = new Array();
+var drinks_edit = new Array();
+
 
 function createButton(drinkname, json) {
     var button = document.createElement("button");
@@ -22,7 +24,7 @@ function createButton(drinkname, json) {
  */
 function insertIntoReceipt(json) {
     var itempane = document.getElementById("items-pane"); // Corrected ID
-
+    json.cur_price = json.med_price;
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("item");
 
@@ -92,7 +94,6 @@ function insertIntoReceipt(json) {
         //change visiblility of #editDrink
         console.log(toppings[0])
 
-
         //create confirm button, applies changes to the drink
         //insert into toppingDiv
         var toppingDiv = document.getElementById("toppingDiv");
@@ -115,8 +116,15 @@ function insertIntoReceipt(json) {
             div.id = toppings[i].ingredient_id;
             div.appendChild(labelElement);
             div.appendChild(textNode);
+            //TODO: hidden field to store the price of the topping
+            var price = document.createElement("p");
+            price.style.display = "none";
+            price.innerHTML = toppings[i].unit_price;
+            div.appendChild(price);
+
             toppingDiv.appendChild(div);
         }
+
         var confirm = document.getElementById("Confirm");
         confirm.innerHTML = "";
         var confirmButton = document.createElement("button");
@@ -124,28 +132,85 @@ function insertIntoReceipt(json) {
         confirmButton.className = "btn btn-danger w-100 h-10";
         confirmButton.innerHTML = "Confirm";
         confirmButton.addEventListener("click", function(){
-                //TODO: update the json, update receipt, close the editDrink page
-                //get size data
-                // var size = document.getElementById("size");
-                // var size = size.options[size.selectedIndex].value;
-                // //get sugar data, located in id sugarLevel
-                // var sugarLevel = document.getElementById("sugarLevel");
-                // var sugar = sugarLevel.options[sugarLevel.selectedIndex].value;
-                // //get ice data
-                // var iceLevel = document.getElementById("iceLevel");
-                // var ice = iceLevel.options[iceLevel.selectedIndex].value;
-                //get topping data
+          //TODO: update the json, update receipt, close the editDrink page
+          //TODO: subtract cur_price from subtotal, recalculate cur_price, add cur_price to subtotal
+          
+          var selected_info_ary = [];
+          // Get all radio buttons with the name "sizeoptions"
+          var sizeOptions = document.querySelectorAll('input[name="sizeoptions"]');
+          for (var i = 0; i < sizeOptions.length; i++) {
+            if (sizeOptions[i].checked) {
+              // Get the label text associated with the selected radio button
+              selectedSize = sizeOptions[i].parentElement.textContent.trim();
+              // console.log(selectedSize);
+              //if selected size is medium, then set isMedium to true, else false
+              selected_info_ary.push({is_medium: selectedSize == "Medium" ? true : false})
+              // selected_info_ary.push({size: selectedSize})
+              //set cur_price to the price of the selected size
+              json.cur_price = selectedSize == "Medium" ? json.med_price : json.lg_price;
+              break; // Exit the loop when a selected option is found
+            }
+          }
+          //get ice and sugar
+          var iceOptions = document.querySelectorAll('input[name="iceoptions"]');
+            for (var i = 0; i < iceOptions.length; i++) {
+              if (iceOptions[i].checked) {
+                // Get the label text associated with the selected radio button
+                selectedIce = iceOptions[i].parentElement.textContent.trim();
+                // console.log(selectedIce);
+                selected_info_ary.push({ice: selectedIce})
+                break; // Exit the loop when a selected option is found
+              }
+            }
 
-                //iterate through id toppingDiv and for each child, get the value and add it to the json
+          var sugarOptions = document.querySelectorAll('input[name="sugaroptions"]');
+            for (var i = 0; i < sugarOptions.length; i++) {
+              if (sugarOptions[i].checked) {
+                // Get the label text associated with the selected radio button
+                selectedSugar = sugarOptions[i].parentElement.textContent.trim();
+                // console.log(selectedSugar);
+                selected_info_ary.push({sugar: selectedSugar})
+                break; // Exit the loop when a selected option is found
+              }
+            }
+          
 
-                document.getElementById("RecipeButtons").style.display = "initial";
-                document.getElementById("EditDrink").style.display = "none";
+          //TODO: get topping data
+            var toppingDivs = document.querySelectorAll("#toppingDiv > div");
 
+            // Create an array to store the extracted information
+            // var toppingInfoArray = [];
+          
+            // Loop through each topping div
+            toppingDivs.forEach(function(toppingDiv) {
+              var toppingId = toppingDiv.id;
+              var quantity = parseInt(toppingDiv.querySelector("input[type=number]").value, 10);
+              //get the price of the topping
+              var price = parseFloat(toppingDiv.querySelector("p").innerHTML);
+              // Check if the quantity is greater than 0
+              if (quantity > 0) {
+                selected_info_ary.push({ ingredient_id: toppingId, quantity: quantity });
+                json.cur_price += price * quantity;
+              }
+            });
+          
+            // Now you have an array containing the topping ID and quantity for each selected topping
+          console.log(selected_info_ary);
+          //iterate through id toppingDiv and for each child, get the value and add it to the json
+          json.edit_info = selected_info_ary;
+          
+          //TODO: edit the subtotal and total
+          //use the cur_price to update the priceTextNode
+          //subtract cur_price from subtotal, recalculate cur_price, add cur_price to subtotal
+          //iterate through selected info ary, add the price of each topping to cur_price
+          document.getElementById("RecipeButtons").style.display = "initial";
+          document.getElementById("EditDrink").style.display = "none";
+          //send this info to confirmcheckout
+          
         });
         confirm.appendChild(confirmButton);
 
     });
-
 
     labelElement.appendChild(inputElement);
     innerDiv2.appendChild(labelElement);
@@ -157,6 +222,7 @@ function insertIntoReceipt(json) {
 
     document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(priceTextNode.data)).toFixed(2);
     document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
+    
     drinks.push(json);
 
     itempane.appendChild(itemDiv); 
@@ -251,11 +317,18 @@ async function confirmCheckout()
     var new_order_item_id = last_order_item_id[0].order_item_id;
     for(i = 0; i < drinks.length; i++) 
     {
+
         new_order_item_id += 1;
         var recipe_id = drinks[i].recipe_id;
         var isMedium = true;
         var ice = "regular";
         var sugar = "100%";
+        var edit_info = drinks[i].edit_info;
+        if(edit_info != null)
+        {
+          //TODO: use this info to set the ice and sugar and size
+        }
+
         var price = drinks[i].med_price;
 
         insertOrderItem(new_order_item_id, recipe_id, new_order_id, isMedium, ice, sugar, price);
