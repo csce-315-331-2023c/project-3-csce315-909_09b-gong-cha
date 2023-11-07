@@ -65,6 +65,7 @@
           </div>
         </div>
 
+        <!-- Tip Buttons  -->
         <div class="col-9" id="TipButtons" style="display: none;">
           <div class="row gap-2 h-50">
             <div class="col align-self-end">
@@ -107,6 +108,86 @@
             </div>
           </div>
         </div>
+
+      <!-- TODO: toppings page -->
+      <div class="col-9" id="EditDrink" style="display: none;">
+        <div class="row gap-2 h-50">
+          <div class="col align-self-end text-center">
+            <h2>Edit Drink</h2>
+          </div>
+          <div>
+            <h5>Choose Size</h5>
+            <!-- TODO: size info goes here -->
+            <div id="size">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="options" id="option1" autocomplete="off"> Medium
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option2" autocomplete="off"> Large
+                </label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <!-- TODO: sugar info goes here -->
+            <h5>Choose Sugar Level</h5>
+            <div id="sugarLevel">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="options" id="option1" autocomplete="off"> 100%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option2" autocomplete="off"> 70%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option3" autocomplete="off"> 50%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option4" autocomplete="off"> 30%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option5" autocomplete="off"> 0%
+                </label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>Choose Ice Level</h5>
+            <!-- TODO: ice info goes here -->
+
+            <div id="iceLevel">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="options" id="option1" autocomplete="off"> Light
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option2" autocomplete="off"> Regular
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option3" autocomplete="off"> None
+                </label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>Choose Toppings</h5>
+            <div id="toppingDiv">
+              <!-- add input for forms -->
+                <!-- <label for="quantity"><input class="form-control" type="number" value="1" min="1" max="10"></label>
+                <label for="topping1">Topping 1</label> -->
+
+
+            </div>
+            <!-- TODO: topping info goes here -->
+          </div>
+          <!-- TODO: STRETCH GOAL: have current price show up for the edited drink -->
+          <!-- <div>Drink Price: $<span id="Drink_Price">0.00</span></div> -->
+          <div class="col" id="Confirm">
+            <button type="button" class="btn btn-danger w-100 h-10" onclick="">Confirm</button>
+          </div>
+        </div>
+      </div>
 
       <div class="col-3" id="receipt">
         <div class="name-bar" id="name-bar">Name</div>
