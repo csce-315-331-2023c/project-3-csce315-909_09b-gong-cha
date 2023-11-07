@@ -204,7 +204,7 @@ function insertIntoReceipt(json) {
           
           document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
           document.getElementById("total").innerHTML = (parseFloat(document.getElementById("total").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
-
+          priceTextNode.data = parseFloat(json.cur_price).toFixed(2);
           document.getElementById("RecipeButtons").style.display = "initial";
           document.getElementById("EditDrink").style.display = "none";
           //send this info to confirmcheckout
