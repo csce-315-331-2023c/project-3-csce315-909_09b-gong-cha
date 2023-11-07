@@ -283,30 +283,31 @@ app.get('/restockReport', async (req, res) => {
   });
 });  
 
-app.get('/excessReport', async (req, res) => {
-  const start_date = req.query.start_date;
-  const end_date = req.query.end_date;
-  const start_time = req.query.start_time;
-  const end_time = req.query.end_time;
+app.get('/excessReport/:start_date/:end_date/:start_time/:end_time', async (req, res) => {
+  const start_date = req.params.start_date;
+  const end_date = req.params.end_date;
+  const start_time = req.params.start_time;
+  const end_time = req.params.end_time;
 
   // sql query
   pool
-  .query("SELECT subquery.Topping_Name, SUM(Total_Used) AS Combined_Total_Used, CEILING((SELECT Stock FROM Toppings WHERE Toppings.Topping_Name = subquery.Topping_Name) * 0.1) AS Ten_Percent_Stock FROM (SELECT Topping_Name, SUM(Quantity_Used) AS Total_Used FROM Recipe_Toppings NATURAL JOIN Toppings NATURAL JOIN Order_ NATURAL JOIN Order_Item WHERE Date_ BETWEEN '" + start_date + "' AND '" + end_date + "'  AND Time_ BETWEEN '" + start_time + "' AND '" + end_time + "' GROUP BY Topping_Name UNION SELECT Topping_Name, SUM(Quantity_Used) AS Total_Used FROM Order_Item_Toppings NATURAL JOIN Toppings NATURAL JOIN Order_ NATURAL JOIN Order_Item WHERE Date_ BETWEEN '" + start_date + "' AND '" + end_date + "'  AND Time_ BETWEEN '" + start_time + "' AND '" + end_time + "'GROUP BY Topping_Name) AS subquery GROUP BY subquery.Topping_Name HAVING SUM(Total_Used) < CEILING((SELECT Stock FROM Toppings WHERE Toppings.Topping_Name = subquery.Topping_Name) * 0.1);")
+  .query("SELECT Ingredient.Ingredient_Name, Subquery.Total_Used, CEILING(Ingredient.Stock * .1) AS Ten_Percent_Stock FROM (Select Ingredient_Name, SUM(Quantity_Used) AS Total_Used FROM Recipe_Ingredient NATURAL JOIN Ingredient NATURAL JOIN Order_ NATURAL JOIN Order_Item WHERE Date_ BETWEEN '" + start_date + "' AND '" + end_date + "' AND Time_ BETWEEN '" + start_time + "' AND '" + end_time + "' GROUP BY Ingredient_Name ORDER BY Ingredient_Name) AS Subquery, Ingredient WHERE Subquery.Total_Used < CEILING(Ingredient.Stock * .1) AND Ingredient.Ingredient_Name = Subquery.Ingredient_Name ORDER BY Total_Used;")
   .then(query_res => {
       res.send(query_res.rows);
   })
 });  
 
-app.get('/salesReport', async (req, res) => {
-  var start_date = (req.body['']);
-  var start_time = (req.body['']);
-  var end_date = (req.body['']);
-  var end_time = (req.body['']);
-  var menu_item = (req.body['']);
+app.get('/salesReport/:init_date/:final_date/:init_time/:final_time/:main_recipe_id', async (req, res) => {
+  const init_date = req.query.start_date;
+  const final_date = req.query.end_date;
+  const init_time = req.query.start_time;
+  const final_time = req.query.end_time;
+  const main_recipe_id = req.query.menu_item;
 
   // sql query
+  console.log(init_date,final_date,init_time,final_time,main_recipe_id)
   pool
-  .query("")
+  .query(`SELECT subquery.order_id, order_item_id, recipe_id,  is_medium, ice, sugar, item_price FROM (SELECT order_id FROM order_item NATURAL JOIN order_ WHERE date_ BETWEEN 'f{init_date}' AND 'f{final_date}' AND time_ BETWEEN 'f{init_time}' AND 'f{final_time}' AND recipe_id = 'f{main_recipe_id}') AS subquery, order_item WHERE order_item.order_id = subquery.order_id ORDER BY subquery.order_id;`)
   .then(query_res => {
       res.send(query_res.rows);
   })

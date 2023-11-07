@@ -277,18 +277,32 @@ async function generateRestockReport() {
 }
 
 async function generateExcessReport() {
-  var data = {
-    'start_date': document.getElementById('start-date2').value,
-    'end_date': document.getElementById('end-date2').value,
-    'start_time': document.getElementById('start-time2').value,
-    'end_time': document.getElementById('end-time2').value
-  };
+  var start_date = document.getElementById('start-date2').value;
+  var end_date = document.getElementById('end-date2').value;
+  var start_time = document.getElementById('start-time2').value;
+  var end_time = document.getElementById('end-time2').value;
 
-  var urlWithParams = `${url}/excessReport?start_date=${data.start_date}&end_date=${data.end_date}&start_time=${data.start_time}&end_time=${data.end_time}`;
+  var urlWithParams = `${url}/excessReport/${start_date}/${end_date}/${start_time}/${end_time}`;
 
+  console.log(urlWithParams);
   var request = await fetch(urlWithParams).then((res => res.json()));
 
   createTableFromJSON(request, 'excess-report')
+}
+
+async function generateSalesReport() {
+  var init_date = document.getElementById('start-date').value;
+  var final_date = document.getElementById('end-date').value;
+  var init_time = document.getElementById('start-time').value;
+  var final_time = document.getElementById('end-time').value;
+  var main_recipe_id = document.getElementById('menu-item-id').value;
+
+  var urlWithParams = `${url}/excessReport/${init_date}/${final_date}/${init_time}/${final_time}/${main_recipe_id}`;
+
+  console.log(urlWithParams);
+  var request = await fetch(urlWithParams).then((res => res.json()));
+
+  createTableFromJSON(request, 'sales-report')
 }
 
 // Make a table given json data 
