@@ -5,21 +5,18 @@ CREATE TYPE ice_type AS ENUM ('light', 'regular', 'none');
 CREATE TYPE sugar_type AS ENUM ('100%', '70%', '50%', '30%', '0%');
 
 --Clear out all old tables 
-Drop TABLE IF EXISTS public.Recipe_Toppings;
 DROP TABLE IF EXISTS public.Order_Item_Toppings;
 DROP TABLE IF EXISTS public.Order_Item;
 DROP TABLE IF EXISTS public.Recipe_Ingredient;
 DROP TABLE IF EXISTS public.Order_;
 DROP TABLE IF EXISTS public.Ingredient;
--- DROP TABLE IF EXISTS public.Toppings; 
 DROP TABLE IF EXISTS public.Recipe;
-
 --NEW!!! the user table
 DROP TABLE IF EXISTS public.Users;
 
 CREATE TABLE IF NOT EXISTS public.Users(
 	Username varchar(128) NOT NULL,
-	Password varchar(128) NOT NULL,
+	Password_ varchar(128) NOT NULL,
 	Is_Manager BOOLEAN NOT NULL,
 	PRIMARY KEY(Username)
 )
@@ -38,7 +35,6 @@ CREATE TABLE IF NOT EXISTS public.Order_(
 	Date_ date NOT NULL,
 	Subtotal Decimal(5,2) NOT NULL,
 	Tip Decimal(5,2), -- can be null
-	Coupon_Code varchar(128),
 	Time_ TIME NOT NULL, --added time so we can do hourly queries
 	PRIMARY KEY(Order_Id)
 )
@@ -81,21 +77,6 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.Ingredient
     OWNER to postgres;
-	
---Table: Toppings
-CREATE TABLE IF NOT EXISTS public.Toppings(
-	Topping_ID serial NOT NULL,
-	Topping_Name varchar(128) NOT NULL,
-	Unit_Price Decimal(5,2) NOT NULL,
-	Stock numeric NOT NULL,
-	Minimum_Quantity numeric NOT NULL,
-	PRIMARY KEY(Topping_ID)
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.Toppings
-    OWNER to postgres;
 
 --Table: Recipe_Ingredient
 CREATE TABLE IF NOT EXISTS public.Recipe_Ingredient(
@@ -116,7 +97,6 @@ CREATE TABLE IF NOT EXISTS public.Order_Item(
 	Order_Item_Id serial NOT NULL,
 	Recipe_ID serial NOT NULL REFERENCES Recipe(Recipe_ID), -- this is a link to the recipes Table
 	Order_Id serial NOT NULL REFERENCES Order_(Order_ID),
-	Notes varchar(128), -- this will store the toppings and other notes
 	Is_Medium BOOLEAN NOT NULL,
 	Ice ice_type DEFAULT 'regular',
 	Sugar sugar_type DEFAULT '100%',
@@ -150,19 +130,6 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.Order_Item_Toppings
     OWNER to postgres;
-
---create junction table between recipe and toppings
-CREATE TABLE IF NOT EXISTS public.Recipe_Toppings(
-	Recipe_ID serial NOT NULL REFERENCES Recipe(Recipe_ID),
-	Topping_ID serial NOT NULL REFERENCES Toppings(Topping_ID),
-	Quantity_Used numeric NOT NULL
-	-- PRIMARY KEY(Recipe_ID, Topping_ID)
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.Recipe_Toppings
-	OWNER to postgres;
 
 --GRANT PERMISSIONS
 GRANT ALL PRIVILEGES ON Order_Item_Toppings 
@@ -217,24 +184,6 @@ GRANT ALL PRIVILEGES ON Ingredient
 TO csce315_909_antonhugo1;
 
 GRANT ALL PRIVILEGES ON Ingredient 
-TO csce315_909_reid_jenkins;
-
--- GRANT ALL PRIVILEGES ON Toppings 
--- TO csce315_909_brenndancroteau;
-
--- GRANT ALL PRIVILEGES ON Toppings 
--- TO csce315_909_antonhugo1;
-
--- GRANT ALL PRIVILEGES ON Toppings 
--- TO csce315_909_reid_jenkins;
-
-GRANT ALL PRIVILEGES ON Recipe_Toppings 
-TO csce315_909_brenndancroteau;
-
-GRANT ALL PRIVILEGES ON Recipe_Toppings 
-TO csce315_909_antonhugo1;
-
-GRANT ALL PRIVILEGES ON Recipe_Toppings 
 TO csce315_909_reid_jenkins;
 
 GRANT ALL PRIVILEGES ON Users 
