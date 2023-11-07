@@ -271,6 +271,7 @@ async function insertinfo(){
 function Checkout(){
     //gather all info from the receipt, request for tip
     document.getElementById("RecipeButtons").style.display = "none";
+    document.getElementById("checkout").disabled = true;
     var subtotal = document.getElementById("subtotal");
     var amounts = ["15", "18", "20"];
 
@@ -424,6 +425,9 @@ function clearOrder()
     document.getElementById("total").innerHTML= "0.00";
     document.getElementById("RecipeButtons").style.display = "initial";
     document.getElementById("ConfirmCheckout").style.display = "none";
+    document.getElementById("checkout").disabled = false;
+
+    
 }
 //open up a dropdown menu to ask for changing toppings, ice, sugar, or size
 //update the receipt'
