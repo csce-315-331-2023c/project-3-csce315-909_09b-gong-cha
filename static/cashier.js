@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 var drinks = new Array();
+var drinks_edit = new Array();
+
 
 function createButton(drinkname, json) {
     var button = document.createElement("button");
@@ -21,8 +23,9 @@ function createButton(drinkname, json) {
  * actionlistener for the buttons, adds the item to the receipt
  */
 function insertIntoReceipt(json) {
+    
     var itempane = document.getElementById("items-pane"); // Corrected ID
-
+    json.cur_price = json.med_price;
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("item");
 
@@ -90,8 +93,6 @@ function insertIntoReceipt(json) {
         document.getElementById("EditDrink").style.display = "initial";
         var toppings = await getToppings();
         //change visiblility of #editDrink
-        console.log(toppings[0])
-
 
         //create confirm button, applies changes to the drink
         //insert into toppingDiv
@@ -115,8 +116,15 @@ function insertIntoReceipt(json) {
             div.id = toppings[i].ingredient_id;
             div.appendChild(labelElement);
             div.appendChild(textNode);
+            //TODO: hidden field to store the price of the topping
+            var price = document.createElement("p");
+            price.style.display = "none";
+            price.innerHTML = toppings[i].unit_price;
+            div.appendChild(price);
+
             toppingDiv.appendChild(div);
         }
+
         var confirm = document.getElementById("Confirm");
         confirm.innerHTML = "";
         var confirmButton = document.createElement("button");
@@ -124,28 +132,87 @@ function insertIntoReceipt(json) {
         confirmButton.className = "btn btn-danger w-100 h-10";
         confirmButton.innerHTML = "Confirm";
         confirmButton.addEventListener("click", function(){
-                //TODO: update the json, update receipt, close the editDrink page
-                //get size data
-                // var size = document.getElementById("size");
-                // var size = size.options[size.selectedIndex].value;
-                // //get sugar data, located in id sugarLevel
-                // var sugarLevel = document.getElementById("sugarLevel");
-                // var sugar = sugarLevel.options[sugarLevel.selectedIndex].value;
-                // //get ice data
-                // var iceLevel = document.getElementById("iceLevel");
-                // var ice = iceLevel.options[iceLevel.selectedIndex].value;
-                //get topping data
+          //TODO: update the json, update receipt, close the editDrink page
+          //TODO: subtract cur_price from subtotal, recalculate cur_price, add cur_price to subtotal
+          //subtract cur price from subtotal
+          document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) - parseFloat(json.cur_price)).toFixed(2);
+          //do same for total
+          document.getElementById("total").innerHTML = (parseFloat(document.getElementById("total").innerHTML) - parseFloat(json.cur_price)).toFixed(2);
+          
+          var selected_info_ary = [];
+          // Get all radio buttons with the name "sizeoptions"
+          var sizeOptions = document.querySelectorAll('input[name="sizeoptions"]');
+          for (var i = 0; i < sizeOptions.length; i++) {
+            if (sizeOptions[i].checked) {
+              // Get the label text associated with the selected radio button
+              selectedSize = sizeOptions[i].parentElement.textContent.trim();
+              //if selected size is medium, then set isMedium to true, else false
+              selected_info_ary.push({is_medium: selectedSize == "Medium" ? true : false})
+              //set cur_price to the price of the selected size
+              if(selectedSize == "Medium"){
+                json.cur_price = parseFloat(json.med_price);
+              }
+              else if(selectedSize == "Large"){
+                json.cur_price = parseFloat(json.large_price);
+              }
+              
+              break; // Exit the loop when a selected option is found
+            }
+          }
+          //get ice and sugar
+          var iceOptions = document.querySelectorAll('input[name="iceoptions"]');
+            for (var i = 0; i < iceOptions.length; i++) {
+              if (iceOptions[i].checked) {
+                // Get the label text associated with the selected radio button
+                selectedIce = iceOptions[i].parentElement.textContent.trim();
+                selected_info_ary.push({ice: selectedIce})
+                break; // Exit the loop when a selected option is found
+              }
+            }
 
-                //iterate through id toppingDiv and for each child, get the value and add it to the json
+          var sugarOptions = document.querySelectorAll('input[name="sugaroptions"]');
+            for (var i = 0; i < sugarOptions.length; i++) {
+              if (sugarOptions[i].checked) {
+                // Get the label text associated with the selected radio button
+                selectedSugar = sugarOptions[i].parentElement.textContent.trim();
+                selected_info_ary.push({sugar: selectedSugar})
+                break; // Exit the loop when a selected option is found
+              }
+            }
+          
 
-                document.getElementById("RecipeButtons").style.display = "initial";
-                document.getElementById("EditDrink").style.display = "none";
+          //TODO: get topping data
+            var toppingDivs = document.querySelectorAll("#toppingDiv > div");
+            var topping_ary = [];
 
+            // Loop through each topping div
+            toppingDivs.forEach(function(toppingDiv) {
+              var toppingId = toppingDiv.id;
+              var quantity = parseInt(toppingDiv.querySelector("input[type=number]").value, 10);
+              //get the price of the topping
+              var price = parseFloat(toppingDiv.querySelector("p").innerHTML);
+              // Check if the quantity is greater than 0
+              if (quantity > 0) {
+                topping_ary.push({ ingredient_id: toppingId, quantity: quantity });
+                json.cur_price = parseFloat(json.cur_price) + price * quantity
+              }
+            });
+
+          json.edit_info = selected_info_ary;
+          json.topping_info = topping_ary;
+          
+          
+          document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
+          document.getElementById("total").innerHTML = (parseFloat(document.getElementById("total").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
+
+          document.getElementById("RecipeButtons").style.display = "initial";
+          document.getElementById("EditDrink").style.display = "none";
+          //send this info to confirmcheckout
+          
         });
         confirm.appendChild(confirmButton);
 
     });
-
 
     labelElement.appendChild(inputElement);
     innerDiv2.appendChild(labelElement);
@@ -157,8 +224,8 @@ function insertIntoReceipt(json) {
 
     document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(priceTextNode.data)).toFixed(2);
     document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
+    
     drinks.push(json);
-
     itempane.appendChild(itemDiv); 
   }
 
@@ -204,6 +271,7 @@ async function insertinfo(){
 function Checkout(){
     //gather all info from the receipt, request for tip
     document.getElementById("RecipeButtons").style.display = "none";
+    document.getElementById("checkout").disabled = true;
     var subtotal = document.getElementById("subtotal");
     var amounts = ["15", "18", "20"];
 
@@ -251,19 +319,43 @@ async function confirmCheckout()
     var new_order_item_id = last_order_item_id[0].order_item_id;
     for(i = 0; i < drinks.length; i++) 
     {
+
         new_order_item_id += 1;
         var recipe_id = drinks[i].recipe_id;
         var isMedium = true;
         var ice = "regular";
         var sugar = "100%";
+        var edit_info = drinks[i].edit_info;
+        if(edit_info != null)
+        {
+          //TODO: change isMedium, ice, sugar
+          for(var j = 0; j < edit_info.length; j++){
+            if(edit_info[j].is_medium != null){
+              isMedium = edit_info[j].is_medium;
+            }
+            else if(edit_info[j].ice != null){
+              ice = edit_info[j].ice;
+            }
+            else if(edit_info[j].sugar != null){
+              sugar = edit_info[j].sugar;
+            }
+          }
+
+        }
+
         var price = drinks[i].med_price;
 
         insertOrderItem(new_order_item_id, recipe_id, new_order_id, isMedium, ice, sugar, price);
-        
-        var ingredient_id = 40;
-        var quantity_used = 1;
 
-        insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
+        var topping_info = drinks[i].topping_info;
+        if(topping_info != null){
+          //for each topping, insert into orderitemtoppings
+          for(var j = 0; j < topping_info.length; j++){
+            ingredient_id = topping_info[j].ingredient_id;
+            quantity_used = topping_info[j].quantity;
+            insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
+          }
+        }
 
     }
     clearOrder()
@@ -333,6 +425,9 @@ function clearOrder()
     document.getElementById("total").innerHTML= "0.00";
     document.getElementById("RecipeButtons").style.display = "initial";
     document.getElementById("ConfirmCheckout").style.display = "none";
+    document.getElementById("checkout").disabled = false;
+
+    
 }
 //open up a dropdown menu to ask for changing toppings, ice, sugar, or size
 //update the receipt'
