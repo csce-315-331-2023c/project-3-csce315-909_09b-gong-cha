@@ -283,17 +283,18 @@ async function generateExcessReport() {
   var end_time = document.getElementById('end-time2').value;
 
   var urlWithParams = `${url}/excessReport/${start_date}/${end_date}/${start_time}/${end_time}`;
+
  try {
-    var request = await fetch(urlWithParams).then((res => res.json()));
-    if (!request.ok) {
-      throw new Error('Error fetching data');
-    }
+    var request = await fetch(urlWithParams);
+    if (!request.ok) {throw new Error('Error fetching data');}
+  } 
+  catch (error) {
+      alert('An error occured while fetching data.');
+  }
 
- } catch (error) {
-    alert('An error occured while fetching data.');
- }
+  var jsonData = await request.json();
 
-  createTableFromJSON(request, 'excess-report')
+  createTableFromJSON(jsonData, 'excess-report')
 }
 
 async function generateSalesReport() {
@@ -303,10 +304,21 @@ async function generateSalesReport() {
   var final_time = document.getElementById('end-time').value;
   var main_recipe_id = document.getElementById('menu-item-id').value;
 
+  init_date = '2022-10-03';
+  final_date = '2022-10-04';
+  init_time = '14:00:00';
+  final_time = '15:00:00';
+  main_recipe_id = 1;
+
   var urlWithParams = `${url}/salesReport/${init_date}/${final_date}/${init_time}/${final_time}/${main_recipe_id}`;
 
-  console.log(urlWithParams);
-  var request = await fetch(urlWithParams).then((res => res.json()));
+  try {
+    var request = await fetch(urlWithParams).then((res => res.json()));
+    if (!request.ok) {throw new Error('Error fetching data');}
+  } 
+  catch (error) {
+    alert('An error occured while fetching data.');
+  }
 
   createTableFromJSON(request, 'sales-report')
 }
