@@ -148,7 +148,7 @@ function insertIntoReceipt(json) {
               selectedSize = sizeOptions[i].parentElement.textContent.trim();
               //if selected size is medium, then set isMedium to true, else false
               selected_info_ary.push({is_medium: selectedSize == "Medium" ? true : false})
-
+              //set cur_price to the price of the selected size
               if(selectedSize == "Medium"){
                 json.cur_price = parseFloat(json.med_price);
               }
@@ -165,7 +165,6 @@ function insertIntoReceipt(json) {
               if (iceOptions[i].checked) {
                 // Get the label text associated with the selected radio button
                 selectedIce = iceOptions[i].parentElement.textContent.trim();
-                // console.log(selectedIce);
                 selected_info_ary.push({ice: selectedIce})
                 break; // Exit the loop when a selected option is found
               }
@@ -176,7 +175,6 @@ function insertIntoReceipt(json) {
               if (sugarOptions[i].checked) {
                 // Get the label text associated with the selected radio button
                 selectedSugar = sugarOptions[i].parentElement.textContent.trim();
-                // console.log(selectedSugar);
                 selected_info_ary.push({sugar: selectedSugar})
                 break; // Exit the loop when a selected option is found
               }
@@ -197,20 +195,13 @@ function insertIntoReceipt(json) {
               if (quantity > 0) {
                 topping_ary.push({ ingredient_id: toppingId, quantity: quantity });
                 json.cur_price = parseFloat(json.cur_price) + price * quantity
-                // console.log(price * quantity)
               }
             });
 
-          // console.log(json.cur_price)
-            // Now you have an array containing the topping ID and quantity for each selected topping
-          // console.log(selected_info_ary);
-          //iterate through id toppingDiv and for each child, get the value and add it to the json
           json.edit_info = selected_info_ary;
           json.topping_info = topping_ary;
           
-          // console.log(drinks);
           
-          //TODO: edit the subtotal and total
           document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
           document.getElementById("total").innerHTML = (parseFloat(document.getElementById("total").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
 
@@ -350,29 +341,20 @@ async function confirmCheckout()
           }
 
         }
-        console.log(isMedium);
-        console.log(ice);
-        console.log(sugar);
 
         var price = drinks[i].med_price;
 
         insertOrderItem(new_order_item_id, recipe_id, new_order_id, isMedium, ice, sugar, price);
-        
-        // var ingredient_id = 40;
-        // var quantity_used = 1;
-        
+
         var topping_info = drinks[i].topping_info;
         if(topping_info != null){
           //for each topping, insert into orderitemtoppings
           for(var j = 0; j < topping_info.length; j++){
             ingredient_id = topping_info[j].ingredient_id;
             quantity_used = topping_info[j].quantity;
-            console.log(ingredient_id);
-            console.log(quantity_used);
             insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
           }
         }
-        // insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
 
     }
     clearOrder()
