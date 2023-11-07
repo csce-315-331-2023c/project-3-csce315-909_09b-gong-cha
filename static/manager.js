@@ -304,23 +304,21 @@ async function generateSalesReport() {
   var final_time = document.getElementById('end-time').value;
   var main_recipe_id = document.getElementById('menu-item-id').value;
 
-  init_date = '2022-10-03';
-  final_date = '2022-10-04';
-  init_time = '14:00:00';
-  final_time = '15:00:00';
-  main_recipe_id = 1;
-
   var urlWithParams = `${url}/salesReport/${init_date}/${final_date}/${init_time}/${final_time}/${main_recipe_id}`;
 
+  console.log(urlWithParams);
+
   try {
-    var request = await fetch(urlWithParams).then((res => res.json()));
+    var request = await fetch(urlWithParams);
     if (!request.ok) {throw new Error('Error fetching data');}
   } 
   catch (error) {
-    alert('An error occured while fetching data.');
+      alert('An error occured while fetching data.');
   }
 
-  createTableFromJSON(request, 'sales-report')
+  var jsonData = await request.json();
+
+  createTableFromJSON(jsonData, 'sales-report')
 }
 
 // Make a table given json data 

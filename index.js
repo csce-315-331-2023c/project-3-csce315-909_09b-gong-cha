@@ -44,7 +44,6 @@ app.get('/user', (req, res) => {
 //make it use the static folder
 app.use(express.static('static'));
 
-// This is used to link an HTML page to the respective page of our website, home being '/'
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
   });
@@ -298,14 +297,13 @@ app.get('/excessReport/:start_date/:end_date/:start_time/:end_time', async (req,
 });  
 
 app.get('/salesReport/:init_date/:final_date/:init_time/:final_time/:main_recipe_id', async (req, res) => {
-  const init_date = req.query.start_date;
-  const final_date = req.query.end_date;
-  const init_time = req.query.start_time;
-  const final_time = req.query.end_time;
-  const main_recipe_id = req.query.menu_item;
+  const init_date = req.params.init_date;
+  const final_date = req.params.final_date;
+  const init_time = req.params.init_time;
+  const final_time = req.params.final_time;
+  const main_recipe_id = req.params.main_recipe_id;
 
   // sql query
-  console.log(init_date,final_date,init_time,final_time,main_recipe_id)
   pool
   .query(`SELECT subquery.order_id, order_item_id, recipe_id,  is_medium, ice, sugar, item_price FROM (SELECT order_id FROM order_item NATURAL JOIN order_ WHERE date_ BETWEEN '${init_date}' AND '${final_date}' AND time_ BETWEEN '${init_time}' AND '${final_time}' AND recipe_id = '${main_recipe_id}') AS subquery, order_item WHERE order_item.order_id = subquery.order_id ORDER BY subquery.order_id;`)
   .then(query_res => {
