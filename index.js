@@ -41,8 +41,10 @@ app.get('/user', (req, res) => {
       });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, function(err) {
+  if(err) console.log(err);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 //make it use the static folder
@@ -57,10 +59,6 @@ app.get('/manager', (req, res) => {
     res.sendFile(__dirname + '/static/manager.html');
   });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
 
 
 
@@ -114,4 +112,102 @@ app.get('/recipe/other', async (req, res) => {
 app.get('/amongus', async (req, res) => {
     console.log("amongus");
   })
+
+// add drink
+app.put('/addDrink', async (req, res) => {
+  const drink = (req.body); // json object!!!
+  // index like you normally would for a pandas dataframe
+  console.log(drink['drink_name'])
+
+  res.send("successful");
+
+});  
+
+
+
+app.put('/modDrinkName', async (req, res) => {
+  var drink_name = (req.body['drink_name']);
+  var recipe_id = (req.body['drink_id']); 
+  // sql query
+  pool
+      .query("UPDATE recipe SET recipe_name  = '" + drink_name + "' WHERE recipe_id = '" + recipe_id + "';");
+  res.send("successful");
+  console.log("modified drink name");
+});  
+
+app.put('/modDrinkIngredients', async (req, res) => {
+  var drink_id = (req.body['drink_id']); // json object!!!
+  var drink_ingredients = (req.body['drink_ingredients']); // json object!!!
+
+  // sql query
+
+  res.send("successful");
+});  
+
+app.put('/modDrinkMediumPrice', async (req, res) => {
+  var recipe_id = (req.body['drink_id']); // json object!!!
+  var med_price = (req.body['med_price']); // json object!!!
+
+  // sql query
+  pool
+      .query("UPDATE recipe SET med_price =" + med_price + "WHERE recipe_id =" + recipe_id + ";");
+  console.log("modified drink med price");
+  res.send("successful");
+});  
+
+app.put('/modDrinkLargePrice', async (req, res) => {
+  var recipe_id = (req.body['drink_id']); // json object!!!
+  var large_price = (req.body['large_price']); // json object!!!
+
+  // sql query
+  pool
+      .query("UPDATE recipe SET large_price =" + large_price + "WHERE recipe_id =" + recipe_id + ";");
   
+  console.log("modified drink large price");
+  res.send("successful");
+
+});  
+
+app.put('/modDrinkRecipePrice', async (req, res) => {
+  var recipe_id = (req.body['drink_id']); // json object!!!
+  var recipe_price = (req.body['recipe']); // json object!!!
+
+  // sql query
+  pool
+      .query("UPDATE recipe SET recipe_price =" + recipe_price + "WHERE recipe_id =" + recipe_id + ";");
+  res.send("successful");
+  console.log("updated drink recipe price");
+});  
+
+
+app.put('/modIngredientName', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_name = (req.body['ingredient_name']); 
+
+  // sql query
+  pool
+  .query("UPDATE ingredient SET ingredient_name = '" + ingredient_name + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient name");
+  res.send("successful");
+});  
+
+app.put('/modIngredientUnitPrice', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_price = (req.body['ingredient_price']); 
+
+  // sql query
+  pool
+  .query("UPDATE ingredient SET unit_price = '" + ingredient_price + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient unit price");
+  res.send("successful");
+});  
+
+app.put('/modIngredientStock', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_stock = (req.body['ingredient_stock']); 
+  // sql query
+  pool
+  .query("UPDATE ingredient SET stock = '" + ingredient_stock + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient unit price");
+  res.send("successful");
+});  
