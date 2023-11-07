@@ -297,7 +297,7 @@ async function generateSalesReport() {
   var final_time = document.getElementById('end-time').value;
   var main_recipe_id = document.getElementById('menu-item-id').value;
 
-  var urlWithParams = `${url}/excessReport/${init_date}/${final_date}/${init_time}/${final_time}/${main_recipe_id}`;
+  var urlWithParams = `${url}/salesReport/${init_date}/${final_date}/${init_time}/${final_time}/${main_recipe_id}`;
 
   console.log(urlWithParams);
   var request = await fetch(urlWithParams).then((res => res.json()));

@@ -291,7 +291,7 @@ app.get('/excessReport/:start_date/:end_date/:start_time/:end_time', async (req,
 
   // sql query
   pool
-  .query("SELECT Ingredient.Ingredient_Name, Subquery.Total_Used, CEILING(Ingredient.Stock * .1) AS Ten_Percent_Stock FROM (Select Ingredient_Name, SUM(Quantity_Used) AS Total_Used FROM Recipe_Ingredient NATURAL JOIN Ingredient NATURAL JOIN Order_ NATURAL JOIN Order_Item WHERE Date_ BETWEEN '" + start_date + "' AND '" + end_date + "' AND Time_ BETWEEN '" + start_time + "' AND '" + end_time + "' GROUP BY Ingredient_Name ORDER BY Ingredient_Name) AS Subquery, Ingredient WHERE Subquery.Total_Used < CEILING(Ingredient.Stock * .1) AND Ingredient.Ingredient_Name = Subquery.Ingredient_Name ORDER BY Total_Used;")
+  .query(`SELECT Ingredient.Ingredient_Name, Subquery.Total_Used, CEILING(Ingredient.Stock * .1) AS Ten_Percent_Stock FROM (Select Ingredient_Name, SUM(Quantity_Used) AS Total_Used FROM Recipe_Ingredient NATURAL JOIN Ingredient NATURAL JOIN Order_ NATURAL JOIN Order_Item WHERE Date_ BETWEEN '${start_date}' AND '${end_date}' AND Time_ BETWEEN '${start_time}' AND '${end_time}' GROUP BY Ingredient_Name ORDER BY Ingredient_Name) AS Subquery, Ingredient WHERE Subquery.Total_Used < CEILING(Ingredient.Stock * .1) AND Ingredient.Ingredient_Name = Subquery.Ingredient_Name ORDER BY Total_Used;`)
   .then(query_res => {
       res.send(query_res.rows);
   })
@@ -307,7 +307,7 @@ app.get('/salesReport/:init_date/:final_date/:init_time/:final_time/:main_recipe
   // sql query
   console.log(init_date,final_date,init_time,final_time,main_recipe_id)
   pool
-  .query(`SELECT subquery.order_id, order_item_id, recipe_id,  is_medium, ice, sugar, item_price FROM (SELECT order_id FROM order_item NATURAL JOIN order_ WHERE date_ BETWEEN 'f{init_date}' AND 'f{final_date}' AND time_ BETWEEN 'f{init_time}' AND 'f{final_time}' AND recipe_id = 'f{main_recipe_id}') AS subquery, order_item WHERE order_item.order_id = subquery.order_id ORDER BY subquery.order_id;`)
+  .query(`SELECT subquery.order_id, order_item_id, recipe_id,  is_medium, ice, sugar, item_price FROM (SELECT order_id FROM order_item NATURAL JOIN order_ WHERE date_ BETWEEN '${init_date}' AND '${final_date}' AND time_ BETWEEN '${init_time}' AND '${final_time}' AND recipe_id = '${main_recipe_id}') AS subquery, order_item WHERE order_item.order_id = subquery.order_id ORDER BY subquery.order_id;`)
   .then(query_res => {
       res.send(query_res.rows);
   })
