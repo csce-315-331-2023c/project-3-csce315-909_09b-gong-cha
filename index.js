@@ -5,7 +5,7 @@ const dotenv = require('dotenv').config();
 
 // Create express app
 const app = express();
-const port = 5000;
+const port = 10000;
 
 // Create pool
 const pool = new Pool({
@@ -374,7 +374,7 @@ app.get('/salesReport/:init_date/:final_date/:init_time/:final_time/:main_recipe
   })
 });  
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, function(err) {
   if(err) console.log(err);
   console.log(`Server is running on http://localhost:${PORT}`);

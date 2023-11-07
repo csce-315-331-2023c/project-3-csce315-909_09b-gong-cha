@@ -1,4 +1,4 @@
-url = "http://localhost:5000"; //changes this later
+url = "http://localhost:10000"; //changes this later
 //onload for body, run makeRecipeButtons
 document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
