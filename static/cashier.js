@@ -23,6 +23,7 @@ function createButton(drinkname, json) {
  * actionlistener for the buttons, adds the item to the receipt
  */
 function insertIntoReceipt(json) {
+    
     var itempane = document.getElementById("items-pane"); // Corrected ID
     json.cur_price = json.med_price;
     const itemDiv = document.createElement("div");
@@ -92,7 +93,6 @@ function insertIntoReceipt(json) {
         document.getElementById("EditDrink").style.display = "initial";
         var toppings = await getToppings();
         //change visiblility of #editDrink
-        console.log(toppings[0])
 
         //create confirm button, applies changes to the drink
         //insert into toppingDiv
@@ -146,10 +146,9 @@ function insertIntoReceipt(json) {
             if (sizeOptions[i].checked) {
               // Get the label text associated with the selected radio button
               selectedSize = sizeOptions[i].parentElement.textContent.trim();
-              // console.log(selectedSize);
               //if selected size is medium, then set isMedium to true, else false
               selected_info_ary.push({is_medium: selectedSize == "Medium" ? true : false})
-              //set cur_price to the price of the selected size
+
               if(selectedSize == "Medium"){
                 json.cur_price = parseFloat(json.med_price);
               }
@@ -186,6 +185,7 @@ function insertIntoReceipt(json) {
 
           //TODO: get topping data
             var toppingDivs = document.querySelectorAll("#toppingDiv > div");
+            var topping_ary = [];
 
             // Loop through each topping div
             toppingDivs.forEach(function(toppingDiv) {
@@ -195,19 +195,20 @@ function insertIntoReceipt(json) {
               var price = parseFloat(toppingDiv.querySelector("p").innerHTML);
               // Check if the quantity is greater than 0
               if (quantity > 0) {
-                selected_info_ary.push({ ingredient_id: toppingId, quantity: quantity });
+                topping_ary.push({ ingredient_id: toppingId, quantity: quantity });
                 json.cur_price = parseFloat(json.cur_price) + price * quantity
-                console.log(price * quantity)
+                // console.log(price * quantity)
               }
             });
 
-          console.log(json.cur_price)
+          // console.log(json.cur_price)
             // Now you have an array containing the topping ID and quantity for each selected topping
-          console.log(selected_info_ary);
+          // console.log(selected_info_ary);
           //iterate through id toppingDiv and for each child, get the value and add it to the json
           json.edit_info = selected_info_ary;
+          json.topping_info = topping_ary;
           
-          console.log(drinks);
+          // console.log(drinks);
           
           //TODO: edit the subtotal and total
           document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
@@ -335,17 +336,43 @@ async function confirmCheckout()
         var edit_info = drinks[i].edit_info;
         if(edit_info != null)
         {
-          //TODO: use this info to set the ice and sugar and size
+          //TODO: change isMedium, ice, sugar
+          for(var j = 0; j < edit_info.length; j++){
+            if(edit_info[j].is_medium != null){
+              isMedium = edit_info[j].is_medium;
+            }
+            else if(edit_info[j].ice != null){
+              ice = edit_info[j].ice;
+            }
+            else if(edit_info[j].sugar != null){
+              sugar = edit_info[j].sugar;
+            }
+          }
+
         }
+        console.log(isMedium);
+        console.log(ice);
+        console.log(sugar);
 
         var price = drinks[i].med_price;
 
         insertOrderItem(new_order_item_id, recipe_id, new_order_id, isMedium, ice, sugar, price);
         
-        var ingredient_id = 40;
-        var quantity_used = 1;
-
-        insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
+        // var ingredient_id = 40;
+        // var quantity_used = 1;
+        
+        var topping_info = drinks[i].topping_info;
+        if(topping_info != null){
+          //for each topping, insert into orderitemtoppings
+          for(var j = 0; j < topping_info.length; j++){
+            ingredient_id = topping_info[j].ingredient_id;
+            quantity_used = topping_info[j].quantity;
+            console.log(ingredient_id);
+            console.log(quantity_used);
+            insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
+          }
+        }
+        // insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
 
     }
     clearOrder()
