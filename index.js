@@ -41,12 +41,6 @@ app.get('/user', (req, res) => {
       });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, function(err) {
-  if(err) console.log(err);
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
 //make it use the static folder
 app.use(express.static('static'));
 
@@ -172,11 +166,29 @@ app.put('/modDrinkLargePrice', async (req, res) => {
   // sql query
   pool
       .query("UPDATE recipe SET large_price =" + large_price + "WHERE recipe_id =" + recipe_id + ";");
+
+
   
   console.log("modified drink large price");
   res.send("successful");
 
 });  
+
+app.get('/orderid', async (req, res) => {
+  pool
+      .query("SELECT * FROM order_ ORDER BY order_id DESC LIMIT 1;")
+      .then(query_res => {
+        res.send(query_res.rows);
+      });
+})
+
+app.get('/orderitemid', async (req, res) => {
+  pool
+      .query("SELECT * FROM order_item ORDER BY order_item_id DESC LIMIT 1;")
+      .then(query_res => {
+        res.send(query_res.rows);
+      });
+})
 
 app.put('/modDrinkRecipePrice', async (req, res) => {
   var recipe_id = (req.body['drink_id']); // json object!!!
@@ -218,3 +230,51 @@ app.put('/modIngredientStock', async (req, res) => {
 
   res.send("successful");
 });  
+
+app.put('/order', async (req, res) => {
+  var username = (req.body['username']);
+  var order_id = (req.body['order_id']); 
+  var date_ = (req.body['date']); 
+  var subtotal = (req.body['subtotal']); 
+  var tip = (req.body['tip']); 
+  var time_ = (req.body['time']); 
+
+  // sql query
+  pool
+  .query("INSERT INTO order_ values ('" + username + "','" + order_id + "','" + date_ + "','" + subtotal + "','" + tip + "','" + time_ + "');");
+
+  res.send("successful");
+});  
+
+app.put('/orderitem', async (req, res) => {
+  var order_item_id = (req.body['order_item_id']);
+  var recipe_id = (req.body['recipe_id']); 
+  var order_id = (req.body['order_id']); 
+  var isMedium = (req.body['is_medium']); 
+  var ice = (req.body['ice']); 
+  var sugar = (req.body['sugar']); 
+  var price = (req.body['price']);
+
+  // sql query
+  pool
+  .query("INSERT INTO order_item values ('" + order_item_id + "','" + recipe_id + "','" + order_id + "','" + isMedium + "','" + ice + "','" + sugar + "','" + price + "');");
+
+  res.send("successful");
+}); 
+
+app.put('/orderitemtoppings', async (req, res) => {
+  var order_item_id = (req.body['order_item_id']); 
+  var ingredient_id = (req.body['ingredient_id']); 
+  var quantity_used = (req.body['quantity']); 
+
+  pool
+  .query("INSERT INTO order_item_toppings values ('" + order_item_id + "','" + ingredient_id + "','" + quantity_used + "');");
+
+  res.send("successful");
+});  
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, function(err) {
+  if(err) console.log(err);
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

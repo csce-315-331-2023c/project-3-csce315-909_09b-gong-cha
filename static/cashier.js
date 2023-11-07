@@ -159,7 +159,6 @@ function insertIntoReceipt(json) {
     document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
     drinks.push(json);
 
-
     itempane.appendChild(itemDiv); 
   }
 
@@ -213,9 +212,7 @@ function Checkout(){
         document.getElementById(amounts[i]).innerHTML = amounts[i] + "%\n(" + ((parseFloat(amounts[i]) / 100) * (parseFloat(subtotal.innerHTML))).toFixed(2) + ")";
     }
     document.getElementById("TipButtons").style.display = "initial";
-    //send to the server
-    //display the total cost
-    //clear the items pane
+
 }
 
 function getTipAmount(id)
@@ -236,8 +233,100 @@ function otherTip()
     document.getElementById("ConfirmCheckout").style.display = "initial";
 }
 
-function confirmCheckout()
+async function confirmCheckout()
 {
+    var username = "68164488";
+    var getDate = new Date();
+    var date = getDate.getFullYear() + "-" + (getDate.getMonth() + 1) + "-" + getDate.getDate();
+    var time = getDate.getHours() + ":" + getDate.getMinutes() + ":" + getDate.getSeconds();
+    var last_order_id = await fetch(url + "/orderid").then((res) => res.json());
+
+    var new_order_id = last_order_id[0].order_id + 1;
+    var subtotal = document.getElementById("subtotal").innerHTML;
+    var tip = document.getElementById("tip").innerHTML;
+
+    insertOrder(username, new_order_id, date, time, subtotal, tip);
+
+    var last_order_item_id = await fetch(url + "/orderitemid").then((res) => res.json());
+    var new_order_item_id = last_order_item_id[0].order_item_id;
+    for(i = 0; i < drinks.length; i++) 
+    {
+        new_order_item_id += 1;
+        var recipe_id = drinks[i].recipe_id;
+        var isMedium = true;
+        var ice = "regular";
+        var sugar = "100%";
+        var price = drinks[i].med_price;
+
+        insertOrderItem(new_order_item_id, recipe_id, new_order_id, isMedium, ice, sugar, price);
+        
+        var ingredient_id = 40;
+        var quantity_used = 1;
+
+        insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
+
+    }
+    clearOrder()
+}
+
+async function insertOrder(username, order_id, date, time, subtotal, tip)
+{
+    var pair = {
+        'username': username,
+        'order_id': order_id,
+        'date': date,
+        'subtotal': subtotal,
+        'tip': tip,
+        'time': time
+      };
+      const response = await fetch(url + "/order", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+      });
+}
+
+async function insertOrderItem(order_item_id, recipe_id, order_id, is_medium, ice, sugar, price)
+{
+    var pair = {
+        'order_item_id': order_item_id,
+        'recipe_id': recipe_id,
+        'order_id': order_id,
+        'is_medium': is_medium,
+        'ice': ice,
+        'sugar': sugar,
+        'price': price
+      };
+      const response = await fetch(url + "/orderitem", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+      });
+}
+
+async function insertOrderItemTopping(order_item_id, ingredient_id, quantity)
+{
+    var pair = {
+        'order_item_id': order_item_id,
+        'ingredient_id': ingredient_id,
+        'quantity': quantity,
+      };
+      const response = await fetch(url + "/orderitemtoppings", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+      });
+}
+
+function clearOrder()
+{
+    drinks.splice(0, drinks.length);
     document.getElementById("items-pane").innerHTML = "";
     document.getElementById("subtotal").innerHTML= "0.00";
     document.getElementById("tip").innerHTML= "0.00";
