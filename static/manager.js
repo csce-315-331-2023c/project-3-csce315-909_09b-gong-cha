@@ -53,10 +53,16 @@ function addIngredient() {
 
   var Ingredient_Name = document.getElementById("add-ingredient-name").value;
   var Unit_Price = document.getElementById("add-unit-price").value;
-  var Stock = document.getElementById("add-unit-price").value;
-  var Is_Toppping = document.getElementsByName("is-topping").value;
+  var Stock = document.getElementById("add-stock").value;
+  var Is_Topping = document.getElementsByName("is-topping")[1].checked;
 
-  
+  var ingredient = {
+    'ingredient_name': document.getElementById("add-ingredient-name").value,
+    'unit_price': document.getElementById("add-unit-price").value,
+    'stock': document.getElementById("add-stock").value,
+    'is_topping': document.getElementsByName("is-topping")[1].checked; 
+  };
+
 
 }
 
@@ -165,8 +171,9 @@ async function modIngredientName() {
 
   var pair = {
     'ingredient_id': document.getElementById('mod-ingredient-id').value,
-    'ingredient_name': document.getElementById('add-ingredient-name').value
+    'ingredient_name': document.getElementById('mod-ingredient-name').value
   };
+  console.log("hewwo");
   const response = await fetch(url + "/modIngredientName", {
     method: "PUT",
     headers: {
