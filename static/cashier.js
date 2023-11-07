@@ -134,6 +134,10 @@ function insertIntoReceipt(json) {
         confirmButton.addEventListener("click", function(){
           //TODO: update the json, update receipt, close the editDrink page
           //TODO: subtract cur_price from subtotal, recalculate cur_price, add cur_price to subtotal
+          //subtract cur price from subtotal
+          document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) - parseFloat(json.cur_price)).toFixed(2);
+          //do same for total
+          document.getElementById("total").innerHTML = (parseFloat(document.getElementById("total").innerHTML) - parseFloat(json.cur_price)).toFixed(2);
           
           var selected_info_ary = [];
           // Get all radio buttons with the name "sizeoptions"
@@ -145,9 +149,14 @@ function insertIntoReceipt(json) {
               // console.log(selectedSize);
               //if selected size is medium, then set isMedium to true, else false
               selected_info_ary.push({is_medium: selectedSize == "Medium" ? true : false})
-              // selected_info_ary.push({size: selectedSize})
               //set cur_price to the price of the selected size
-              json.cur_price = selectedSize == "Medium" ? json.med_price : json.lg_price;
+              if(selectedSize == "Medium"){
+                json.cur_price = parseFloat(json.med_price);
+              }
+              else if(selectedSize == "Large"){
+                json.cur_price = parseFloat(json.large_price);
+              }
+              
               break; // Exit the loop when a selected option is found
             }
           }
@@ -178,9 +187,6 @@ function insertIntoReceipt(json) {
           //TODO: get topping data
             var toppingDivs = document.querySelectorAll("#toppingDiv > div");
 
-            // Create an array to store the extracted information
-            // var toppingInfoArray = [];
-          
             // Loop through each topping div
             toppingDivs.forEach(function(toppingDiv) {
               var toppingId = toppingDiv.id;
@@ -190,19 +196,23 @@ function insertIntoReceipt(json) {
               // Check if the quantity is greater than 0
               if (quantity > 0) {
                 selected_info_ary.push({ ingredient_id: toppingId, quantity: quantity });
-                json.cur_price += price * quantity;
+                json.cur_price = parseFloat(json.cur_price) + price * quantity
+                console.log(price * quantity)
               }
             });
-          
+
+          console.log(json.cur_price)
             // Now you have an array containing the topping ID and quantity for each selected topping
           console.log(selected_info_ary);
           //iterate through id toppingDiv and for each child, get the value and add it to the json
           json.edit_info = selected_info_ary;
           
+          console.log(drinks);
+          
           //TODO: edit the subtotal and total
-          //use the cur_price to update the priceTextNode
-          //subtract cur_price from subtotal, recalculate cur_price, add cur_price to subtotal
-          //iterate through selected info ary, add the price of each topping to cur_price
+          document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
+          document.getElementById("total").innerHTML = (parseFloat(document.getElementById("total").innerHTML) + parseFloat(json.cur_price)).toFixed(2);
+
           document.getElementById("RecipeButtons").style.display = "initial";
           document.getElementById("EditDrink").style.display = "none";
           //send this info to confirmcheckout
@@ -224,7 +234,6 @@ function insertIntoReceipt(json) {
     document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
     
     drinks.push(json);
-
     itempane.appendChild(itemDiv); 
   }
 
