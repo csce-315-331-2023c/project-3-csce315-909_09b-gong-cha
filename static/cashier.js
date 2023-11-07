@@ -96,6 +96,7 @@ function insertIntoReceipt(json) {
         //create confirm button, applies changes to the drink
         //insert into toppingDiv
         var toppingDiv = document.getElementById("toppingDiv");
+        toppingDiv.innerHTML = "";
         for (var i = 0; i < toppings.length; i++){
             //use above format
             /**                
@@ -110,32 +111,38 @@ function insertIntoReceipt(json) {
             inputElement.max = "10";
             var textNode = document.createTextNode(toppings[i].ingredient_name);
             labelElement.appendChild(inputElement);
-            // labelElement.appendChild(textNode);
             var div = document.createElement("div");
             div.id = toppings[i].ingredient_id;
             div.appendChild(labelElement);
             div.appendChild(textNode);
             toppingDiv.appendChild(div);
-            // toppingDiv.appendChild(labelElement);
-            // toppingDiv.appendChild(textNode);
-
         }
         var confirm = document.getElementById("Confirm");
+        confirm.innerHTML = "";
         var confirmButton = document.createElement("button");
         confirmButton.type = "button";
         confirmButton.className = "btn btn-danger w-100 h-10";
         confirmButton.innerHTML = "Confirm";
         confirmButton.addEventListener("click", function(){
                 //TODO: update the json, update receipt, close the editDrink page
-                //get sugar data
-                //get ice data
-                //get topping data
                 //get size data
+                // var size = document.getElementById("size");
+                // var size = size.options[size.selectedIndex].value;
+                // //get sugar data, located in id sugarLevel
+                // var sugarLevel = document.getElementById("sugarLevel");
+                // var sugar = sugarLevel.options[sugarLevel.selectedIndex].value;
+                // //get ice data
+                // var iceLevel = document.getElementById("iceLevel");
+                // var ice = iceLevel.options[iceLevel.selectedIndex].value;
+                //get topping data
+
+                //iterate through id toppingDiv and for each child, get the value and add it to the json
 
                 document.getElementById("RecipeButtons").style.display = "initial";
                 document.getElementById("EditDrink").style.display = "none";
 
         });
+        confirm.appendChild(confirmButton);
 
     });
 
