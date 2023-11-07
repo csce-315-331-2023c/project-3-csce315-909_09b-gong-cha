@@ -53,16 +53,13 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
   });
 
-app.get('/manager', (req, res) => {
-    res.sendFile(__dirname + '/static/manager.html');
+app.get('/manager/ingredients', (req, res) => {
+    pool
+    .query('SELECT * FROM ingredient;')
+    .then(query_res => {
+        res.send(query_res.rows);
+    });
   });
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-
 
 app.use(express.json());
 //view all recipes

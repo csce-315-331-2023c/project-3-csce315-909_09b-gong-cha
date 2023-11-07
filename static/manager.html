@@ -37,10 +37,10 @@
       <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Edit Database</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Tab 2</a>
+      <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Tables</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Tab 3</a>
+      <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Reports</a>
     </li>
   </ul>
 
@@ -206,7 +206,18 @@
     </div>
 
     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-      Content for Tab 2 goes here.
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h1>Ingredients</h1>
+            <div id="ingredient-table" class="table"></div>
+          </div>
+          <div class="col-md-6">
+            <h1>Drinks</h1>
+            <div id="drink-table" class="table"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
