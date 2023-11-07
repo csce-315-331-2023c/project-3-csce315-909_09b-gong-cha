@@ -16,7 +16,7 @@ function showInputBox() {
 }
 
 // Adds a drink to the database
-function addDrink() {
+async function addDrink() {
 
   var Drink_Name = document.getElementById("add-drink-name").value;
   var Ingredient_Names = document.getElementById('add-ingredients').value;
@@ -25,8 +25,31 @@ function addDrink() {
   var Med_Price = document.getElementById('med-price-add').value;
   var Large_Price = document.getElementById('lrg-price-add').value;
   var Recipe_Price = document.getElementById('rcp-price-add').value;
+  // var request = await fetch(url + "/amongus").then((res) => res.json());
 
-  drinkTable();
+  var drink = {
+    'drink_name': Drink_Name,
+    'ingredient_names': Ingredient_Names,
+    'ingredient_amount': Ingredient_Amount,
+    'is_slushy': Is_Slushy,
+    'med_price': Med_Price,
+    'large_price': Large_Price,
+    'recipe_price': Recipe_Price  
+  };
+
+  console.log((drink));
+  const response = await fetch(url + "/addDrink", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(drink),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
+
+  drinkTable()
 }
 
 // Adds an ingredient to the database
@@ -34,132 +57,182 @@ function addIngredient() {
 
   var Ingredient_Name = document.getElementById("add-ingredient-name").value;
   var Unit_Price = document.getElementById("add-unit-price").value;
-  var Stock = document.getElementById("add-unit-price").value;
-  var Is_Toppping = document.getElementsByName("is-topping").value;
+  var Stock = document.getElementById("add-stock").value;
+  var Is_Topping = document.getElementsByName("is-topping")[1].checked;
+
+  var ingredient = {
+    'ingredient_name': document.getElementById("add-ingredient-name").value,
+    'unit_price': document.getElementById("add-unit-price").value,
+    'stock': document.getElementById("add-stock").value,
+    'is_topping': document.getElementsByName("is-topping")[1].checked; 
+  };
 
   ingredientTable();
 }
 
 // Modifies name of a drink given drinkID
-function modDrinkName() {
-  var Drink_Id = document.getElementById('mod-drink-id');
-  var Drink_Name = document.getElementById("mod-drink-name").value;
+async function modDrinkName() {
+  var pair = {
+    'drink_id': document.getElementById("mod-drink-id").value,
+    'drink_name': document.getElementById("mod-drink-name").value
+  };
 
-  drinkTable();
+  const response = await fetch(url + "/modDrinkName", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
+
+  drinkTable()
 }
 
 // Modifies ingredients & quantities of a drink given drinkID
-function modDrinkIngredients() {
-  var Drink_Id = document.getElementById('mod-drink-id');
+async function modDrinkIngredients() {
+
+  var pair = {
+    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_ingredients': document.getElementById('mod-drink-ingredients').value
+  };
+
+  const response = await fetch(url + "/modDrinkIngredients", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
 
   drinkTable();
 }
 
 // Modifies medium price of a drink given drinkID
-function modDrinkMediumPrice() {
-  var Drink_Id = document.getElementById('mod-drink-id');
-  var Medium_Price = document.getElementById('mod-drink-med-price').value;
+async function modDrinkMediumPrice() {
+  var pair = {
+    'drink_id': document.getElementById('mod-drink-id').value,
+    'med_price': document.getElementById('mod-drink-med-price').value
+  };
 
-  drinkTable();
+  const response = await fetch(url + "/modDrinkMediumPrice", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
+
+  drinkTable()
 }
 
 // Modifies large price of a drink given drinkID
-function modDrinkLargePrice() {
-  var Drink_Id = document.getElementById('mod-drink-id');
-  var Large_Price = document.getElementById('mod-drink-lrg-price').value;
+async function modDrinkLargePrice() {
+  var pair = {
+    'drink_id': document.getElementById('mod-drink-id').value,
+    'large_price': document.getElementById('mod-drink-lrg-price').value
+  };
 
-  drinkTable();
+  const response = await fetch(url + "/modDrinkLargePrice", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
+
+  drinkTable()
 }
 
 // Modifies recipe price of a drink given drinkID
-function modDrinkRecipePrice() {
-  var Drink_Id = document.getElementById('mod-drink-id');
-  var Large_Price = document.getElementById('mod-drink-rcp-price').value;
+async function modDrinkRecipePrice() {
+  var pair = {
+    'drink_id': document.getElementById('mod-drink-id').value,
+    'recipe': document.getElementById('mod-drink-rcp-price').value
+  };
+  const response = await fetch(url + "/modDrinkRecipePrice", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
 
   drinkTable();
 }
 
 // Modifies an ingredient name given ingredientID
-function modIngredientName() {
-  var Ingredient_ID = document.getElementById('mod-ingredient-id');
-  var Ingredient_Name = document.getElementById('add-ingredient-name');
+async function modIngredientName() {
+
+  var pair = {
+    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_name': document.getElementById('mod-ingredient-name').value
+  };
+  console.log("hewwo");
+  const response = await fetch(url + "/modIngredientName", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
 
   ingredientTable();
 }
 
 // Modifies an ingredient unit price given ingredientID
-function modIngredientUnitPrice() {
-  var Ingredient_ID = document.getElementById('mod-ingredient-id');
-  var Ingredient_Price = document.getElementById('mod-ingredient-unit-price').value;
+async function modIngredientUnitPrice() {
 
-  ingredientTable();
+  var pair = {
+    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_price': document.getElementById('mod-ingredient-unit-price').value
+  };
+
+  const response = await fetch(url + "/modIngredientUnitPrice", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
+
 }
 
 // Modifies an ingredient stock given ingredientID
-function modIngredientStock() {
-  var Ingredient_ID = document.getElementById('mod-ingredient-id');
-  var Ingredient_Price = document.getElementById('mod-ingredient-stock').value;
+async function modIngredientStock() {
+  var pair = {
+    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_stock': document.getElementById('mod-ingredient-stock').value
+  };
 
-  ingredientTable();
-}
-
-// Generate table that will hold all the ingredients
-async function ingredientTable() {
-  var request = await fetch(url + "/manager/ingredients").then((res => res.json()));
-  console.log(request)
-  createTableFromJSON(request, 'ingredient-table')
-}
-
-// Generate table that will hold all the drinks
-async function drinkTable() {
-  var request = await fetch(url + "/recipe").then((res => res.json()));
-  console.log(request)
-  createTableFromJSON(request, 'drink-table')
-}
-
-// Make a table given json data 
-async function createTableFromJSON(jsonData, tableContainerID) {
-  // Get the container element where the table will be inserted
-  let container = document.getElementById(tableContainerID);
-  if (container.childElementCount > 0)
-     container.removeChild(container.firstChild);
-
-  // Clear the container's contents
-  container.innerHTML = '';
-  
-  // Create the table element
-  let table = document.createElement("table");
-  
-  // Get the keys (column names) of the first object in the JSON data
-  let cols = Object.keys(jsonData[0]);
-  
-  // Create the header element
-  let thead = document.createElement("thead");
-  let tr = document.createElement("tr");
-  
-  // Loop through the column names and create header cells
-  cols.forEach((item) => {
-     let th = document.createElement("th");
-     th.innerText = item; // Set the column name as the text of the header cell
-     tr.appendChild(th); // Append the header cell to the header row
+  const response = await fetch(url + "/modIngredientStock", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
   });
-  thead.appendChild(tr); // Append the header row to the header
-  table.append(tr) // Append the header to the table
-  
-  // Loop through the JSON data and create table rows
-  jsonData.forEach((item) => {
-     let tr = document.createElement("tr");
-     
-     // Get the values of the current object in the JSON data
-     let vals = Object.values(item);
-     
-     // Loop through the values and create table cells
-     vals.forEach((elem) => {
-        let td = document.createElement("td");
-        td.innerText = elem; // Set the value as the text of the table cell
-        tr.appendChild(td); // Append the table cell to the table row
-     });
-     table.appendChild(tr); // Append the table row to the table
-  });
-  container.appendChild(table) // Append the table to the container element
+
+  const msg = await response.text();
+  console.log(msg);
 }

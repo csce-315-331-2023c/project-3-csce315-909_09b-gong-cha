@@ -41,10 +41,6 @@ app.get('/user', (req, res) => {
       });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
-
 //make it use the static folder
 app.use(express.static('static'));
 
@@ -108,7 +104,181 @@ app.get('/recipe/other', async (req, res) => {
       });
 })
 
+//get all toppings
+/** select * from ingredient where istopping = true;*/
+app.get('/toppings', async (req, res) => {
+  pool
+      .query('SELECT * FROM ingredient WHERE isTopping = true;')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
 app.get('/amongus', async (req, res) => {
     console.log("amongus");
   })
+
+// add drink
+app.put('/addDrink', async (req, res) => {
+  const drink = (req.body); // json object!!!
+  // index like you normally would for a pandas dataframe
+  console.log(drink['drink_name'])
+
+  res.send("successful");
+
+});  
+
+
+
+app.put('/modDrinkName', async (req, res) => {
+  var drink_name = (req.body['drink_name']);
+  var recipe_id = (req.body['drink_id']); 
+  // sql query
+  pool
+      .query("UPDATE recipe SET recipe_name  = '" + drink_name + "' WHERE recipe_id = '" + recipe_id + "';");
+  res.send("successful");
+  console.log("modified drink name");
+});  
+
+app.put('/modDrinkIngredients', async (req, res) => {
+  var drink_id = (req.body['drink_id']); // json object!!!
+  var drink_ingredients = (req.body['drink_ingredients']); // json object!!!
+
+  // sql query
+
+  res.send("successful");
+});  
+
+app.put('/modDrinkMediumPrice', async (req, res) => {
+  var recipe_id = (req.body['drink_id']); // json object!!!
+  var med_price = (req.body['med_price']); // json object!!!
+
+  // sql query
+  pool
+      .query("UPDATE recipe SET med_price =" + med_price + "WHERE recipe_id =" + recipe_id + ";");
+  console.log("modified drink med price");
+  res.send("successful");
+});  
+
+app.put('/modDrinkLargePrice', async (req, res) => {
+  var recipe_id = (req.body['drink_id']); // json object!!!
+  var large_price = (req.body['large_price']); // json object!!!
+
+  // sql query
+  pool
+      .query("UPDATE recipe SET large_price =" + large_price + "WHERE recipe_id =" + recipe_id + ";");
+
+
   
+  console.log("modified drink large price");
+  res.send("successful");
+
+});  
+
+app.get('/orderid', async (req, res) => {
+  pool
+      .query("SELECT * FROM order_ ORDER BY order_id DESC LIMIT 1;")
+      .then(query_res => {
+        res.send(query_res.rows);
+      });
+})
+
+app.get('/orderitemid', async (req, res) => {
+  pool
+      .query("SELECT * FROM order_item ORDER BY order_item_id DESC LIMIT 1;")
+      .then(query_res => {
+        res.send(query_res.rows);
+      });
+})
+
+app.put('/modDrinkRecipePrice', async (req, res) => {
+  var recipe_id = (req.body['drink_id']); // json object!!!
+  var recipe_price = (req.body['recipe']); // json object!!!
+
+  // sql query
+  pool
+      .query("UPDATE recipe SET recipe_price =" + recipe_price + "WHERE recipe_id =" + recipe_id + ";");
+  res.send("successful");
+  console.log("updated drink recipe price");
+});  
+
+
+app.put('/modIngredientName', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_name = (req.body['ingredient_name']); 
+
+  // sql query
+  pool
+  .query("UPDATE ingredient SET ingredient_name = '" + ingredient_name + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient name");
+  res.send("successful");
+});  
+
+app.put('/modIngredientUnitPrice', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_price = (req.body['ingredient_price']); 
+
+  // sql query
+  pool
+  .query("UPDATE ingredient SET unit_price = '" + ingredient_price + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient unit price");
+  res.send("successful");
+});  
+
+app.put('/modIngredientStock', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_stock = (req.body['ingredient_stock']); 
+  // sql query
+  pool
+  .query("UPDATE ingredient SET stock = '" + ingredient_stock + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient unit price");
+  res.send("successful");
+});  
+
+app.put('/order', async (req, res) => {
+  var username = (req.body['username']);
+  var order_id = (req.body['order_id']); 
+  var date_ = (req.body['date']); 
+  var subtotal = (req.body['subtotal']); 
+  var tip = (req.body['tip']); 
+  var time_ = (req.body['time']); 
+
+  // sql query
+  pool
+  .query("INSERT INTO order_ values ('" + username + "','" + order_id + "','" + date_ + "','" + subtotal + "','" + tip + "','" + time_ + "');");
+
+  res.send("successful");
+});  
+
+app.put('/orderitem', async (req, res) => {
+  var order_item_id = (req.body['order_item_id']);
+  var recipe_id = (req.body['recipe_id']); 
+  var order_id = (req.body['order_id']); 
+  var isMedium = (req.body['is_medium']); 
+  var ice = (req.body['ice']); 
+  var sugar = (req.body['sugar']); 
+  var price = (req.body['price']);
+
+  // sql query
+  pool
+  .query("INSERT INTO order_item values ('" + order_item_id + "','" + recipe_id + "','" + order_id + "','" + isMedium + "','" + ice + "','" + sugar + "','" + price + "');");
+
+  res.send("successful");
+}); 
+
+app.put('/orderitemtoppings', async (req, res) => {
+  var order_item_id = (req.body['order_item_id']); 
+  var ingredient_id = (req.body['ingredient_id']); 
+  var quantity_used = (req.body['quantity']); 
+
+  pool
+  .query("INSERT INTO order_item_toppings values ('" + order_item_id + "','" + ingredient_id + "','" + quantity_used + "');");
+
+  res.send("successful");
+});  
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, function(err) {
+  if(err) console.log(err);
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
