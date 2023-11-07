@@ -79,8 +79,66 @@ function insertIntoReceipt(json) {
 
     const editIcon = document.createElement("i");
     editIcon.classList.add("fa-regular", "fa-pen-to-square", "fa-lg");
-
+    
+    //TODO: create associated json for each drink with relevant info, the editbutton will open up a menu to change the toppings, ice, sugar, or size
+    //then, the editbutton will change the json and update the receipt
     editButton.appendChild(editIcon);
+    editButton.addEventListener("click", async function(){
+        //TODO: make page to edit drink
+        //retrieve toppings
+        document.getElementById("RecipeButtons").style.display = "none";
+        document.getElementById("EditDrink").style.display = "initial";
+        var toppings = await getToppings();
+        //change visiblility of #editDrink
+        console.log(toppings[0])
+
+
+        //create confirm button, applies changes to the drink
+        //insert into toppingDiv
+        var toppingDiv = document.getElementById("toppingDiv");
+        for (var i = 0; i < toppings.length; i++){
+            //use above format
+            /**                
+             <label for="quantity"><input class="form-control" type="number" value="1" min="1" max="10"></label>
+            <label for="topping1">Topping 1</label> */
+            var labelElement = document.createElement("label");
+            labelElement.setAttribute("for", "quantity");
+            var inputElement = document.createElement("input");
+            inputElement.classList.add("form-control");
+            inputElement.type = "number";
+            inputElement.min = "1";
+            inputElement.max = "10";
+            var textNode = document.createTextNode(toppings[i].ingredient_name);
+            labelElement.appendChild(inputElement);
+            // labelElement.appendChild(textNode);
+            var div = document.createElement("div");
+            div.id = toppings[i].ingredient_id;
+            div.appendChild(labelElement);
+            div.appendChild(textNode);
+            toppingDiv.appendChild(div);
+            // toppingDiv.appendChild(labelElement);
+            // toppingDiv.appendChild(textNode);
+
+        }
+        var confirm = document.getElementById("Confirm");
+        var confirmButton = document.createElement("button");
+        confirmButton.type = "button";
+        confirmButton.className = "btn btn-danger w-100 h-10";
+        confirmButton.innerHTML = "Confirm";
+        confirmButton.addEventListener("click", function(){
+                //TODO: update the json, update receipt, close the editDrink page
+                //get sugar data
+                //get ice data
+                //get topping data
+                //get size data
+
+                document.getElementById("RecipeButtons").style.display = "initial";
+                document.getElementById("EditDrink").style.display = "none";
+
+        });
+
+    });
+
 
     labelElement.appendChild(inputElement);
     innerDiv2.appendChild(labelElement);
@@ -94,7 +152,6 @@ function insertIntoReceipt(json) {
     document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
     drinks.push(json);
 
-    editButton.addEventListener("click", EditDrink);
 
     itempane.appendChild(itemDiv); 
   }
@@ -182,12 +239,11 @@ function confirmCheckout()
     document.getElementById("ConfirmCheckout").style.display = "none";
 }
 //open up a dropdown menu to ask for changing toppings, ice, sugar, or size
-//update the receipt
+//update the receipt'
 //close the dropdown menu
-function EditDrink(){
-    console.log("edit drink");
-   //create the dropdown menu
-    //add actionlisteners to each of the buttons
-    //update the receipt
-    //close the dropdown menu
+
+async function getToppings(){
+    var request = await fetch(url + "/toppings").then((res) => res.json());
+    return request;
 }
+

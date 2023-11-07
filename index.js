@@ -109,6 +109,16 @@ app.get('/recipe/other', async (req, res) => {
       });
 })
 
+//get all toppings
+/** select * from ingredient where istopping = true;*/
+app.get('/toppings', async (req, res) => {
+  pool
+      .query('SELECT * FROM ingredient WHERE isTopping = true;')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
 app.get('/amongus', async (req, res) => {
     console.log("amongus");
   })
