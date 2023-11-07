@@ -128,8 +128,6 @@ app.put('/addDrink', async (req, res) => {
 
 });  
 
-
-
 app.put('/modDrinkName', async (req, res) => {
   var drink_name = (req.body['drink_name']);
   var recipe_id = (req.body['drink_id']); 
@@ -275,6 +273,43 @@ app.put('/orderitemtoppings', async (req, res) => {
   .query("INSERT INTO order_item_toppings values ('" + order_item_id + "','" + ingredient_id + "','" + quantity_used + "');");
 
   res.send("successful");
+});  
+
+app.get('/restockReport', async (req, res) => { 
+  pool
+  .query('SELECT * FROM ingredient WHERE stock < minimum_quantity;')
+  .then(query_res => {
+      res.send(query_res.rows);
+  });
+});  
+
+app.get('/excessReport', async (req, res) => {
+  const start_date = req.query.start_date;
+  const end_date = req.query.end_date;
+  const start_time = req.query.start_time;
+  const end_time = req.query.end_time;
+
+  // sql query
+  pool
+  .query("SELECT subquery.Topping_Name, SUM(Total_Used) AS Combined_Total_Used, CEILING((SELECT Stock FROM Toppings WHERE Toppings.Topping_Name = subquery.Topping_Name) * 0.1) AS Ten_Percent_Stock FROM (SELECT Topping_Name, SUM(Quantity_Used) AS Total_Used FROM Recipe_Toppings NATURAL JOIN Toppings NATURAL JOIN Order_ NATURAL JOIN Order_Item WHERE Date_ BETWEEN '" + start_date + "' AND '" + end_date + "'  AND Time_ BETWEEN '" + start_time + "' AND '" + end_time + "' GROUP BY Topping_Name UNION SELECT Topping_Name, SUM(Quantity_Used) AS Total_Used FROM Order_Item_Toppings NATURAL JOIN Toppings NATURAL JOIN Order_ NATURAL JOIN Order_Item WHERE Date_ BETWEEN '" + start_date + "' AND '" + end_date + "'  AND Time_ BETWEEN '" + start_time + "' AND '" + end_time + "'GROUP BY Topping_Name) AS subquery GROUP BY subquery.Topping_Name HAVING SUM(Total_Used) < CEILING((SELECT Stock FROM Toppings WHERE Toppings.Topping_Name = subquery.Topping_Name) * 0.1);")
+  .then(query_res => {
+      res.send(query_res.rows);
+  })
+});  
+
+app.get('/salesReport', async (req, res) => {
+  var start_date = (req.body['']);
+  var start_time = (req.body['']);
+  var end_date = (req.body['']);
+  var end_time = (req.body['']);
+  var menu_item = (req.body['']);
+
+  // sql query
+  pool
+  .query("")
+  .then(query_res => {
+      res.send(query_res.rows);
+  })
 });  
 
 const PORT = process.env.PORT || 5000;

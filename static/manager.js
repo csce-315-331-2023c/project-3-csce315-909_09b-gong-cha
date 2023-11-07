@@ -3,6 +3,7 @@ url = "http://localhost:5000"; //changes this later
 document.addEventListener("DOMContentLoaded", function() {
   ingredientTable();
   drinkTable();
+  generateRestockReport();
 });
 
 function showInputBox() {
@@ -14,6 +15,17 @@ function showInputBox() {
 
   document.getElementById(`inputBox${selectedOption}`).classList.remove("d-none");
 }
+
+function showReport() {
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById(`report${i}`).classList.add("d-none"); // Reset report to be hidden
+  }
+
+  let selectedOption = document.getElementById("reportOptions").value;
+
+  document.getElementById(`report${selectedOption}`).classList.remove("d-none");
+}
+
 
 // Adds a drink to the database
 async function addDrink() {
@@ -216,6 +228,7 @@ async function modIngredientUnitPrice() {
   const msg = await response.text();
   console.log(msg);
 
+  ingredientTable();
 }
 
 // Modifies an ingredient stock given ingredientID
@@ -235,20 +248,47 @@ async function modIngredientStock() {
 
   const msg = await response.text();
   console.log(msg);
+
+  ingredientTable();
 }
 
 // Generate table that will hold all the ingredients
 async function ingredientTable() {
   var request = await fetch(url + "/manager/ingredients").then((res => res.json()));
-  console.log(request)
+
+  request.sort((a, b) => a.ingredient_id - b.ingredient_id);
+
   createTableFromJSON(request, 'ingredient-table')
 }
 
 // Generate table that will hold all the drinks
 async function drinkTable() {
   var request = await fetch(url + "/recipe").then((res => res.json()));
-  console.log(request)
+
+  request.sort((a, b) => a.recipe_id - b.recipe_id);
+
   createTableFromJSON(request, 'drink-table')
+}
+
+async function generateRestockReport() {
+  var request = await fetch(url + "/restockReport").then((res => res.json()));
+
+  createTableFromJSON(request, 'restock-report')
+}
+
+async function generateExcessReport() {
+  var data = {
+    'start_date': document.getElementById('start-date2').value,
+    'end_date': document.getElementById('end-date2').value,
+    'start_time': document.getElementById('start-time2').value,
+    'end_time': document.getElementById('end-time2').value
+  };
+
+  var urlWithParams = `${url}/excessReport?start_date=${data.start_date}&end_date=${data.end_date}&start_time=${data.start_time}&end_time=${data.end_time}`;
+
+  var request = await fetch(urlWithParams).then((res => res.json()));
+
+  createTableFromJSON(request, 'excess-report')
 }
 
 // Make a table given json data 

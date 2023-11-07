@@ -221,7 +221,57 @@
     </div>
 
     <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-      Content for Tab 3 goes here.
+      <div class="form-group">
+        <label for="reportOptions">Select a Report</label>
+        <select class="form-select w-25" id="reportOptions" name="reportOptions" onchange="showReport()">
+          <option value="-">-</option>
+          <option value="1">Restock Report</option>
+          <option value="2">Sales Report</option>
+          <option value="3">Excess Report</option>
+        </select>
+      </div>
+      <div id="report1" class="d-none w-50">
+        <div id="restock-report" class="table"></div>
+      </div>
+      <div id="report2" class="d-none w-50">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="start-time">Start time:</label>
+            <input type="text" class="form-control" id="start-time" name="start-time">
+            <label for="start-date">Start date:</label>
+            <input type="text" class="form-control" id="start-date" name="start-date">
+            <label for="end-time">End time:</label>
+            <input type="text" class="form-control" id="end-time" name="end-time">
+            <label for="end-date">End date:</label>
+            <input type="text" class="form-control" id="end-date" name="end-date">
+            <label for="menu-item">Menu Item Name:</label>
+            <input type="text" class="form-control" id="menu-item" name="menu-item">
+            <button type="submit" class="btn btn-primary" onclick="generateSalesReport()">Generate Report</button>
+          </div>
+          <div class="col-md-6">
+            <div id="sales-report" class="table"></div>
+          </div>
+        </div>
+      </div>
+      <div id="report3" class="d-none w-50">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="start-time2">Start time:</label>
+            <input type="text" class="form-control" id="start-time2" name="start-time2">
+            <label for="start-date2">Start date:</label>
+            <input type="text" class="form-control" id="start-date2" name="start-date">
+            <label for="end-time2">End time:</label>
+            <input type="text" class="form-control" id="end-time2" name="end-time2">
+            <label for="end-date2">End date:</label>
+            <input type="text" class="form-control" id="end-date2" name="end-date2">
+            <button type="submit" class="btn btn-primary" onclick="generateExcessReport()">Generate Report</button>
+          </div>
+          <div class="col-md-6">
+            <div id="excess-report" class="table"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
