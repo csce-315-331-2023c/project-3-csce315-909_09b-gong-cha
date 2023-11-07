@@ -64,7 +64,7 @@ function addIngredient() {
     'ingredient_name': document.getElementById("add-ingredient-name").value,
     'unit_price': document.getElementById("add-unit-price").value,
     'stock': document.getElementById("add-stock").value,
-    'is_topping': document.getElementsByName("is-topping")[1].checked; 
+    'is_topping': document.getElementsByName("is-topping")[1].checked
   };
 
   ingredientTable();
