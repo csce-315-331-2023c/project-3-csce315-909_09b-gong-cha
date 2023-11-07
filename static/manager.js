@@ -283,9 +283,15 @@ async function generateExcessReport() {
   var end_time = document.getElementById('end-time2').value;
 
   var urlWithParams = `${url}/excessReport/${start_date}/${end_date}/${start_time}/${end_time}`;
+ try {
+    var request = await fetch(urlWithParams).then((res => res.json()));
+    if (!request.ok) {
+      throw new Error('Error fetching data');
+    }
 
-  console.log(urlWithParams);
-  var request = await fetch(urlWithParams).then((res => res.json()));
+ } catch (error) {
+    alert('An error occured while fetching data.');
+ }
 
   createTableFromJSON(request, 'excess-report')
 }
