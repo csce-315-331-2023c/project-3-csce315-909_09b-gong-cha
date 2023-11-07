@@ -78,6 +78,7 @@ async function addIngredient() {
   const msg = await response.text();
   console.log(msg);
 
+  ingredientTable();
 }
 
 // Modifies name of a drink given drinkID
