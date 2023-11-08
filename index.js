@@ -6,7 +6,7 @@ const dotenv = require('dotenv').config();
 const app = express();
 const port = 10000;
 
-// Create pool
+// Create pool 
 const pool = new Pool({
     user: process.env.PSQL_USER,
     host: process.env.PSQL_HOST,
