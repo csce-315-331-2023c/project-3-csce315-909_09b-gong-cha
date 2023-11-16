@@ -138,3 +138,41 @@ Task Description
 Full Topping Functionality - Assigned To Ren
 Full Checkout Functionality - Assigned To Reid
 Adding Drinks/Recipes within Manager Functionality-Anton
+
+
+SCRUM Meeting 4 for Team 9B
+_________________________________________________
+Prepared by: Brenndan Croteau
+Meeting Date: November 15, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai 
+Meeting Agenda Items
+ Task Distribution
+ Sprint Progression Plan
+Accomplishments:
+ Distributed tasks to each member, made a plan for what to complete first within the sprint, 
+ cleared up bootstrap confusion for those who haven't used it yet
+
+Tasks Completed:
+Task Description
+Task Allocation- ASSIGNED TO Everyone - Completed Yes
+
+Before The Next Meeting
+Plans:
+Design/Implement Front-end for Customer View
+Design/Implement Back-end for Customer View
+
+Task Assignments:
+Task Description
+Design GUI, Create Tabbed Pane for drinks - Assigned to Brenndan
+Make buttons for each drink - Assigned to Ren
+Implement style sheet for customer view - Assigned to Anton
+Add images and descriptions to the drinks - Assigned to Reid
+
+Minutes from Previous Meeting
+ Finalization of MVP
+ Last Features
+ Status Update Since Last Meeting
