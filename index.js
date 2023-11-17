@@ -25,20 +25,16 @@ process.on('SIGINT', function() {
          
 // app.set("view engine", "html");
 
-//testing
-app.get('/user', (req, res) => {
-  teammembers = []
-  pool
-      .query('SELECT * FROM teammembers;')
-      .then(query_res => {
-          for (let i = 0; i < query_res.rowCount; i++){
-              teammembers.push(query_res.rows[i]);
-          }
-          const data = {teammembers: teammembers};
-          console.log(teammembers);
-          res.render('user', data);
-      });
-});
+//TODO: have app send correct url based on .env variable
+//this will prevent us from having to manually change url when we deploy
+// app.get('/baseUrl', (req, res) => {
+//   if (process.env.NODE_ENV === 'production') {
+//     res.send('http://localhost:10000')
+//   }
+//   else{
+//     res.send('https://csce-315-project-3-gong-cha.onrender.com')
+//   }
+// });
 
 //make it use the static folder
 app.use(express.static('static'));
@@ -378,3 +374,4 @@ app.listen(PORT, function(err) {
   if(err) console.log(err);
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
