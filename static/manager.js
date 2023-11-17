@@ -1,7 +1,12 @@
-// const dotenv = require('dotenv').config();
-// dotenv.config({ path: '../.env' });
-// url = `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASSWORD}@${process.env.PSQL_HOST}:${process.env.PSQL_PORT}/${process.env.PSQL_DATABASE}`; //changes this later
-url = "https://csce-315-project-3-gong-cha.onrender.com";
+// let url = ""
+// if (process.env.NODE_ENV === "development"){
+//   url = "http://localhost:10000"
+// }
+// else{
+//   url = "https://csce-315-project-3-gong-cha.onrender.com";
+// }
+//get url from index.js
+const url = 'http://localhost:10000';
 
 
 document.addEventListener("DOMContentLoaded", function() {
