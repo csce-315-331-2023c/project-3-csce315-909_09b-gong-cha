@@ -1,12 +1,13 @@
 const url = 'http://localhost:5000';
 
-
+// This will load all necessary tables/options on startup
 document.addEventListener("DOMContentLoaded", function() {
   ingredientTable();
   drinkTable();
   generateRestockReport();
   getDrinks();
   getIngredients();
+  fetchIngredientsAndDisplay();
 });
 
 function showInputBox() {
@@ -114,11 +115,17 @@ async function modDrinkName() {
 async function modDrinkIngredients() {
   var select = document.getElementById('drinkList');
 
+  var arrays = gatherValues();
+  
   var trio = {
     'drink_id': select.value,
-    'ingredients_name': document.getElementById('mod-drink-ingredients').value,
-    'ingredients_quantity': document.getElementById('mod-drink-ingredients-qty').value
+    'ingredients_name': arrays.ingredients,
+    'ingredients_quantity': arrays.quantities
   };
+
+  console.log(trio.drink_id);
+  console.log(trio.ingredients_name);
+  console.log(trio.ingredients_quantity);
 
   const response = await fetch(url + "/modDrinkIngredients", {
     method: "PUT",
@@ -350,6 +357,126 @@ async function getIngredients() {
           select.appendChild(option);
       });
   })
+}
+
+// async function getIngredientOptions() {
+//   document.getElementById('allIngredients').innerHTML = '';
+//   fetch('/ingredientNames')
+//   .then(response => response.json())
+//   .then(ingredients => {
+//     const ingredientsListDiv = document.getElementById('allIngredients');
+//     ingredients.forEach(ingredient => {
+//       const label = document.createElement('label');
+//       label.textContent = " " + ingredient.ingredient_name;
+
+//       const quantityInput = document.createElement('input');
+//       quantityInput.type = 'number';
+//       quantityInput.name = 'ingredientQuantities[]';
+//       quantityInput.min = '0';
+//       quantityInput.value = '0';
+
+//       ingredientsListDiv.appendChild(quantityInput);
+//       ingredientsListDiv.appendChild(label);
+//       ingredientsListDiv.appendChild(document.createElement('br'));
+//     });
+//   })
+//   .catch(error => console.error('Error:', error));
+// }
+
+async function fetchIngredientsAndDisplay() {
+  try {
+    const response = await fetch('/ingredientNames');
+    const ingredients = await response.json();
+    const ingredientsListDiv = document.getElementById('allIngredients');
+
+    const thirdLength = Math.ceil(ingredients.length / 3);
+    const firstThird = ingredients.slice(0, thirdLength);
+    const secondThird = ingredients.slice(thirdLength, 2 * thirdLength);
+    const lastThird = ingredients.slice(2 * thirdLength);
+
+    const firstColumn = createColumn(firstThird);
+    const secondColumn = createColumn(secondThird);
+    const thirdColumn = createColumn(lastThird);
+
+    const row = document.createElement('div');
+    row.classList.add('row');
+
+    const col1 = document.createElement('div');
+    col1.classList.add('col-md-4');
+    col1.appendChild(firstColumn);
+
+    const col2 = document.createElement('div');
+    col2.classList.add('col-md-4');
+    col2.appendChild(secondColumn);
+
+    const col3 = document.createElement('div');
+    col3.classList.add('col-md-4');
+    col3.appendChild(thirdColumn);
+
+    row.appendChild(col1);
+    row.appendChild(col2);
+    row.appendChild(col3);
+
+    ingredientsListDiv.appendChild(row);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+function createColumn(ingredients) {
+  const column = document.createElement('div');
+  column.classList.add('mb-3');
+
+  ingredients.forEach(ingredient => {
+    const formGroup = document.createElement('div');
+    formGroup.classList.add('input-group');
+
+    const inputGroupText = document.createElement('label');
+    inputGroupText.classList.add('input-group-text');
+    inputGroupText.textContent = ingredient.ingredient_name;
+
+    const quantityInput = document.createElement('input');
+    quantityInput.type = 'number';
+    quantityInput.classList.add('form-control');
+    quantityInput.name = 'ingredientQuantities[]';
+    quantityInput.min = '0';
+    quantityInput.value = '0';
+
+    formGroup.appendChild(quantityInput);
+    formGroup.appendChild(inputGroupText);
+    column.appendChild(formGroup);
+  });
+
+  return column;
+}
+
+function gatherValues() {
+  const inputs = document.querySelectorAll('#allIngredients input[type="number"]');
+  const ingredientNames = [];
+  const quantities = [];
+
+  inputs.forEach(input => {
+    const val = input.value;
+    const ingredientName = input.nextElementSibling.textContent.trim();
+
+    if (val != 0) {
+      ingredientNames.push(ingredientName); // Add input value to the Set if it's not empty
+      quantities.push(val);
+    }
+  });
+
+  const ingredientNamesString = ingredientNames.join(','); // Comma-separated string for unique values
+  const quantitesString = quantities.join(','); // Comma-separated string for non-zero values
+
+  console.log('Ingredients:', ingredientNamesString);
+  console.log('Quantities:', quantitesString);
+
+  var arrays = {
+    'ingredients': ingredientNamesString,
+    'quantities': quantitesString
+  }
+
+  return arrays;
 }
 
 async function generateRestockReport() {

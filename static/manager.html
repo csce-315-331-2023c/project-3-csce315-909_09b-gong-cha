@@ -88,7 +88,7 @@
 
         <button type="submit" class="btn btn-primary" onclick="addDrink()">Add New Drink</button>
       </div>
-      <div id="inputBox2" class="d-none w-50">
+      <div id="inputBox2" class="d-none">
         <label for="drinkList">What drink would you like to modify?</label>
         <select id="drinkList" class="form-control"></select>
         <div class="row">
@@ -101,21 +101,12 @@
           </div>
         </div>
 
-        <div class="row">
-          <label for="mod-drink-ingredients">Ingredients (separated by ','):</label>
-          <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-drink-ingredients" name="mod-drink-ingredients">
+        <div>
+          <label for="mod-drink-ingredients">Ingredients (Add all that will be in the drink):</label>
+          <div id="allIngredients" class="mb-3">
+            <!-- ingredients will be dynamically added here -->
           </div>
-        </div>
-
-        <div class="row">
-          <label for="mod-drink-ingredients-qty">Quantity of Ingredients (in same order, separated by ','):</label>
-          <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-drink-ingredients-qty" name="mod-drink-ingredients-qty">
-          </div>
-          <div class="col-md-6">
-            <button type="submit" class="btn btn-primary" onclick="modDrinkIngredients()">Change Ingredients</button>
-          </div>
+          <button type="submit" class="btn btn-primary" onclick="modDrinkIngredients()">Change Ingredients</button>
         </div>
 
         <div class="row">
