@@ -176,3 +176,40 @@ Minutes from Previous Meeting
  Finalization of MVP
  Last Features
  Status Update Since Last Meeting
+
+SCRUM Meeting 5 for Team 9B
+_________________________________________________
+Prepared by: Anton Hugo Ramirez
+Meeting Date: November 19, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai 
+Meeting Agenda Items
+Customer View
+Plans for Sprint Remainder
+Log-In Page
+Accomplishments:
+Revised Manager View
+Implemented Menu
+
+Tasks Completed:
+Task Description
+Implemented Menu Front End - ASSIGNED TO Reid - Completed Yes
+Added Images to Menu - ASSIGNED TO Anton - Completed Yes
+Implemented Cashier View - ASSIGNED TO Ren - Completed Yes
+
+Before The Next Meeting
+Plans:
+Implement Log In Functionality
+Implement Customer View
+
+Task Assignments:
+Task Description
+Log in Functionality - Anton, Brenndan
+Customer View - Ren, Reid
+Adjust Checkout Button for Cashier View - Ren
+
+Minutes from Previous Meeting
+Task Distribution, User Studies.
