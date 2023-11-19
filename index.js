@@ -102,6 +102,14 @@ app.get('/recipe/other', async (req, res) => {
       });
 })
 
+app.get('/drinkNames', async (req, res) => {
+  pool
+      .query('SELECT recipe_name FROM recipe ORDER BY recipe_id;')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
 //get all toppings
 /** select * from ingredient where istopping = true;*/
 app.get('/toppings', async (req, res) => {

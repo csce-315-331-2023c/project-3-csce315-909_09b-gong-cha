@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
   ingredientTable();
   drinkTable();
   generateRestockReport();
+  getDrinks();
 });
 
 function showInputBox() {
@@ -84,8 +85,10 @@ async function addIngredient() {
 
 // Modifies name of a drink given drinkID
 async function modDrinkName() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById("mod-drink-id").value,
+    'drink_id': select.value,
     'drink_name': document.getElementById("mod-drink-name").value
   };
 
@@ -100,14 +103,18 @@ async function modDrinkName() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable()
+  setTimeout(() => {
+    getDrinks();
+    drinkTable()
+  }, 200);
 }
 
 // Modifies ingredients & quantities of a drink given drinkID
 async function modDrinkIngredients() {
+  var select = document.getElementById('drinkList');
 
   var trio = {
-    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_id': select.value,
     'ingredients_name': document.getElementById('mod-drink-ingredients').value,
     'ingredients_quantity': document.getElementById('mod-drink-ingredients-qty').value
   };
@@ -122,14 +129,14 @@ async function modDrinkIngredients() {
 
   const msg = await response.text();
   console.log(msg);
-
-  drinkTable();
 }
 
 // Modifies medium price of a drink given drinkID
 async function modDrinkMediumPrice() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_id': select.value,
     'med_price': document.getElementById('mod-drink-med-price').value
   };
 
@@ -144,13 +151,17 @@ async function modDrinkMediumPrice() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable()
+  setTimeout(() => {
+    drinkTable()
+  }, 200);
 }
 
 // Modifies large price of a drink given drinkID
 async function modDrinkLargePrice() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_id': select.value,
     'large_price': document.getElementById('mod-drink-lrg-price').value
   };
 
@@ -165,13 +176,17 @@ async function modDrinkLargePrice() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable()
+  setTimeout(() => {
+    drinkTable()
+  }, 200);
 }
 
 // Modifies recipe price of a drink given drinkID
 async function modDrinkRecipePrice() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_id': select.value,
     'recipe': document.getElementById('mod-drink-rcp-price').value
   };
   const response = await fetch(url + "/modDrinkRecipePrice", {
@@ -185,7 +200,9 @@ async function modDrinkRecipePrice() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable();
+  setTimeout(() => {
+    drinkTable()
+  }, 200);
 }
 
 // Modifies an ingredient name given ingredientID
@@ -269,6 +286,23 @@ async function drinkTable() {
   request.sort((a, b) => a.recipe_id - b.recipe_id);
 
   createTableFromJSON(request, 'drink-table')
+}
+
+async function getDrinks() {
+  var select = document.getElementById('drinkList');
+  select.innerHTML = '';
+
+  fetch('/drinkNames')
+  .then(response => response.json())
+  .then(data => {
+      const select = document.getElementById('drinkList');
+      data.forEach((drink, index) => {
+          const option = document.createElement('option');
+          option.value = index + 1;
+          option.textContent = drink.recipe_name;
+          select.appendChild(option);
+      });
+  })
 }
 
 async function generateRestockReport() {
