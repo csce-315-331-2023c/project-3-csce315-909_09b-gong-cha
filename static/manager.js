@@ -375,6 +375,8 @@ async function fetchIngredientsAndDisplay(element) {
     const ingredients = await response.json();
     const ingredientsListDiv = document.getElementById(`${element}`);
 
+    ingredientsListDiv.innerHTML = "";
+
     const thirdLength = Math.ceil(ingredients.length / 3);
     const firstThird = ingredients.slice(0, thirdLength);
     const secondThird = ingredients.slice(thirdLength, 2 * thirdLength);
