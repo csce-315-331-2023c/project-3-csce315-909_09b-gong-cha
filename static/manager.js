@@ -6,7 +6,7 @@
 //   url = "https://csce-315-project-3-gong-cha.onrender.com";
 // }
 //get url from index.js
-const url = 'http://localhost:10000';
+const url = 'http://localhost:5000';
 
 
 // This will load all necessary tables/options on startup
