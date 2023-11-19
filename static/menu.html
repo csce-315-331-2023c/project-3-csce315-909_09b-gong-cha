@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/5a20bc120a.js" crossorigin="anonymous"></script>
+  <title>My Website</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="menu.css">
+</head>
+
+<script src="menu.js"></script>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">GongCha</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">About</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="manager.html">Manager</a>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-danger" onclick="">Translate</button>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    
+    <div class="container">
+      <div class="row">
+        <div id="RecipeButtons">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="categories-tab" data-toggle="tab" href="#milktea" role="tab" aria-controls="milktea" aria-selected="true">Milk Tea Series</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="slushie-tab" data-toggle="tab" href="#slushie" role="tab" aria-controls="slushie" aria-selected="false">Slush Series</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="coffee-tab" data-toggle="tab" href="#coffee" role="tab" aria-controls="coffee" aria-selected="false">Coffee Series</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tea-tab" data-toggle="tab" href="#tea" role="tab" aria-controls="tea" aria-selected="false">Tea Series</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Specialty Series</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="topping-tab" data-toggle="tab" href="#topping" role="tab" aria-controls="topping" aria-selected="false">Toppings</a>
+            </li>
+          </ul>
+        
+          <div class="tab-content align-content-center display-6" id="myTabContent">
+            <div class="tab-pane fade show active" id="milktea" role="tabpanel" aria-labelledby="milktea-tab">
+              <div class="container pt-2" id="milk_container">
+              </div>
+            </div>
+            <div class="tab-pane fade" id="slushie" role="tabpanel" aria-labelledby="slushie-tab">
+                <div class="container pt-2" id="slushie_container">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="coffee" role="tabpanel" aria-labelledby="coffee-tab">
+              <div class="container pt-2" id="coffee_container">
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tea" role="tabpanel" aria-labelledby="tea-tab">
+              <div class="container pt-2" id="tea_container">
+              </div>
+            </div>
+            <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+              <div class="container pt-2" id="other_container">
+              </div>
+            </div>
+            <div class="tab-pane fade" id="topping" role="tabpanel" aria-labelledby="topping-tab">
+              <div class="container pt-2" id="toppings_container">
+                <div class="row justify-content-evenly bg-light h4 p-1">
+                  <div class="col-8">
+                    Toppings
+                  </div>
+                  <div class="col">
+                    Unit Price
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+</body>
+</html>

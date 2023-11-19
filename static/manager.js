@@ -1,4 +1,13 @@
-const url = 'http://localhost:5000';
+// let url = ""
+// if (process.env.NODE_ENV === "development"){
+//   url = "http://localhost:10000"
+// }
+// else{
+//   url = "https://csce-315-project-3-gong-cha.onrender.com";
+// }
+//get url from index.js
+const url = 'http://localhost:10000';
+
 
 // This will load all necessary tables/options on startup
 document.addEventListener("DOMContentLoaded", function() {
