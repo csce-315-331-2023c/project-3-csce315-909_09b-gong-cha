@@ -85,7 +85,12 @@ async function addIngredient() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    ingredientTable();
+    fetchIngredientsAndDisplay('allIngredients');
+    fetchIngredientsAndDisplay('allIngredientsAdd');
+    getIngredients();
+  }, 200);
 }
 
 // Modifies name of a drink given drinkID
@@ -235,8 +240,10 @@ async function modIngredientName() {
   console.log(msg);
 
   setTimeout(() => {
+    ingredientTable();
+    fetchIngredientsAndDisplay('allIngredients');
+    fetchIngredientsAndDisplay('allIngredientsAdd');
     getIngredients();
-    ingredientTable()
   }, 200);
 }
 
