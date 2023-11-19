@@ -1,4 +1,4 @@
-const url = 'http://localhost:10000';
+const url = 'http://localhost:5000';
 
 //onload for body, run makeRecipeButtons
 document.addEventListener("DOMContentLoaded", function() {
@@ -18,7 +18,7 @@ function createButton(drinkname, json) {
       insertIntoReceipt(json);
     });
     return button;
-  }
+}
   
 /**
  * actionlistener for the buttons, adds the item to the receipt
