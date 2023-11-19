@@ -1,7 +1,4 @@
-// const dotenv = require('dotenv').config();
-// dotenv.config({ path: '../.env' });
-// url = `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASSWORD}@${process.env.PSQL_HOST}:${process.env.PSQL_PORT}/${process.env.PSQL_DATABASE}`; //changes this later
-url = "https://csce-315-project-3-gong-cha.onrender.com";
+const url = 'http://localhost:5000';
 //onload for body, run makeRecipeButtons
 document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
