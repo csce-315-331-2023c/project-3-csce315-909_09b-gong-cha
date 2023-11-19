@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
   generateRestockReport();
   getDrinks();
   getIngredients();
-  fetchIngredientsAndDisplay();
+  fetchIngredientsAndDisplay('allIngredients');
+  fetchIngredientsAndDisplay('allIngredientsAdd');
 });
 
 function showInputBox() {
@@ -34,10 +35,12 @@ function showReport() {
 // Adds a drink to the database
 async function addDrink() {
 
+  var arrays = gatherValues('allIngredientsAdd');
+
   var drink = {
     'drink_name': document.getElementById("add-drink-name").value,
-    'ingredient_names': document.getElementById('add-ingredients').value,
-    'ingredient_amount': document.getElementById('add-ingredients-qty').value,
+    'ingredient_names': arrays.ingredients,
+    'ingredient_amount': arrays.quantities,
     'is_slushy': document.getElementsByName("is-slushy")[1].checked,
     'med_price': document.getElementById('med-price-add').value,
     'large_price': document.getElementById('lrg-price-add').value,
@@ -115,7 +118,7 @@ async function modDrinkName() {
 async function modDrinkIngredients() {
   var select = document.getElementById('drinkList');
 
-  var arrays = gatherValues();
+  var arrays = gatherValues('allIngredients');
   
   var trio = {
     'drink_id': select.value,
@@ -359,35 +362,11 @@ async function getIngredients() {
   })
 }
 
-// async function getIngredientOptions() {
-//   document.getElementById('allIngredients').innerHTML = '';
-//   fetch('/ingredientNames')
-//   .then(response => response.json())
-//   .then(ingredients => {
-//     const ingredientsListDiv = document.getElementById('allIngredients');
-//     ingredients.forEach(ingredient => {
-//       const label = document.createElement('label');
-//       label.textContent = " " + ingredient.ingredient_name;
-
-//       const quantityInput = document.createElement('input');
-//       quantityInput.type = 'number';
-//       quantityInput.name = 'ingredientQuantities[]';
-//       quantityInput.min = '0';
-//       quantityInput.value = '0';
-
-//       ingredientsListDiv.appendChild(quantityInput);
-//       ingredientsListDiv.appendChild(label);
-//       ingredientsListDiv.appendChild(document.createElement('br'));
-//     });
-//   })
-//   .catch(error => console.error('Error:', error));
-// }
-
-async function fetchIngredientsAndDisplay() {
+async function fetchIngredientsAndDisplay(element) {
   try {
     const response = await fetch('/ingredientNames');
     const ingredients = await response.json();
-    const ingredientsListDiv = document.getElementById('allIngredients');
+    const ingredientsListDiv = document.getElementById(`${element}`);
 
     const thirdLength = Math.ceil(ingredients.length / 3);
     const firstThird = ingredients.slice(0, thirdLength);
@@ -450,8 +429,8 @@ function createColumn(ingredients) {
   return column;
 }
 
-function gatherValues() {
-  const inputs = document.querySelectorAll('#allIngredients input[type="number"]');
+function gatherValues(element) {
+  const inputs = document.querySelectorAll(`#${element} input[type="number"]`);
   const ingredientNames = [];
   const quantities = [];
 

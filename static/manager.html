@@ -61,11 +61,12 @@
         <label for="add-drink-name">Drink Name (REQUIRED):</label>
         <input type="text" class="form-control" id="add-drink-name" name="add-drink-name">
 
-        <label for="add-ingredients">Ingredients (separated by ',') (REQUIRED):</label>
-        <input type="text" class="form-control" id="add-ingredients" name="add-ingredients">
-
-        <label for="add-ingredients-qty">Quantity of Ingredients (separated by ',') (REQUIRED):</label>
-        <input type="text" class="form-control" id="add-ingredients-qty" name="add-ingredients-qty">
+        <div>
+          <label for="add-drink-ingredients">Ingredients (Add all that will be in the drink) (REQUIRED):</label>
+          <div id="allIngredientsAdd" class="mb-3">
+            <!-- ingredients will be dynamically added here -->
+          </div>
+        </div>
 
         <div>
           <input class="form-check-input" type="radio" name="is-slushy" id="is-not-slushy" value="option1" checked>
@@ -88,7 +89,7 @@
 
         <button type="submit" class="btn btn-primary" onclick="addDrink()">Add New Drink</button>
       </div>
-      <div id="inputBox2" class="d-none">
+      <div id="inputBox2" class="d-none w-50">
         <label for="drinkList">What drink would you like to modify?</label>
         <select id="drinkList" class="form-control"></select>
         <div class="row">
