@@ -312,6 +312,16 @@ app.put('/modIngredientStock', async (req, res) => {
   res.send("successful");
 });  
 
+app.put('/modIngredientMinStock', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_stock = (req.body['ingredient_stock']); 
+  // sql query
+  pool
+  .query("UPDATE ingredient SET minimum_quantity = '" + ingredient_stock + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient minimum stock price");
+  res.send("successful");
+});  
+
 app.put('/order', async (req, res) => {
   var username = (req.body['username']);
   var order_id = (req.body['order_id']); 

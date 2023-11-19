@@ -277,6 +277,29 @@ async function modIngredientStock() {
   }, 200);
 }
 
+// Modifies an the minimum stock of an ingredient
+async function modIngredientMinStock() {
+  var pair = {
+    'ingredient_id': document.getElementById('ingredientList').value,
+    'ingredient_stock': document.getElementById('mod-ingredient-min').value
+  };
+
+  const response = await fetch(url + "/modIngredientMinStock", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
+
+  setTimeout(() => {
+    ingredientTable()
+  }, 200);
+}
+
 // Generate table that will hold all the ingredients
 async function ingredientTable() {
   var request = await fetch(url + "/manager/ingredients").then((res => res.json()));
