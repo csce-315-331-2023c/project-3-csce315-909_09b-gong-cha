@@ -6,7 +6,7 @@
 //   url = "https://csce-315-project-3-gong-cha.onrender.com";
 // }
 //get url from index.js
-const url = 'http://localhost:10000';
+const url = 'http://localhost:5000';
 
 
 // This will load all necessary tables/options on startup
@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
   drinkTable();
   generateRestockReport();
   getDrinks();
+  getDrinks2();
   getIngredients();
   fetchIngredientsAndDisplay('allIngredients');
   fetchIngredientsAndDisplay('allIngredientsAdd');
@@ -124,6 +125,7 @@ async function modDrinkName() {
 
   setTimeout(() => {
     getDrinks();
+    getDrinks2();
     drinkTable()
   }, 200);
 }
@@ -361,6 +363,23 @@ async function getDrinks() {
   })
 }
 
+async function getDrinks2() {
+  var select = document.getElementById('drinkList2');
+  select.innerHTML = '';
+
+  fetch('/drinkNames')
+  .then(response => response.json())
+  .then(data => {
+      const select = document.getElementById('drinkList2');
+      data.forEach((drink, index) => {
+          const option = document.createElement('option');
+          option.value = index + 1;
+          option.textContent = drink.recipe_name;
+          select.appendChild(option);
+      });
+  })
+}
+
 async function getIngredients() {
   var select = document.getElementById('ingredientList');
   select.innerHTML = '';
@@ -508,7 +527,7 @@ async function generateSalesReport() {
   var final_date = document.getElementById('end-date').value;
   var init_time = document.getElementById('start-time').value;
   var final_time = document.getElementById('end-time').value;
-  var main_recipe_id = document.getElementById('menu-item-id').value;
+  var main_recipe_id = document.getElementById('drinkList2').value;
 
   var urlWithParams = `${url}/salesReport/${init_date}/${final_date}/${init_time}/${final_time}/${main_recipe_id}`;
 
