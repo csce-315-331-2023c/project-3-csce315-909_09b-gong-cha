@@ -1,0 +1,178 @@
+SCRUM Meeting 1 for Team 9B
+_________________________________________________
+Prepared by: Anton Hugo Ramirez
+Meeting Date: November 01, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+Ren Mai 
+Meeting Agenda Items
+ First Meeting of Sprint
+Layout of work
+Status Update Since Last Meeting
+Accomplishments: first scrum meeting, so nothing really
+
+Tasks Completed:
+Task Description
+Task Allocation- ASSIGNED TO Everyone - Completed Yes
+
+Before The Next Meeting
+Plans:
+Design/Implement Front End for Cashier
+Design/Implement Front End for Manager
+
+Task Assignments:
+Task Description
+Implement Buttons, Input Fields, Tabs for Manager View - Assigned to
+ Brendann
+Implement Basic webpages for each tab(home page, about us, etc.)- Assigned to
+ Ren
+Implement Drink Modification functionality Assigned to Anton
+Implement Receipt Design for Cashier View Assigned to
+Reid
+
+Minutes from Previous Meeting
+We discussed the initial project assignment and tech stack. We planned on using Node.js for our package manager for our front end and utilizing Bootstrap as our framework for the front end and Express.js for our back end. We came up and allocated tasks for everyone. We also planned each sprint.
+
+
+SCRUM Meeting 2 for Team 9B
+_________________________________________________
+Prepared by: Anton Hugo Ramirez
+Meeting Date: November 6, 2023
+Meeting Attendees
+Anton Hugo Ramirez
+ Reid Jenkins
+ Brendann Croteau
+ Ren Mai
+Meeting Agenda Items
+ Progress Check
+Dependency Issues
+Status Update Since Last Meeting
+Accomplishments:
+Created GitHub repo, with Node.js packages and implementations
+Hosted our web app, and have basic views for cashier view and back-end
+
+Tasks Completed:
+Task Description
+
+Completed? (yes/no)
+Implemented some functionality for modifying drinks and ingredients
+Assigned to Anton
+Completed Yes
+Implemented Basic webpages for each tab(home page, about us, etc.)
+Assigned to Ren
+Completed Yes
+
+Implemented Receipt Design for Cashier View
+Assigned to Reid
+Completed Yes
+
+Implement Buttons, Input Fields, Tabs for Manager View
+Assigned to Brenndan
+Complted Yes
+
+Before The Next Meeting
+Plans:
+ Have more manager functionality
+Have a little more pizzazz with front end
+Have some more cashier functionality
+
+Task Assignments:
+Task Description
+Implement Adding Drinks and Adding Ingredients
+Assigned to Anton
+Implement Tables for Inventory of Drinks and Ingredients
+Assigned to Brenndan
+Refactoring Database, and Regeneration
+Assigned to Ren
+Adding toppings onto drinks for cashier view
+Assigned to Ren
+Front end for Cashier in regards to orders and editing drinks, with tips
+Assigned to Reid
+
+Minutes from Previous Meeting
+In our previous meeting, we discussed basic webpage design for our application and implementation for the design elements. This included building upon previous receipt and Wireframe designs for our web pages and more clearly defining what designs we wanted to display. In terms of the future, we discussed how we plan on providing security for manager view, as we want to be able to redirect users who have not logged in away from the cashier/manager page based on their sign-in, how the frontend would change based on profile login, database generation changes, and technical discussion of how we would implement Gets and Puts in the backend. 
+
+
+SCRUM Meeting 3 for Team 9b
+_________________________________________________
+Prepared by: Anton Hugo Ramirez
+Meeting Date: November 6, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai
+Meeting Agenda Items
+Finalization of MVP
+Last Features
+Status Update Since Last Meeting
+Accomplishments:
+ Modifying Drinks, Ingredient Functionality for Manager View
+Check Out Functionality
+Made tables for Ingredients and Recipes
+
+Tasks Completed:
+Task Description
+Partial Check Out Functionality
+Assigned to Reid
+Complted Yes
+Modifying, Adding Drinks and Ingredients
+Assigned to Anton
+Completed Yes
+Editing Toppings Front End
+Assigned to Ren
+Completed Yes
+Added tables for Ingredients and Recipes
+Assigned to Brendann
+Completed Yes
+
+Before The Next Meeting
+Plans:
+Finalize MVP and deployment
+Finalize cashier 
+
+Task Assignments:
+Task Description
+Full Topping Functionality - Assigned To Ren
+Full Checkout Functionality - Assigned To Reid
+Adding Drinks/Recipes within Manager Functionality-Anton
+
+
+SCRUM Meeting 4 for Team 9B
+_________________________________________________
+Prepared by: Brenndan Croteau
+Meeting Date: November 15, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai 
+Meeting Agenda Items
+ Task Distribution
+ Sprint Progression Plan
+Accomplishments:
+ Distributed tasks to each member, made a plan for what to complete first within the sprint, 
+ cleared up bootstrap confusion for those who haven't used it yet
+
+Tasks Completed:
+Task Description
+Task Allocation- ASSIGNED TO Everyone - Completed Yes
+
+Before The Next Meeting
+Plans:
+Design/Implement Front-end for Customer View
+Design/Implement Back-end for Customer View
+
+Task Assignments:
+Task Description
+Design GUI, Create Tabbed Pane for drinks - Assigned to Brenndan
+Make buttons for each drink - Assigned to Ren
+Implement style sheet for customer view - Assigned to Anton
+Add images and descriptions to the drinks - Assigned to Reid
+
+Minutes from Previous Meeting
+ Finalization of MVP
+ Last Features
+ Status Update Since Last Meeting
