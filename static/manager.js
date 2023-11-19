@@ -9,10 +9,15 @@
 const url = 'http://localhost:10000';
 
 
+// This will load all necessary tables/options on startup
 document.addEventListener("DOMContentLoaded", function() {
   ingredientTable();
   drinkTable();
   generateRestockReport();
+  getDrinks();
+  getIngredients();
+  fetchIngredientsAndDisplay('allIngredients');
+  fetchIngredientsAndDisplay('allIngredientsAdd');
 });
 
 function showInputBox() {
@@ -39,10 +44,12 @@ function showReport() {
 // Adds a drink to the database
 async function addDrink() {
 
+  var arrays = gatherValues('allIngredientsAdd');
+
   var drink = {
     'drink_name': document.getElementById("add-drink-name").value,
-    'ingredient_names': document.getElementById('add-ingredients').value,
-    'ingredient_amount': document.getElementById('add-ingredients-qty').value,
+    'ingredient_names': arrays.ingredients,
+    'ingredient_amount': arrays.quantities,
     'is_slushy': document.getElementsByName("is-slushy")[1].checked,
     'med_price': document.getElementById('med-price-add').value,
     'large_price': document.getElementById('lrg-price-add').value,
@@ -87,13 +94,20 @@ async function addIngredient() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    ingredientTable();
+    fetchIngredientsAndDisplay('allIngredients');
+    fetchIngredientsAndDisplay('allIngredientsAdd');
+    getIngredients();
+  }, 200);
 }
 
 // Modifies name of a drink given drinkID
 async function modDrinkName() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById("mod-drink-id").value,
+    'drink_id': select.value,
     'drink_name': document.getElementById("mod-drink-name").value
   };
 
@@ -108,17 +122,27 @@ async function modDrinkName() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable()
+  setTimeout(() => {
+    getDrinks();
+    drinkTable()
+  }, 200);
 }
 
 // Modifies ingredients & quantities of a drink given drinkID
 async function modDrinkIngredients() {
+  var select = document.getElementById('drinkList');
 
+  var arrays = gatherValues('allIngredients');
+  
   var trio = {
-    'drink_id': document.getElementById('mod-drink-id').value,
-    'ingredients_name': document.getElementById('mod-drink-ingredients').value,
-    'ingredients_quantity': document.getElementById('mod-drink-ingredients-qty').value
+    'drink_id': select.value,
+    'ingredients_name': arrays.ingredients,
+    'ingredients_quantity': arrays.quantities
   };
+
+  console.log(trio.drink_id);
+  console.log(trio.ingredients_name);
+  console.log(trio.ingredients_quantity);
 
   const response = await fetch(url + "/modDrinkIngredients", {
     method: "PUT",
@@ -130,14 +154,14 @@ async function modDrinkIngredients() {
 
   const msg = await response.text();
   console.log(msg);
-
-  drinkTable();
 }
 
 // Modifies medium price of a drink given drinkID
 async function modDrinkMediumPrice() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_id': select.value,
     'med_price': document.getElementById('mod-drink-med-price').value
   };
 
@@ -152,13 +176,17 @@ async function modDrinkMediumPrice() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable()
+  setTimeout(() => {
+    drinkTable()
+  }, 200);
 }
 
 // Modifies large price of a drink given drinkID
 async function modDrinkLargePrice() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_id': select.value,
     'large_price': document.getElementById('mod-drink-lrg-price').value
   };
 
@@ -173,13 +201,17 @@ async function modDrinkLargePrice() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable()
+  setTimeout(() => {
+    drinkTable()
+  }, 200);
 }
 
 // Modifies recipe price of a drink given drinkID
 async function modDrinkRecipePrice() {
+  var select = document.getElementById('drinkList');
+
   var pair = {
-    'drink_id': document.getElementById('mod-drink-id').value,
+    'drink_id': select.value,
     'recipe': document.getElementById('mod-drink-rcp-price').value
   };
   const response = await fetch(url + "/modDrinkRecipePrice", {
@@ -193,17 +225,18 @@ async function modDrinkRecipePrice() {
   const msg = await response.text();
   console.log(msg);
 
-  drinkTable();
+  setTimeout(() => {
+    drinkTable()
+  }, 200);
 }
 
 // Modifies an ingredient name given ingredientID
 async function modIngredientName() {
-
   var pair = {
-    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_id': document.getElementById('ingredientList').value,
     'ingredient_name': document.getElementById('mod-ingredient-name').value
   };
-  console.log("hewwo");
+
   const response = await fetch(url + "/modIngredientName", {
     method: "PUT",
     headers: {
@@ -215,14 +248,19 @@ async function modIngredientName() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    ingredientTable();
+    fetchIngredientsAndDisplay('allIngredients');
+    fetchIngredientsAndDisplay('allIngredientsAdd');
+    getIngredients();
+  }, 200);
 }
 
 // Modifies an ingredient unit price given ingredientID
 async function modIngredientUnitPrice() {
 
   var pair = {
-    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_id': document.getElementById('ingredientList').value,
     'ingredient_price': document.getElementById('mod-ingredient-unit-price').value
   };
 
@@ -237,13 +275,15 @@ async function modIngredientUnitPrice() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    ingredientTable()
+  }, 200);
 }
 
 // Modifies an ingredient stock given ingredientID
 async function modIngredientStock() {
   var pair = {
-    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_id': document.getElementById('ingredientList').value,
     'ingredient_stock': document.getElementById('mod-ingredient-stock').value
   };
 
@@ -258,7 +298,32 @@ async function modIngredientStock() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    ingredientTable()
+  }, 200);
+}
+
+// Modifies an the minimum stock of an ingredient
+async function modIngredientMinStock() {
+  var pair = {
+    'ingredient_id': document.getElementById('ingredientList').value,
+    'ingredient_stock': document.getElementById('mod-ingredient-min').value
+  };
+
+  const response = await fetch(url + "/modIngredientMinStock", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pair),
+  });
+
+  const msg = await response.text();
+  console.log(msg);
+
+  setTimeout(() => {
+    ingredientTable()
+  }, 200);
 }
 
 // Generate table that will hold all the ingredients
@@ -277,6 +342,138 @@ async function drinkTable() {
   request.sort((a, b) => a.recipe_id - b.recipe_id);
 
   createTableFromJSON(request, 'drink-table')
+}
+
+async function getDrinks() {
+  var select = document.getElementById('drinkList');
+  select.innerHTML = '';
+
+  fetch('/drinkNames')
+  .then(response => response.json())
+  .then(data => {
+      const select = document.getElementById('drinkList');
+      data.forEach((drink, index) => {
+          const option = document.createElement('option');
+          option.value = index + 1;
+          option.textContent = drink.recipe_name;
+          select.appendChild(option);
+      });
+  })
+}
+
+async function getIngredients() {
+  var select = document.getElementById('ingredientList');
+  select.innerHTML = '';
+
+  fetch('/ingredientNames')
+  .then(response => response.json())
+  .then(data => {
+      const select = document.getElementById('ingredientList');
+      data.forEach((drink, index) => {
+          const option = document.createElement('option');
+          option.value = index + 1;
+          option.textContent = drink.ingredient_name;
+          select.appendChild(option);
+      });
+  })
+}
+
+async function fetchIngredientsAndDisplay(element) {
+  try {
+    const response = await fetch('/ingredientNames');
+    const ingredients = await response.json();
+    const ingredientsListDiv = document.getElementById(`${element}`);
+
+    ingredientsListDiv.innerHTML = "";
+
+    const thirdLength = Math.ceil(ingredients.length / 3);
+    const firstThird = ingredients.slice(0, thirdLength);
+    const secondThird = ingredients.slice(thirdLength, 2 * thirdLength);
+    const lastThird = ingredients.slice(2 * thirdLength);
+
+    const firstColumn = createColumn(firstThird);
+    const secondColumn = createColumn(secondThird);
+    const thirdColumn = createColumn(lastThird);
+
+    const row = document.createElement('div');
+    row.classList.add('row');
+
+    const col1 = document.createElement('div');
+    col1.classList.add('col-md-4');
+    col1.appendChild(firstColumn);
+
+    const col2 = document.createElement('div');
+    col2.classList.add('col-md-4');
+    col2.appendChild(secondColumn);
+
+    const col3 = document.createElement('div');
+    col3.classList.add('col-md-4');
+    col3.appendChild(thirdColumn);
+
+    row.appendChild(col1);
+    row.appendChild(col2);
+    row.appendChild(col3);
+
+    ingredientsListDiv.appendChild(row);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+function createColumn(ingredients) {
+  const column = document.createElement('div');
+  column.classList.add('mb-3');
+
+  ingredients.forEach(ingredient => {
+    const formGroup = document.createElement('div');
+    formGroup.classList.add('input-group');
+
+    const inputGroupText = document.createElement('label');
+    inputGroupText.classList.add('input-group-text');
+    inputGroupText.textContent = ingredient.ingredient_name;
+
+    const quantityInput = document.createElement('input');
+    quantityInput.type = 'number';
+    quantityInput.classList.add('form-control');
+    quantityInput.name = 'ingredientQuantities[]';
+    quantityInput.min = '0';
+    quantityInput.value = '0';
+
+    formGroup.appendChild(quantityInput);
+    formGroup.appendChild(inputGroupText);
+    column.appendChild(formGroup);
+  });
+
+  return column;
+}
+
+function gatherValues(element) {
+  const inputs = document.querySelectorAll(`#${element} input[type="number"]`);
+  const ingredientNames = [];
+  const quantities = [];
+
+  inputs.forEach(input => {
+    const val = input.value;
+    const ingredientName = input.nextElementSibling.textContent.trim();
+
+    if (val != 0) {
+      ingredientNames.push(ingredientName); // Add input value to the Set if it's not empty
+      quantities.push(val);
+    }
+  });
+
+  const ingredientNamesString = ingredientNames.join(','); // Comma-separated string for unique values
+  const quantitesString = quantities.join(','); // Comma-separated string for non-zero values
+
+  console.log('Ingredients:', ingredientNamesString);
+  console.log('Quantities:', quantitesString);
+
+  var arrays = {
+    'ingredients': ingredientNamesString,
+    'quantities': quantitesString
+  }
+
+  return arrays;
 }
 
 async function generateRestockReport() {

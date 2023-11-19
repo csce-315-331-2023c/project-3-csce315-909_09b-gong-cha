@@ -58,14 +58,15 @@
         </select>
       </div>
       <div id="inputBox1" class="d-none w-50">
-        <label for="add-drink-name">Drink Name:</label>
+        <label for="add-drink-name">Drink Name (REQUIRED):</label>
         <input type="text" class="form-control" id="add-drink-name" name="add-drink-name">
 
-        <label for="add-ingredients">Ingredients (separated by ','):</label>
-        <input type="text" class="form-control" id="add-ingredients" name="add-ingredients">
-
-        <label for="add-ingredients-qty">Quantity of Ingredients (separated by ','):</label>
-        <input type="text" class="form-control" id="add-ingredients-qty" name="add-ingredients-qty">
+        <div>
+          <label for="add-drink-ingredients">Ingredients (Add all that will be in the drink) (REQUIRED):</label>
+          <div id="allIngredientsAdd" class="mb-3">
+            <!-- ingredients will be dynamically added here -->
+          </div>
+        </div>
 
         <div>
           <input class="form-check-input" type="radio" name="is-slushy" id="is-not-slushy" value="option1" checked>
@@ -74,13 +75,13 @@
           <label class="form-check-label" for="is-slushy">Slushy</label>
         </div>
 
-        <label for="med-price-add">Medium Price:</label>
+        <label for="med-price-add">Medium Price (REQUIRED):</label>
         <input type="number" class="form-control" id="med-price-add" name="med-price-add">
 
-        <label for="lrg-price-add">Large Price:</label>
+        <label for="lrg-price-add">Large Price (REQUIRED):</label>
         <input type="number" class="form-control" id="lrg-price-add" name="lrg-price-add">
       
-        <label for="rcp-price-add">Recipe Price:</label>
+        <label for="rcp-price-add">Recipe Price (REQUIRED):</label>
         <input type="number" class="form-control" id="rcp-price-add" name="rcp-price-add">
 
         <label for="image-upload">Image:</label>
@@ -89,8 +90,8 @@
         <button type="submit" class="btn btn-primary" onclick="addDrink()">Add New Drink</button>
       </div>
       <div id="inputBox2" class="d-none w-50">
-        <label for="mod-drink-id">Drink ID (REQUIRED):</label>
-        <input type="text" class="form-control" id="mod-drink-id" name="mod-drink-id">
+        <label for="drinkList">What drink would you like to modify?</label>
+        <select id="drinkList" class="form-control"></select>
         <div class="row">
           <label for="mod-drink-name">Drink Name:</label>
           <div class="col-md-6">
@@ -101,21 +102,12 @@
           </div>
         </div>
 
-        <div class="row">
-          <label for="mod-drink-ingredients">Ingredients (separated by ','):</label>
-          <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-drink-ingredients" name="mod-drink-ingredients">
+        <div>
+          <label for="mod-drink-ingredients">Ingredients (Add all that will be in the drink):</label>
+          <div id="allIngredients" class="mb-3">
+            <!-- ingredients will be dynamically added here -->
           </div>
-        </div>
-
-        <div class="row">
-          <label for="mod-drink-ingredients-qty">Quantity of Ingredients (in same order, separated by ','):</label>
-          <div class="col-md-6">
-            <input type="text" class="form-control" id="mod-drink-ingredients-qty" name="mod-drink-ingredients-qty">
-          </div>
-          <div class="col-md-6">
-            <button type="submit" class="btn btn-primary" onclick="modDrinkIngredients()">Change Ingredients</button>
-          </div>
+          <button type="submit" class="btn btn-primary" onclick="modDrinkIngredients()">Change Ingredients</button>
         </div>
 
         <div class="row">
@@ -150,15 +142,15 @@
 
       </div>
       <div id="inputBox3" class="d-none w-50">
-        <label for="add-ingredient-name">Ingredient Name:</label>
+        <label for="add-ingredient-name">Ingredient Name (REQUIRED):</label>
         <input type="text" class="form-control" id="add-ingredient-name" name="add-ingredient-name">
 
-        <label for="add-unit-price">Unit Price:</label>
+        <label for="add-unit-price">Unit Price (REQUIRED):</label>
         <input type="number" class="form-control" id="add-unit-price" name="add-unit-price">
 
-        <label for="add-stock">Stock:</label>
+        <label for="add-stock">Stock (REQUIRED):</label>
         <input type="number" class="form-control" id="add-stock" name="add-stock">
-        <label for="add-minimum-quantity">Minimum Quantity:</label>
+        <label for="add-minimum-quantity">Minimum Quantity (REQUIRED):</label>
         <input type="number" class="form-control" id="add-minimum-quantity" name="add-minimum-quantity">        
         <div>
           <input class="form-check-input" type="radio" name="is-topping" id="is-not-topping" value="option1" checked>
@@ -170,8 +162,8 @@
         <button type="submit" class="btn btn-primary" onclick="addIngredient()">Add Ingredient</button>
       </div>
       <div id="inputBox4" class="d-none w-50">
-        <label for="mod-ingredient-id">Ingredient ID (REQUIRED):</label>
-        <input type="text" class="form-control" id="mod-ingredient-id" name="mod-ingredient-id">
+        <label for="ingredientList">What ingredient would you like to modify?</label>
+        <select id="ingredientList" class="form-control"></select>
 
         <div class="row">
           <label for="mod-ingredient-name">Ingredient Name:</label>
@@ -200,6 +192,16 @@
           </div>
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" onclick="modIngredientStock()">Change Stock</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-ingredient-min">Minimum Quantity:</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="mod-ingredient-min" name="mod-ingredient-min">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngredientMinStock()">Change Minimum Quantity:</button>
           </div>
         </div>
 

@@ -7,6 +7,7 @@
   <title>My Website</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="menu.css">
 </head>
 
 <script src="menu.js"></script>
@@ -43,19 +44,19 @@
         <div id="RecipeButtons">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="categories-tab" data-toggle="tab" href="#milktea" role="tab" aria-controls="milktea" aria-selected="true">Milk Tea</a>
+              <a class="nav-link active" id="categories-tab" data-toggle="tab" href="#milktea" role="tab" aria-controls="milktea" aria-selected="true">Milk Tea Series</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="slushie-tab" data-toggle="tab" href="#slushie" role="tab" aria-controls="slushie" aria-selected="false">Slushie</a>
+              <a class="nav-link" id="slushie-tab" data-toggle="tab" href="#slushie" role="tab" aria-controls="slushie" aria-selected="false">Slush Series</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="coffee-tab" data-toggle="tab" href="#coffee" role="tab" aria-controls="coffee" aria-selected="false">Coffee</a>
+              <a class="nav-link" id="coffee-tab" data-toggle="tab" href="#coffee" role="tab" aria-controls="coffee" aria-selected="false">Coffee Series</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="tea-tab" data-toggle="tab" href="#tea" role="tab" aria-controls="tea" aria-selected="false">Tea</a>
+              <a class="nav-link" id="tea-tab" data-toggle="tab" href="#tea" role="tab" aria-controls="tea" aria-selected="false">Tea Series</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Other</a>
+              <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Specialty Series</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="topping-tab" data-toggle="tab" href="#topping" role="tab" aria-controls="topping" aria-selected="false">Toppings</a>
@@ -64,20 +65,103 @@
         
           <div class="tab-content align-content-center display-6" id="myTabContent">
             <div class="tab-pane fade show active" id="milktea" role="tabpanel" aria-labelledby="milktea-tab">
-              <!-- <div>Milk Tea Series</div> -->
-            </div>
-            <div class="tab-pane fade" id="slushie" role="tabpanel" aria-labelledby="slushie-tab"></div>
-            <div class="tab-pane fade" id="coffee" role="tabpanel" aria-labelledby="coffee-tab"></div>
-            <div class="tab-pane fade" id="tea" role="tabpanel" aria-labelledby="tea-tab"></div>
-            <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab"></div>
-            <div class="tab-pane fade" id="topping" role="tabpanel" aria-labelledby="topping-tab">
-              <div class="container">
-                <div class="row">
-                  <div class="col">
-                    1 of 2
+              <div class="container pt-2" id="milk_container">
+                <div class="row justify-content-evenly bg-light h4 p-1">
+                  <div class="col-6">
+                    Milk Tea Series
                   </div>
                   <div class="col">
-                    2 of 2
+                    Medium Price
+                  </div>
+                  <div class="col">
+                    Large Price
+                  </div>
+                </div>
+                <div class="row bg-light h5" id="content">
+                  <div class="col-1 pe-3">                    
+                    <img src="images/teas/Creme-Brulee-Brown-Sugar-Milk-Tea.png">
+                  </div>
+                  <div class="col-5 p-4">
+                    MILK TEA GREEN | BLACK | OOLONG | EARL GREY
+                  </div>
+                  <div class="col p-4">
+                   $4.50
+                  </div>
+                  <div class="col p-4">
+                    $5.50
+                  </div>
+                </div>
+                
+            </div>
+            </div>
+            <div class="tab-pane fade" id="slushie" role="tabpanel" aria-labelledby="slushie-tab">
+                <div class="container pt-2" id="slushie_container">
+                  <div class="row justify-content-evenly bg-light h4 p-1">
+                    <div class="col-6">
+                      Slush Series
+                    </div>
+                    <div class="col">
+                      Medium Price
+                    </div>
+                    <div class="col">
+                      Large Price
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="coffee" role="tabpanel" aria-labelledby="coffee-tab">
+              <div class="container pt-2" id="coffee_container">
+                <div class="row justify-content-evenly bg-light h4 p-1">
+                  <div class="col-6">
+                    Coffee Series
+                  </div>
+                  <div class="col">
+                    Medium Price
+                  </div>
+                  <div class="col">
+                    Large Price
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tea" role="tabpanel" aria-labelledby="tea-tab">
+              <div class="container pt-2" id="tea_container">
+                <div class="row justify-content-evenly bg-light h4 p-1">
+                  <div class="col-6">
+                    Tea Series
+                  </div>
+                  <div class="col">
+                    Medium Price
+                  </div>
+                  <div class="col">
+                    Large Price
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+              <div class="container pt-2" id="other_container">
+                <div class="row justify-content-evenly bg-light h4 p-1">
+                  <div class="col-6">
+                    Specialty Series
+                  </div>
+                  <div class="col">
+                    Medium Price
+                  </div>
+                  <div class="col">
+                    Large Price
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="topping" role="tabpanel" aria-labelledby="topping-tab">
+              <div class="container pt-2" id="toppings_container">
+                <div class="row justify-content-evenly bg-light h4 p-1">
+                  <div class="col-8">
+                    Toppings
+                  </div>
+                  <div class="col">
+                    Unit Price
                   </div>
                 </div>
             </div>
