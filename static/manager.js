@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   drinkTable();
   generateRestockReport();
   getDrinks();
+  getIngredients();
 });
 
 function showInputBox() {
@@ -207,12 +208,11 @@ async function modDrinkRecipePrice() {
 
 // Modifies an ingredient name given ingredientID
 async function modIngredientName() {
-
   var pair = {
-    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_id': document.getElementById('ingredientList').value,
     'ingredient_name': document.getElementById('mod-ingredient-name').value
   };
-  console.log("hewwo");
+
   const response = await fetch(url + "/modIngredientName", {
     method: "PUT",
     headers: {
@@ -224,14 +224,17 @@ async function modIngredientName() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    getIngredients();
+    ingredientTable()
+  }, 200);
 }
 
 // Modifies an ingredient unit price given ingredientID
 async function modIngredientUnitPrice() {
 
   var pair = {
-    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_id': document.getElementById('ingredientList').value,
     'ingredient_price': document.getElementById('mod-ingredient-unit-price').value
   };
 
@@ -246,13 +249,15 @@ async function modIngredientUnitPrice() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    ingredientTable()
+  }, 200);
 }
 
 // Modifies an ingredient stock given ingredientID
 async function modIngredientStock() {
   var pair = {
-    'ingredient_id': document.getElementById('mod-ingredient-id').value,
+    'ingredient_id': document.getElementById('ingredientList').value,
     'ingredient_stock': document.getElementById('mod-ingredient-stock').value
   };
 
@@ -267,7 +272,9 @@ async function modIngredientStock() {
   const msg = await response.text();
   console.log(msg);
 
-  ingredientTable();
+  setTimeout(() => {
+    ingredientTable()
+  }, 200);
 }
 
 // Generate table that will hold all the ingredients
@@ -300,6 +307,23 @@ async function getDrinks() {
           const option = document.createElement('option');
           option.value = index + 1;
           option.textContent = drink.recipe_name;
+          select.appendChild(option);
+      });
+  })
+}
+
+async function getIngredients() {
+  var select = document.getElementById('ingredientList');
+  select.innerHTML = '';
+
+  fetch('/ingredientNames')
+  .then(response => response.json())
+  .then(data => {
+      const select = document.getElementById('ingredientList');
+      data.forEach((drink, index) => {
+          const option = document.createElement('option');
+          option.value = index + 1;
+          option.textContent = drink.ingredient_name;
           select.appendChild(option);
       });
   })

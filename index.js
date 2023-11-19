@@ -102,9 +102,19 @@ app.get('/recipe/other', async (req, res) => {
       });
 })
 
+// gets all the drink names
 app.get('/drinkNames', async (req, res) => {
   pool
       .query('SELECT recipe_name FROM recipe ORDER BY recipe_id;')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
+// gets all the ingredient names
+app.get('/ingredientNames', async (req, res) => {
+  pool
+      .query('SELECT ingredient_name FROM ingredient ORDER BY ingredient_id;')
       .then(query_res => {
           res.send(query_res.rows);
       });
