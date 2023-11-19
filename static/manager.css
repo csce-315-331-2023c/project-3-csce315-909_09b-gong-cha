@@ -2,6 +2,30 @@ body {
     background-color:ghostwhite;
 }
 
+#allIngredients .form-control {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    width: 65px;
+    height: 40px;
+}
+
+#allIngredientsAdd .input-group-text {
+    height: 40px;
+}
+
+#allIngredientsAdd .form-control {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    width: 65px;
+    height: 40px;
+}
+
+#allIngredients .input-group-text {
+    height: 40px;
+}
+
 .navbar.navbar-expand-lg.navbar-light.bg-light {
     background-color: #eb5a50 !important;
 }

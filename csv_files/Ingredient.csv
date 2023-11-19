@@ -43,3 +43,4 @@ Ingredient_ID,Ingredient_Name,Unit_Price,Stock,Minimum_Quantity,isTopping
 42,Herbal Jelly,0.5,10,122,TRUE
 43,Basil Seeds,0.03,100,105,TRUE
 44,Oreo Crumbs,0.05,100,100,TRUE
+45,Ai-Yu Jelly,0.05,500,100,TRUE

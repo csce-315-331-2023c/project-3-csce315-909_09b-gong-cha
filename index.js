@@ -4,7 +4,7 @@ const dotenv = require('dotenv').config();
 
 // Create express app
 const app = express();
-const port = 10000;
+const port = 5000;
 
 // Create pool 
 const pool = new Pool({
@@ -93,6 +93,24 @@ app.get('/recipe/coffee', async (req, res) => {
 app.get('/recipe/other', async (req, res) => {
   pool
       .query('SELECT * FROM recipe WHERE is_Slush = false AND recipe_name NOT LIKE \'%Coffee%\' AND recipe_name NOT LIKE \'%Milk%\';')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
+// gets all the drink names
+app.get('/drinkNames', async (req, res) => {
+  pool
+      .query('SELECT recipe_name FROM recipe ORDER BY recipe_id;')
+      .then(query_res => {
+          res.send(query_res.rows);
+      });
+})
+
+// gets all the ingredient names
+app.get('/ingredientNames', async (req, res) => {
+  pool
+      .query('SELECT ingredient_name FROM ingredient ORDER BY ingredient_id;')
       .then(query_res => {
           res.send(query_res.rows);
       });
@@ -290,6 +308,16 @@ app.put('/modIngredientStock', async (req, res) => {
   res.send("successful");
 });  
 
+app.put('/modIngredientMinStock', async (req, res) => {
+  var ingredient_id = (req.body['ingredient_id']); 
+  var ingredient_stock = (req.body['ingredient_stock']); 
+  // sql query
+  pool
+  .query("UPDATE ingredient SET minimum_quantity = '" + ingredient_stock + "' WHERE ingredient_id = " + ingredient_id + ";");
+  console.log("modified ingredient minimum stock price");
+  res.send("successful");
+});  
+
 app.put('/order', async (req, res) => {
   var username = (req.body['username']);
   var order_id = (req.body['order_id']); 
@@ -369,7 +397,7 @@ app.get('/salesReport/:init_date/:final_date/:init_time/:final_time/:main_recipe
   })
 });  
 
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, function(err) {
   if(err) console.log(err);
   console.log(`Server is running on http://localhost:${PORT}`);

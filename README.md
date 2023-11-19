@@ -1,6 +1,6 @@
-#Project 3 CSCE 315 909_09B
+# Project 3 CSCE 315 909_09B
 
-#README
+# README Overview
 
 ## Introduction:
 Website Application for a business selling tea and drinks, which is also known as GongCha. 
@@ -13,6 +13,7 @@ Website Application for a business selling tea and drinks, which is also known a
 
 This code has been run and tested on:
 
+- Bootstrap - 5.3.2
 - Express - 4.18.2
 - PostgreSQL - 13.3
 - Nodejs - v16.9.1
