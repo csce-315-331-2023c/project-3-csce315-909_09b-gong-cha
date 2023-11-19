@@ -1,0 +1,81 @@
+body {
+    background-color:ghostwhite;
+}
+
+#allIngredients .form-control {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    width: 65px;
+    height: 40px;
+}
+
+#allIngredientsAdd .input-group-text {
+    height: 40px;
+}
+
+#allIngredientsAdd .form-control {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    width: 65px;
+    height: 40px;
+}
+
+#allIngredients .input-group-text {
+    height: 40px;
+}
+
+.navbar.navbar-expand-lg.navbar-light.bg-light {
+    background-color: #eb5a50 !important;
+}
+
+.navbar-brand {
+    padding-left: 10px !important;
+}
+
+#navbarNav .nav-link {
+    color:white;
+}
+
+#navbarNav .nav-link:hover {
+    color:black;
+}
+
+#translate-button {
+    margin-left: 5px;
+    margin-top: 1px;
+    color: white;
+}
+
+#translate-button:hover {
+    color:black;
+}
+
+#myTab {
+    background-color: ghostwhite;
+}
+
+#myTab .active {
+    background-color: ghostwhite;
+}
+
+#myTab .nav-link {
+    color: black;
+}
+
+.nav-tabs {
+    background-color: ghostwhite;
+}
+
+.btn.btn-primary {
+    background-color: #eb5a50;
+}
+
+.form-control {
+    margin-bottom: 5px;
+}
+
+#myTabContent {
+    margin-left: 20px;
+}

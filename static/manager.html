@@ -5,17 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Website</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="manager.css">
 </head>
 <body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">GongCha</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">About</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="menu.html">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cashier.html">Cashier</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="manager.html">Manager</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="customer.html">Customer</a>
+        </li>
+        <li class="nav-item">
+          <button type="button" id="translate-button" class="btn btn-danger" onclick="Translate()">Translate</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Edit Database</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Tab 2</a>
+      <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Tables</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Tab 3</a>
+      <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Reports</a>
     </li>
   </ul>
 
@@ -25,36 +59,231 @@
       <div class="form-group">
         <label for="options">What would you like to change?</label>
         <select class="form-select w-25" id="options" name="options" onchange="showInputBox()">
-          <option value="option1">Add Drink</option>
-          <option value="option2">Modify Drink</option>
-          <option value="option3">Add Ingredient</option>
-          <option value="option1">Modify Ingredient</option>
+          <option value="-">-</option>
+          <option value="1">Add Drink</option>
+          <option value="2">Modify Drink</option>
+          <option value="3">Add Ingredient</option>
+          <option value="4">Modify Ingredient</option>
         </select>
       </div>
-      <!-- <div id="inputBox1" class="d-none">
-        <label for="input1">Input for Option 1:</label>
-        <input type="text" class="form-control" id="input1" name="input1">
+      <div id="inputBox1" class="d-none w-50">
+        <label for="add-drink-name">Drink Name (REQUIRED):</label>
+        <input type="text" class="form-control" id="add-drink-name" name="add-drink-name">
+
+        <div>
+          <label for="add-drink-ingredients">Ingredients (Add all that will be in the drink) (REQUIRED):</label>
+          <div id="allIngredientsAdd" class="mb-3">
+            <!-- ingredients will be dynamically added here -->
+          </div>
+        </div>
+
+        <div>
+          <input class="form-check-input" type="radio" name="is-slushy" id="is-not-slushy" value="option1" checked>
+          <label class="form-check-label" for="is-not-slushy">Not Slushy</label>
+          <input class="form-check-input" type="radio" name="is-slushy" id="is-a-slushy" value="option2">
+          <label class="form-check-label" for="is-slushy">Slushy</label>
+        </div>
+
+        <label for="med-price-add">Medium Price (REQUIRED):</label>
+        <input type="number" class="form-control" id="med-price-add" name="med-price-add">
+
+        <label for="lrg-price-add">Large Price (REQUIRED):</label>
+        <input type="number" class="form-control" id="lrg-price-add" name="lrg-price-add">
+      
+        <label for="rcp-price-add">Recipe Price (REQUIRED):</label>
+        <input type="number" class="form-control" id="rcp-price-add" name="rcp-price-add">
+
+        <label for="image-upload">Image:</label>
+        <input type="file" class="form-control" id="image-upload" accept="image/*">
+
+        <button type="submit" class="btn btn-primary" onclick="addDrink()">Add New Drink</button>
       </div>
-      <div id="inputBox2" class="d-none">
-        <label for="input2">Input for Option 2:</label>
-        <input type="text" class="form-control" id="input2" name="input2">
+      <div id="inputBox2" class="d-none w-50">
+        <label for="drinkList">What drink would you like to modify?</label>
+        <select id="drinkList" class="form-control"></select>
+        <div class="row">
+          <label for="mod-drink-name">Drink Name:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-drink-name" name="mod-drink-name">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkName()">Change Name</button>
+          </div>
+        </div>
+
+        <div>
+          <label for="mod-drink-ingredients">Ingredients (Add all that will be in the drink):</label>
+          <div id="allIngredients" class="mb-3">
+            <!-- ingredients will be dynamically added here -->
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="modDrinkIngredients()">Change Ingredients</button>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-med-price">Medium Price:</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="mod-drink-med-price" name="mod-drink-med-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkMediumPrice()">Change Medium Price</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-lrg-price">Large Price:</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="mod-drink-lrg-price" name="mod-drink-lrg-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkLargePrice()">Change Large Price</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-drink-rcp-price">Recipe Price:</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="mod-drink-rcp-price" name="mod-drink-rcp-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modDrinkRecipePrice()">Change Recipe Price</button>
+          </div>
+        </div>
+
       </div>
-      <div id="inputBox3" class="d-none">
-        <label for="input3">Input for Option 3:</label>
-        <input type="text" class="form-control" id="input3" name="input3">
+      <div id="inputBox3" class="d-none w-50">
+        <label for="add-ingredient-name">Ingredient Name (REQUIRED):</label>
+        <input type="text" class="form-control" id="add-ingredient-name" name="add-ingredient-name">
+
+        <label for="add-unit-price">Unit Price (REQUIRED):</label>
+        <input type="number" class="form-control" id="add-unit-price" name="add-unit-price">
+
+        <label for="add-stock">Stock (REQUIRED):</label>
+        <input type="number" class="form-control" id="add-stock" name="add-stock">
+        <label for="add-minimum-quantity">Minimum Quantity (REQUIRED):</label>
+        <input type="number" class="form-control" id="add-minimum-quantity" name="add-minimum-quantity">        
+        <div>
+          <input class="form-check-input" type="radio" name="is-topping" id="is-not-topping" value="option1" checked>
+          <label class="form-check-label" for="is-not-topping">Not Topping</label>
+          <input class="form-check-input" type="radio" name="is-topping" id="is-a-topping" value="option2">
+          <label class="form-check-label" for="is-topping">Topping</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="addIngredient()">Add Ingredient</button>
       </div>
-      <div id="inputBox4" class="d-none">
-        <label for="input4">Input for Option 4:</label>
-        <input type="text" class="form-control" id="input4" name="input4">
-      </div> -->
+      <div id="inputBox4" class="d-none w-50">
+        <label for="ingredientList">What ingredient would you like to modify?</label>
+        <select id="ingredientList" class="form-control"></select>
+
+        <div class="row">
+          <label for="mod-ingredient-name">Ingredient Name:</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="mod-ingredient-name" name="mod-ingredient-name">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngredientName()">Change Name</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-ingredient-unit-price">Unit Price:</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="mod-ingredient-unit-price" name="mod-ingredient-unit-price">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngredientUnitPrice()">Change Unit Price</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-ingredient-stock">Stock:</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="mod-ingredient-stock" name="mod-ingredient-stock">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngredientStock()">Change Stock</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="mod-ingredient-min">Minimum Quantity:</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="mod-ingredient-min" name="mod-ingredient-min">
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" onclick="modIngredientMinStock()">Change Minimum Quantity:</button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-      Content for Tab 2 goes here.
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h1>Ingredients</h1>
+            <div id="ingredient-table" class="table"></div>
+          </div>
+          <div class="col-md-6">
+            <h1>Drinks</h1>
+            <div id="drink-table" class="table"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-      Content for Tab 3 goes here.
+      <div class="form-group">
+        <label for="reportOptions">Select a Report</label>
+        <select class="form-select w-25" id="reportOptions" name="reportOptions" onchange="showReport()">
+          <option value="-">-</option>
+          <option value="1">Restock Report</option>
+          <option value="2">Sales Report</option>
+          <option value="3">Excess Report</option>
+        </select>
+      </div>
+      <div id="report1" class="d-none w-50">
+        <div id="restock-report" class="table"></div>
+      </div>
+      <div id="report2" class="d-none w-50">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="start-date">Start date (YYYY-MM-DD):</label>
+            <input type="text" class="form-control" id="start-date" name="start-date">
+            <label for="end-date">End date (YYYY-MM-DD):</label>
+            <input type="text" class="form-control" id="end-date" name="end-date">
+            <label for="start-time">Start time (MILITARY HH:MM:SS):</label>
+            <input type="text" class="form-control" id="start-time" name="start-time">
+            <label for="end-time">End time (MILITARY HH:MM:SS):</label>
+            <input type="text" class="form-control" id="end-time" name="end-time">
+            <label for="drinkList2">Please Select a Drink:</label>
+            <select id="drinkList2" class="form-control"></select>
+            <button type="submit" class="btn btn-primary" onclick="generateSalesReport()">Generate Sales Report</button>
+          </div>
+          <div class="col-md-6">
+            <div id="sales-report" class="table"></div>
+          </div>
+        </div>
+      </div>
+      <div id="report3" class="d-none w-50">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="start-date2">Start date (YYYY-MM-DD):</label>
+            <input type="text" class="form-control" id="start-date2" name="start-date2">
+            <label for="end-date2">End date (YYYY-MM-DD):</label>
+            <input type="text" class="form-control" id="end-date2" name="end-date2">
+            <label for="start-time2">Start time (24HR HH:MM:SS):</label>
+            <input type="text" class="form-control" id="start-time2" name="start-time2">
+            <label for="end-time2">End time (24HR HH:MM:SS):</label>
+            <input type="text" class="form-control" id="end-time2" name="end-time2">
+            <button type="submit" class="btn btn-primary" onclick="generateExcessReport()">Generate Excess Report</button>
+          </div>
+          <div class="col-md-6">
+            <div id="excess-report" class="table"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>

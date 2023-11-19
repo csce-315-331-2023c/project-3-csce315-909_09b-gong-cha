@@ -23,10 +23,19 @@
               <a class="nav-link" href="index.html">About</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Menu</a>
+              <a class="nav-link" href="menu.html">Menu</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="cashier.html">Cashier</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="manager.html">Manager</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="customer.html">Customer</a>
             </li>
             <li class="nav-item">
               <button type="button" class="btn btn-danger" onclick="">Translate</button>
@@ -56,7 +65,6 @@
             </li>
           </ul>
         
-          <!-- the tabpanel info -->
           <div class="tab-content align-content-center display-6" id="myTabContent">
             <div class="tab-pane fade show active" id="milktea" role="tabpanel" aria-labelledby="milktea-tab"></div>
             <div class="tab-pane fade" id="slushie" role="tabpanel" aria-labelledby="slushie-tab"></div>
@@ -66,30 +74,138 @@
           </div>
         </div>
 
+        <!-- Tip Buttons  -->
+        <div class="col-9" id="TipButtons" style="display: none;">
+          <div class="row gap-2 h-50">
+            <div class="col align-self-end">
+              <button type="button" class="btn btn-rectangle-lg btn-danger" id="15" onclick="getTipAmount(15)"></button>
+            </div>
+            <div class="col align-self-end">
+              <button type="button" class="btn btn-rectangle-lg btn-danger" id="18" onclick="getTipAmount(18)"></button>
+            </div>
+            <div class="col align-self-end">
+              <button type="button" class="btn btn-rectangle-lg btn-danger" id="20" onclick="getTipAmount(20)"></button>
+            </div>
+          </div>
+          <div class="row gap-2">
+            <div class="col">
+              <button type="button" class="btn btn-danger w-100" id="none" onclick="getTipAmount(0)">No Tip</button>
+            </div>
+          </div>
+          <div class="row gap-5 g-3">
+            <div class="col-auto">
+              <label for="otherAmount" class="col-form-label">Other</label>
+            </div>
+            <div class="col">
+              <input type="text" id="otherAmount" class="form-control">
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-danger" id="otherTip" onclick="otherTip()">Submit</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-9" id="ConfirmCheckout" style="display: none;">
+          <div class="row gap-2 h-50">
+            <div class="col align-self-end text-center">
+              <h1>Confirm Checkout</h1>
+            </div>
+          </div>
+          <div class="row gap-2">
+            <div class="col">
+              <button type="button" class="btn btn-danger w-100 h-10" onclick="confirmCheckout()">Checkout</button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-outline-danger w-100 h-10" onclick="clearOrder()">Cancel Order</button>
+            </div>
+          </div>
+        </div>
+
+      <!-- TODO: toppings page -->
+      <div class="col-9" id="EditDrink" style="display: none;">
+        <div class="row gap-2 h-50">
+          <div class="col align-self-end text-center">
+            <h2>Edit Drink</h2>
+          </div>
+          <div>
+            <h5>Choose Size</h5>
+            <!-- TODO: size info goes here -->
+            <div id="size">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="sizeoptions" id="option1" autocomplete="off"> Medium
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="sizeoptions" id="option2" autocomplete="off"> Large
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <!-- TODO: sugar info goes here -->
+            <h5>Choose Sugar Level</h5>
+            <div id="sugarLevel">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="sugaroptions" id="option3" autocomplete="off"> 100%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="sugaroptions" id="option4" autocomplete="off"> 70%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="sugaroptions" id="option5" autocomplete="off"> 50%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="sugaroptions" id="option6" autocomplete="off"> 30%
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="sugaroptions" id="option7" autocomplete="off"> 0%
+                </label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>Choose Ice Level</h5>
+            <!-- TODO: ice info goes here -->
+
+            <div id="iceLevel">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="iceoptions" id="option8" autocomplete="off"> Light
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="iceoptions" id="option9" autocomplete="off"> Regular
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="iceoptions" id="option10" autocomplete="off"> None
+                </label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>Choose Toppings</h5>
+            <div id="toppingDiv">
+            <!-- TODO: topping info goes here -->
+            </div>
+          </div>
+          <!-- TODO: STRETCH GOAL: have current price show up for the edited drink -->
+          <!-- <div>Drink Price: $<span id="Drink_Price">0.00</span></div> -->
+          <div class="col" id="Confirm">
+          </div>
+        </div>
+      </div>
+
       <div class="col-3" id="receipt">
         <div class="name-bar" id="name-bar">Name</div>
         <div class="items-pane overflow-auto" id="items-pane">
-
-          <!-- TODO: CONVERT THIS TO JAVASCRIPT IMPLEMENTATION  -->
-          <div class="item">
-            <div>
-              <button type="button" class="btn rounded-5">
-                <i class="fa-regular fa-circle-xmark fa-lg"></i>
-              </button>
-              Thai Tea</div>
-            <div class="d-flex">
-              <label for="quantity"><input class="form-control" type="number" value="1" min="1" max="10"></label> $4.99 
-              <button type="button" class="btn rounded-5" onclick="EditDrink()"><i class="fa-regular fa-pen-to-square fa-lg"></i></button>
-            </div>
-          </div>
-          <!-- END OF CLASS -->
 
         </div>  
         <div class="moneyinfo">
           <div>Subtotal: $<span id="subtotal">0.00</span></div>
           <div>Tip: $<span id="tip">0.00</span></div>
           <div>Total: $<span id="total">0.00</span></div>
-          <button class="checkout-bar" onclick="Checkout()">Checkout</button>
+          <button class="checkout-bar" id="checkout" onclick="Checkout()">Checkout</button>
     </div>
     </div>
 
