@@ -62,20 +62,32 @@
         <div class="tab-pane fade show active" id="categories" role="tabpanel" aria-labelledby="categories-tab">
           <div class="flex-wrap" id="buttons">
             <button type="button" id="milk" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(milkDiv,buttons)"><img src="images/teas/1.png" alt="">Milk Tea Series</button>
+            <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(slushDiv, buttons)" ><img src="images/teas/49.png" alt="">Slush Series</button>
             <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(coffeeDiv, buttons)"><img src="images/teas/25.png" alt="">Coffee Series</button>
-            <button type="button" class="btn btn-light btn-outline-dark btn-lg"><img src="images/teas/35.png" alt="">Tea Series</button>
-            <button type="button" class="btn btn-light btn-outline-dark btn-lg"><img src="images/teas/49.png" alt="">Specialty Series</button> 
+            <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(teaDiv, buttons)"><img src="images/teas/35.png" alt="">Tea Series</button>
+            <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(otherDiv, buttons)"><img src="images/teas/44.png" alt="">Specialty Series</button> 
           </div>
 
           <div class="flex-wrap" id="milkDiv" style="display: none;">
             <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, milkDiv)">Back</button>
             <div id="milktea">Insert milktea stuff</div>
           </div>
+          <div class="flex-wrap" id="slushDiv" style="display: none;">
+            <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, slushDiv)">Back</button>
+            <div id="slush">Insert slush stuff</div>
+          </div>
           <div class="flex-wrap" id="coffeeDiv" style="display: none;">
             <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, coffeeDiv)">Back</button>
             <div id="coffee">Insert coffee stuff</div>
           </div>
-
+          <div class="flex-wrap" id="teaDiv" style="display: none;">
+            <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, teaDiv)">Back</button>
+            <div id="tea">Insert tea stuff</div>
+          </div>
+          <div class="flex-wrap" id="otherDiv" style="display: none;">
+            <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, coffeeDiv)">Back</button>
+            <div id="other">Insert other stuff</div>
+          </div>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="best-sellers-tab">two</div>
         <div class="tab-pane fade" id="newly-added" role="tabpanel" aria-labelledby="newly-added-tab">three</div>
