@@ -1,4 +1,4 @@
-#buttons button{
+.flex-wrap button{
     margin: 15px;
     padding: 10px;
     cursor: pointer;
@@ -12,3 +12,4 @@ img{
     max-width: 25vh;
     max-height: 25vh;
 }
+

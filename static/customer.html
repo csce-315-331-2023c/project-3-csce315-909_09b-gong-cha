@@ -61,7 +61,7 @@
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="categories" role="tabpanel" aria-labelledby="categories-tab">
           <div class="flex-wrap" id="buttons">
-            <button type="button" id="milk" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(milkDiv,buttons)"><img src="images/teas/1.png" alt="">Milk Tea Series</button>
+            <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(milkDiv,buttons)"><img src="images/teas/1.png" alt="">Milk Tea Series</button>
             <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(slushDiv, buttons)" ><img src="images/teas/49.png" alt="">Slush Series</button>
             <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(coffeeDiv, buttons)"><img src="images/teas/25.png" alt="">Coffee Series</button>
             <button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="ToggleVis(teaDiv, buttons)"><img src="images/teas/35.png" alt="">Tea Series</button>
@@ -88,6 +88,11 @@
             <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, coffeeDiv)">Back</button>
             <div id="other">Insert other stuff</div>
           </div>
+        </div>
+
+        <div id="customizeDiv">
+          <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, customizeDiv)">Back</button>
+
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="best-sellers-tab">two</div>
         <div class="tab-pane fade" id="newly-added" role="tabpanel" aria-labelledby="newly-added-tab">three</div>
