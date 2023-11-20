@@ -1,9 +1,25 @@
 const url = 'http://localhost:5000';
 
+/*preset arrays so we can quickly determine ice levels */
+var ice_ary = ["regular", "light", "none"]
+var sugar_ary = ["100%", "70%", "50%", "30%", "0%"]
 function ToggleVis(divName_vis, divName_hide){
     divName_hide.style.display = "none";
     divName_vis.style.display = "block";
 }
+
+//TODO: reset the forms with id size, sugarlevel, and icelevel back to default
+function resetForms(){
+      // Reset the Size select
+      document.getElementById('size').selectedIndex = 0;
+
+      // Reset the Sugar Level select
+      document.getElementById('sugarLevel').selectedIndex = 0;
+
+      // Reset the Ice Level select
+      document.getElementById('iceLevel').selectedIndex = 0;;
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
@@ -24,9 +40,6 @@ async function putToppingsinDiv(){
     toppingDiv.innerHTML = "";
     for (var i = 0; i < toppings.length; i++){
         //use above format
-        /**                
-         <label for="quantity"><input class="form-control" type="number" value="1" min="1" max="10"></label>
-        <label for="topping1">Topping 1</label> */
         var labelElement = document.createElement("label");
         labelElement.setAttribute("for", "quantity");
         var inputElement = document.createElement("input");
@@ -66,6 +79,9 @@ function sendtocheckout(json){
     localStorage.setItem('newData', 'true');
 }
 
+var img_change = document.getElementById("img");
+var name_change = document.getElementById("name");
+
 function createButton(drinkname, json) {
     var button = document.createElement("button");
     // <button type="button" class="btn btn-light btn-outline-dark btn-lg"><img src="images/teas/1.png">Milk Tea Series</button>
@@ -85,12 +101,76 @@ function createButton(drinkname, json) {
         putToppingsinDiv();
         
         //switch to customize page
+        //TODO: change image and name in customizeDiv
+        img_change.src = 'images/teas/' + json.recipe_id + '.png';
+        name_change.textContent = drinkname;
+        
         ToggleVis(customizeDiv, json.divName);
         //TODO: add edit button to customizeDiv, which will call sendtocheckout(json)
-        //TODO: send json to checkout.html
+        const checkout = document.createElement("button");
+        checkout.type = "button";
+        checkout.className = "btn btn-light btn-outline-dark btn-lg";
+        checkout.textContent = "Send to Checkout";
+        //add button to the checkout id
+        var checkoutDiv = document.getElementById("checkout");
+        checkoutDiv.innerHTML = "";
+        checkoutDiv.appendChild(checkout);
 
-        //TODO: this time, 
-        sendtocheckout(json);
+        //TODO: when checkout is hit, send json to checkout.html
+        checkout.addEventListener("click", function(){
+            //parse through and get size, ice, sugar and toppings
+            console.log("checkout button clicked");
+
+            var selected_info_ary = [];
+            //get size
+            var size = document.getElementById("size").selectedIndex;
+            if(size == 0){
+                json.cur_price = parseFloat(json.med_price);
+            }
+            else{
+                json.cur_price = parseFloat(json.large_price);
+            }
+
+            //get ice
+            var ice = document.getElementById("iceLevel").selectedIndex;
+            //get sugar
+            var sugar = document.getElementById("sugarLevel").selectedIndex;
+
+            console.log(size, ice, sugar);
+
+            selected_info_ary.push({is_medium: size == 0 ? true : false})
+            selected_info_ary.push({ice_level: ice_ary[ice]})
+            selected_info_ary.push({sugar_level: sugar_ary[sugar]})
+
+            //get toppings
+            var topping_ary = [];
+            var toppingDivs = document.querySelectorAll("#toppingDiv > div");
+            // Loop through each topping div
+            toppingDivs.forEach(function(toppingDiv) {
+                var toppingId = toppingDiv.id;
+                var quantity = parseInt(toppingDiv.querySelector("input[type=number]").value, 10);
+                //get the price of the topping
+                var price = parseFloat(toppingDiv.querySelector("p").innerHTML);
+                // Check if the quantity is greater than 0
+                if (quantity > 0) {
+                  topping_ary.push({ ingredient_id: toppingId, quantity: quantity });
+                  json.cur_price = parseFloat(json.cur_price) + price * quantity
+                }
+              });
+  
+            json.edit_info = selected_info_ary;
+            json.topping_info = topping_ary;
+
+            console.log(json);
+            //TODO: send json to checkout.html
+            sendtocheckout(json);
+
+            //TODO: default values for size, ice, sugar
+            resetForms();
+            //switch to the buttons page
+            ToggleVis(json.divName, customizeDiv);
+        });
+
         //change customizeDiv's elements to match that of the drink
         
     });
