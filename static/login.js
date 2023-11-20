@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
   if (isManager == null) {
     localStorage.setItem('isManager', 'false');
   }
+  if (isLoggedIn == 'true') {
+    this.getElementById('login-nav').textContent = "Logout";
+  }
 })
 // this switches between login mode and create account mode
 function toggleForm() {

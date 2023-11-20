@@ -20,6 +20,10 @@ document.addEventListener("DOMContentLoaded", function() {
     window.location.href = 'login.html';
   }
   
+  if (isLoggedIn == 'true') {
+    this.getElementById('login-nav').textContent = "Logout";
+  }
+  
     insertinfo();
 });
 

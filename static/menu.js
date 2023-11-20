@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function() {
       localStorage.setItem('isManager', 'false');
     }
 
+    if (isLoggedIn == 'true') {
+        this.getElementById('login-nav').textContent = "Logout";
+    }
+
     insertinfo();
 });
 
