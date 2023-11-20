@@ -62,6 +62,18 @@ app.get('/recipe', async (req, res) => {
       });
 })
 
+app.post('/getAccount', async (req, res) => {
+  const username = req.body['username'];
+  const password = req.body['password'];
+
+  pool
+      .query("SELECT * FROM users WHERE username = '" + username + "' AND password_ = '" + password + "';")
+      .then(query_res => {
+          console.log(query_res.rows);
+          res.send(query_res.rows);
+      });
+})
+
 //get all drinks that have milk in the name
 app.get('/recipe/milk', async (req, res) => {
   pool
