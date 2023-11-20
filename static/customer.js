@@ -23,9 +23,23 @@ function createButton(drinkname, json) {
 
     button.addEventListener("click", function() {
         console.log(json);
+        //TODO: send json to checkout.html
         // <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, milkDiv)">Back</button>
         //change visibility of current div to hidden
-        customizeDiv = document.getElementById("customizeDiv");
+        // Assuming json is an object representing the drink data
+        var jsonData = json;
+
+        // // Retrieve existing data from local storage or initialize an empty array
+        var existingData = JSON.parse(localStorage.getItem('drinks')) || [];
+        console.log(existingData);
+        // // Add the new drink data to the array
+        existingData.push(jsonData);
+
+        // // Store the updated array back in local storage
+        localStorage.setItem('drinks', JSON.stringify(existingData));
+
+        // // Notify checkout.html that new data is updated (optional)
+        localStorage.setItem('newData', 'true');
 
         ToggleVis(customizeDiv, json.divName);
 
