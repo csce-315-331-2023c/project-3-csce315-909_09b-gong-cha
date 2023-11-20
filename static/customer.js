@@ -25,7 +25,12 @@ function createButton(drinkname, json) {
         console.log(json);
         // <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, milkDiv)">Back</button>
         //change visibility of current div to hidden
-        // ToggleVis();
+        customizeDiv = document.getElementById("customizeDiv");
+
+        ToggleVis(customizeDiv, json.divName);
+
+        //change customizeDiv's elements to match that of the drink
+        
     });
     return button;
 }
@@ -49,18 +54,23 @@ async function insertinfo(){
         button = createButton(request[i].recipe_name, request[i]);
         let name = request[i].recipe_name;
         if(request[i].is_slush){
+            request[i].divName = document.getElementById("slushDiv");
             slushie.appendChild(button);
         }
         else if(name.includes("Coffee")){
+            request[i].divName = document.getElementById("coffeeDiv");
             coffee.appendChild(button);
         }
         else if(name.includes("Milk")){
+            request[i].divName = document.getElementById("milkDiv");
             milkTea.appendChild(button);
         }
         else if(name.includes("Tea")){
+            request[i].divName = document.getElementById("teaDiv");
             tea.appendChild(button);
         }
         else{
+            request[i].divName = document.getElementById("otherDiv");
             other.appendChild(button);
         }
     }
