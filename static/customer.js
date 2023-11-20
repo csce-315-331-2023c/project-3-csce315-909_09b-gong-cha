@@ -106,11 +106,12 @@ function createButton(drinkname, json) {
         name_change.textContent = drinkname;
         
         ToggleVis(customizeDiv, json.divName);
+
         //TODO: add edit button to customizeDiv, which will call sendtocheckout(json)
         const checkout = document.createElement("button");
         checkout.type = "button";
         checkout.className = "btn btn-light btn-outline-dark btn-lg";
-        checkout.textContent = "Send to Checkout";
+        checkout.textContent = "Add to Cart";
         //add button to the checkout id
         var checkoutDiv = document.getElementById("checkout");
         checkoutDiv.innerHTML = "";

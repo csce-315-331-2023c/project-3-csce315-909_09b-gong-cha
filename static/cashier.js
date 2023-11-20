@@ -25,7 +25,7 @@ function createButton(drinkname, json) {
  */
 function insertIntoReceipt(json) {
     
-    var itempane = document.getElementById("items-pane"); // Corrected ID
+    var itempane = document.getElementById("items-pane"); 
     json.cur_price = json.med_price;
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("item");
