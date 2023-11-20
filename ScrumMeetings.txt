@@ -39,7 +39,7 @@ We discussed the initial project assignment and tech stack. We planned on using 
 SCRUM Meeting 2 for Team 9B
 _________________________________________________
 Prepared by: Anton Hugo Ramirez
-Meeting Date: November 6, 2023
+Meeting Date: November 3, 2023
 Meeting Attendees
 Anton Hugo Ramirez
  Reid Jenkins
@@ -199,6 +199,7 @@ Task Description
 Implemented Menu Front End - ASSIGNED TO Reid - Completed Yes
 Added Images to Menu - ASSIGNED TO Anton - Completed Yes
 Implemented Cashier View - ASSIGNED TO Ren - Completed Yes
+Revamp Manager View - ASSIGNED TO Brenndan - Completed Yes
 
 Before The Next Meeting
 Plans:
