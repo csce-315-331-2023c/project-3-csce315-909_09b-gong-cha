@@ -92,11 +92,48 @@
 
         <div class="flex-wrap" id="customizeDiv" style="display: none;">
           <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, customizeDiv)">Back</button>
-          <div class="d-flex align-items-center justify-content-center" id="mods">
-            <!-- <div id="img"><img src="images/teas/1.png"></div>
-            <div id="Name"><h3>Black Milk Tea</h3></div>
-          </div> -->
-          updates
+          <div class="" id="mods">
+            <h3>Customize Your Drink</h3>
+            <div class="d-flex justify-content-center align-items-center" >
+              <div id="img"><img src="images/teas/1.png"></div>
+              <div id="Name"><h3>Black Milk Tea</h3></div>   
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <h5>Choose Size</h5>
+                  <select class="form-select" aria-label="Default select example" id="size">
+                    <option selected>Medium</option>
+                    <option value="1">Large</option>
+                  </select>
+      
+                  <h5>Choose Sugar Level</h5>
+                  <select class="form-select" aria-label="Default select example" id="sugarLevel">
+                    <option selected>100%</option>
+                    <option value="1">70%</option>
+                    <option value="2">50%</option>
+                    <option value="3">30%</option>
+                    <option value="4">0%</option>
+                  </select>
+      
+                  <h5>Choose Ice Level</h5>
+                  <select class="form-select" aria-label="Default select example" id="iceLevel">
+                    <option selected>Regular</option>
+                    <option value="1">Light</option>
+                    <option value="2">None</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <h5>Choose Toppings</h5>
+                  <div id="toppingDiv">
+                  </div>
+                </div>
+              </div>
+
+
+            <!-- TODO: ADD THE EDIT BUTTON HERE BELOW which will have an action listener, gather all this info, and send to checkout-->
+          </div>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="best-sellers-tab">two</div>
         <div class="tab-pane fade" id="newly-added" role="tabpanel" aria-labelledby="newly-added-tab">three</div>

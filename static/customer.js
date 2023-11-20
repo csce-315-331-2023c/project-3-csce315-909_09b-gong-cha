@@ -9,6 +9,63 @@ document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
 });
 
+async function getToppings(){
+    var request = await fetch(url + "/toppings").then((res) => res.json());
+    return request;
+}
+
+async function putToppingsinDiv(){
+    var toppings = await getToppings();
+    //change visiblility of #editDrink
+
+    //create confirm button, applies changes to the drink
+    //insert into toppingDiv
+    var toppingDiv = document.getElementById("toppingDiv");
+    toppingDiv.innerHTML = "";
+    for (var i = 0; i < toppings.length; i++){
+        //use above format
+        /**                
+         <label for="quantity"><input class="form-control" type="number" value="1" min="1" max="10"></label>
+        <label for="topping1">Topping 1</label> */
+        var labelElement = document.createElement("label");
+        labelElement.setAttribute("for", "quantity");
+        var inputElement = document.createElement("input");
+        inputElement.classList.add("form-control");
+        inputElement.type = "number";
+        inputElement.min = "1";
+        inputElement.max = "10";
+        var textNode = document.createTextNode(toppings[i].ingredient_name);
+        labelElement.appendChild(inputElement);
+        var div = document.createElement("div");
+        div.id = toppings[i].ingredient_id;
+        div.appendChild(labelElement);
+        div.appendChild(textNode);
+        //TODO: hidden field to store the price of the topping
+        var price = document.createElement("p");
+        price.style.display = "none";
+        price.innerHTML = toppings[i].unit_price;
+        div.appendChild(price);
+
+        toppingDiv.appendChild(div);
+    }
+}
+
+function sendtocheckout(json){
+    var jsonData = json;
+
+    // // Retrieve existing data from local storage or initialize an empty array
+    var existingData = JSON.parse(localStorage.getItem('drinks')) || [];
+    console.log(existingData);
+    // // Add the new drink data to the array
+    existingData.push(jsonData);
+
+    // // Store the updated array back in local storage
+    localStorage.setItem('drinks', JSON.stringify(existingData));
+
+    // // Notify checkout.html that new data is updated (optional)
+    localStorage.setItem('newData', 'true');
+}
+
 function createButton(drinkname, json) {
     var button = document.createElement("button");
     // <button type="button" class="btn btn-light btn-outline-dark btn-lg"><img src="images/teas/1.png">Milk Tea Series</button>
@@ -23,26 +80,17 @@ function createButton(drinkname, json) {
 
     button.addEventListener("click", function() {
         console.log(json);
-        //TODO: send json to checkout.html
-        // <button type="button" class="btn btn-light btn-outline-dark btn-lg p-3 m-3" onclick="ToggleVis(buttons, milkDiv)">Back</button>
-        //change visibility of current div to hidden
-        // Assuming json is an object representing the drink data
-        var jsonData = json;
 
-        // // Retrieve existing data from local storage or initialize an empty array
-        var existingData = JSON.parse(localStorage.getItem('drinks')) || [];
-        console.log(existingData);
-        // // Add the new drink data to the array
-        existingData.push(jsonData);
-
-        // // Store the updated array back in local storage
-        localStorage.setItem('drinks', JSON.stringify(existingData));
-
-        // // Notify checkout.html that new data is updated (optional)
-        localStorage.setItem('newData', 'true');
-
+        //put the toppings in the div
+        putToppingsinDiv();
+        
+        //switch to customize page
         ToggleVis(customizeDiv, json.divName);
+        //TODO: add edit button to customizeDiv, which will call sendtocheckout(json)
+        //TODO: send json to checkout.html
 
+        //TODO: this time, 
+        sendtocheckout(json);
         //change customizeDiv's elements to match that of the drink
         
     });
