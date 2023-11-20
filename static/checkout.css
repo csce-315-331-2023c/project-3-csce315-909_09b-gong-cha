@@ -35,3 +35,15 @@ img{
 ::-webkit-scrollbar-thumb:hover {
     background-color: #a33d42;
 }
+
+#moneyinfo{
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+#moneyinfo > div{
+    margin: 1%;
+}
