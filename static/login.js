@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
   if (isLoggedIn == 'true') {
     this.getElementById('login-nav').textContent = "Logout";
   }
+  else {
+    this.getElementById('login-nav').textContent = "Login";
+  }
+
+  toggleAuthenticationViews();
 })
 // this switches between login mode and create account mode
 function toggleForm() {
@@ -71,6 +76,28 @@ async function checkLoginInfo(event) {
     console.log('Resource does not exist or there was an error');
     alert("Username or Password Incorrect");
   }
+}
+
+function toggleAuthenticationViews() {
+  var loginForm = document.getElementById('loginForm');
+  var logoutBox = document.getElementById('logoutBox');
+
+  console.log(localStorage.getItem('isLoggedIn'));
+
+  if (localStorage.getItem('isLoggedIn') == 'true') {
+    loginForm.style.display = 'none'; // Hide login form
+    logoutBox.style.display = 'block'; // Show logout box
+  } else {
+    loginForm.style.display = 'block'; // Show login form
+    logoutBox.style.display = 'none'; // Hide logout box
+  }
+}
+
+function logout() {
+  localStorage.setItem('isLoggedIn', 'false');
+  localStorage.setItem('isEmployee', 'false');
+  localStorage.setItem('isManager', 'false');
+  window.location.href = 'index.html';
 }
 
 // this function will take new account info from HTML elements "new-username" and "new-password" and add them to our database

@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (isLoggedIn == 'true') {
         this.getElementById('login-nav').textContent = "Logout";
     }
+    else {
+        this.getElementById('login-nav').textContent = "Login";
+    }
 
     insertinfo();
 });
