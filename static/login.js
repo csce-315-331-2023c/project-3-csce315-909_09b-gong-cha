@@ -101,3 +101,6 @@ function logout() {
 }
 
 // this function will take new account info from HTML elements "new-username" and "new-password" and add them to our database
+function createAccount() {
+  
+}
