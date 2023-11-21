@@ -28,8 +28,10 @@ function updatePageDynamically(json) {
   const nameColumn = document.createElement("div");
   nameColumn.classList.add("col-md-8");
 
+  const nameDiv = document.createElement("div");
   const textNode = document.createTextNode(json.recipe_name);
-  nameColumn.appendChild(textNode);
+  nameDiv.appendChild(textNode);
+  nameColumn.appendChild(nameDiv);
 
   const buttonColumn = document.createElement("div");
   buttonColumn.classList.add("col-md-1");
@@ -50,9 +52,13 @@ function updatePageDynamically(json) {
 
       for(i = 0; i < storedDrinks.length; i++)
       {
-        if(storedDrinks[i].recipe_name == itemDiv.children[0].textContent)
+        console.log(storedDrinks[i].recipe_name);
+        console.log(itemDiv.children[1].children[0].textContent);
+        if(storedDrinks[i].recipe_name == itemDiv.children[1].children[0].textContent)
         {
+          console.log("equals");
             storedDrinks.splice(i, 1);
+            localStorage.setItem('drinks', JSON.stringify(storedDrinks));
             break;
         }
       }
