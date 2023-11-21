@@ -77,7 +77,7 @@ app.post('/getAccount', async (req, res) => {
 app.post('/createAccount', async (req, res) => {
   username = req.body['new-username'];
   password = req.body['new-password'];
-  is_manager = username.includes('@');
+  is_manager = false;
   pool
       .query("INSERT INTO users VALUES('" + username + "', '" + password + "', '"+ is_manager + "');")
       .then(query_res => {

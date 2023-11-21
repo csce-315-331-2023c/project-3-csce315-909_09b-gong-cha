@@ -113,7 +113,7 @@ async function createAccount(event) {
 
     var userData = {
       'new-username': username,
-      'new-password': password
+      'new-password': password,
     }
   
     const response = await fetch(url + "/createAccount", {
