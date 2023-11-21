@@ -101,6 +101,27 @@ function logout() {
 }
 
 // this function will take new account info from HTML elements "new-username" and "new-password" and add them to our database
-function createAccount() {
+async function createAccount(event) {
+  username = document.getElementById('new-username').value;
+  password = document.getElementById('new-password').value;
+  if(password != document.getElementById('confirm-password').value){
+    event.preventDefault();
+    alert("Passwords do not match!");
+    return false;
+  }else{
+    alert("Account successfully created. ");
+
+    var userData = {
+      'new-username': username,
+      'new-password': password
+    }
   
+    const response = await fetch(url + "/createAccount", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });  
+  }
 }

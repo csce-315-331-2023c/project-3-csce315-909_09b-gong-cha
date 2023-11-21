@@ -74,6 +74,17 @@ app.post('/getAccount', async (req, res) => {
       });
 })
 
+app.post('/createAccount', async (req, res) => {
+  username = req.body['new-username'];
+  password = req.body['new-password'];
+  is_manager = username.includes('@');
+  pool
+      .query("INSERT INTO users VALUES('" + username + "', '" + password + "', '"+ is_manager + "');")
+      .then(query_res => {
+          console.log("rachel zegler stan");
+      });
+})
+
 //get all drinks that have milk in the name
 app.get('/recipe/milk', async (req, res) => {
   pool
