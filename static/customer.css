@@ -1,0 +1,17 @@
+.flex-wrap button{
+    margin: 15px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    /* min-width: 50vh; */
+    min-width: 100vh;
+}
+
+img{
+    max-width: 25vh;
+    max-height: 25vh;
+}
+
+
+
