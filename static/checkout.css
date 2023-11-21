@@ -3,6 +3,10 @@ img{
     max-height: 25vh;
 }
 
+.navbar-brand {
+    padding-left: 10px !important;
+}
+
 #items-pane{
     height: 80vh;
     width: auto;

@@ -13,5 +13,6 @@ img{
     max-height: 25vh;
 }
 
-
-
+.navbar-brand {
+    padding-left: 10px !important;
+}

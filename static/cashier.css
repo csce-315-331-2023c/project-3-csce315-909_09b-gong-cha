@@ -9,6 +9,9 @@
     margin: 5px;
 }
 
+.navbar-brand {
+  padding-left: 10px !important;
+}
 
 .name-bar {
     background-color: lightgray;
