@@ -98,6 +98,8 @@ function sendtocheckout(json){
 
     // // Notify checkout.html that new data is updated (optional)
     localStorage.setItem('newData', 'true');
+
+    alert("Drink has been added to shopping cart!");
 }
 
 var img_change = document.getElementById("img");
