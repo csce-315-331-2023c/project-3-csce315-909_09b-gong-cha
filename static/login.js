@@ -61,7 +61,7 @@ async function checkLoginInfo(event) {
     const responseData = await response.json();
     // Resource exists
     localStorage.setItem('isLoggedIn', 'true');
-    window.location.href = 'about.html';
+    window.location.href = 'index.html';
     if (!responseData[0].username.includes('@')) {
       localStorage.setItem('isEmployee', 'true');
       window.location.href = 'cashier.html';
