@@ -1,0 +1,19 @@
+body {
+    background-color: #dc3545;
+}
+
+.navbar-brand {
+    padding-left: 10px !important;
+}
+
+.btn.btn-primary {
+    background-color: #dc3545;
+}
+
+.btn.btn-primary:hover {
+    color: black;
+}
+
+.submit {
+    background-color: #dc3545;
+}

@@ -1,6 +1,31 @@
 const url = 'http://localhost:5000';
 
 document.addEventListener("DOMContentLoaded", function() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const isEmployee = localStorage.getItem('isEmployee');
+  const isManager = localStorage.getItem('isManager');
+
+  if (isLoggedIn == null) {
+    localStorage.setItem('isLoggedIn', 'false');
+  }
+  if (isEmployee == null) {
+    localStorage.setItem('isEmployee', 'false');
+  }
+  if (isManager == null) {
+    localStorage.setItem('isManager', 'false');
+  }
+
+  if (isLoggedIn == 'false') {
+    window.location.href = 'login.html';
+  }
+
+  if (isLoggedIn == 'true') {
+    this.getElementById('login-nav').textContent = "Logout";
+  }
+  else {
+    this.getElementById('login-nav').textContent = "Login";
+  }
+
   var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
   // Call the function to update the page dynamically
   document.getElementById("items-pane").innerHTML = "";

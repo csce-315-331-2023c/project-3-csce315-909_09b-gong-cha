@@ -22,6 +22,27 @@ function resetForms(){
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const isEmployee = localStorage.getItem('isEmployee');
+    const isManager = localStorage.getItem('isManager');
+  
+    if (isLoggedIn == null) {
+      localStorage.setItem('isLoggedIn', 'false');
+    }
+    if (isEmployee == null) {
+      localStorage.setItem('isEmployee', 'false');
+    }
+    if (isManager == null) {
+      localStorage.setItem('isManager', 'false');
+    }
+
+    if (isLoggedIn == 'true') {
+        this.getElementById('login-nav').textContent = "Logout";
+    }
+    else {
+        this.getElementById('login-nav').textContent = "Login";
+    }
+
     insertinfo();
 });
 
@@ -77,6 +98,8 @@ function sendtocheckout(json){
 
     // // Notify checkout.html that new data is updated (optional)
     localStorage.setItem('newData', 'true');
+
+    alert("Drink has been added to shopping cart!");
 }
 
 var img_change = document.getElementById("img");
