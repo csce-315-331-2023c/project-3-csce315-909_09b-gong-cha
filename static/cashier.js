@@ -1,4 +1,4 @@
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 
 //onload for body, run makeRecipeButtons
 document.addEventListener("DOMContentLoaded", function() {
@@ -27,7 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
     this.getElementById('login-nav').textContent = "Login";
   }
   
-    insertinfo();
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
+
+  insertinfo();
 });
 
 var drinks = new Array();
@@ -37,7 +41,7 @@ var drinks_edit = new Array();
 function createButton(drinkname, json) {
     var button = document.createElement("button");
     button.type = "button";
-    button.className = "btn btn-secondary btn-square-lg btn-danger";
+    button.className = "btn btn-secondary btn-square-lg btn-danger translate";
     button.innerHTML = drinkname;
     button.addEventListener("click", function() {
       insertIntoReceipt(json);
@@ -82,7 +86,9 @@ function insertIntoReceipt(json) {
 
     buttonElement.appendChild(iconElement);
 
-    const textNode = document.createTextNode(json.recipe_name);
+    const textNode = document.createElement("span");
+    textNode.classList = "translate";
+    textNode.textContent = json.recipe_name;
 
     innerDiv1.appendChild(buttonElement);
     innerDiv1.appendChild(textNode);
@@ -136,7 +142,9 @@ function insertIntoReceipt(json) {
             inputElement.type = "number";
             inputElement.min = "1";
             inputElement.max = "10";
-            var textNode = document.createTextNode(toppings[i].ingredient_name);
+            var textNode = document.createElement("span");
+            textNode.classList = "translate";
+            textNode.textContent = toppings[i].ingredient_name;
             labelElement.appendChild(inputElement);
             var div = document.createElement("div");
             div.id = toppings[i].ingredient_id;
@@ -155,7 +163,7 @@ function insertIntoReceipt(json) {
         confirm.innerHTML = "";
         var confirmButton = document.createElement("button");
         confirmButton.type = "button";
-        confirmButton.className = "btn btn-danger w-100 h-10";
+        confirmButton.className = "btn btn-danger w-100 h-10 translate";
         confirmButton.innerHTML = "Confirm";
         confirmButton.addEventListener("click", function(){
           //TODO: update the json, update receipt, close the editDrink page
@@ -237,7 +245,9 @@ function insertIntoReceipt(json) {
           
         });
         confirm.appendChild(confirmButton);
-
+        if (localStorage.getItem('lang') == 'es') {
+          translateElements2('es');
+        }
     });
 
     labelElement.appendChild(inputElement);
@@ -253,6 +263,10 @@ function insertIntoReceipt(json) {
     
     drinks.push(json);
     itempane.appendChild(itemDiv); 
+
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
+    }
   }
 
 /**
@@ -291,6 +305,9 @@ async function insertinfo(){
         else{
             other.appendChild(button);
         }
+    }
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
     }
 }
 
@@ -464,3 +481,24 @@ async function getToppings(){
     return request;
 }
 
+function translateElements2(lang) {
+  var targetLanguage = lang;
+  const elements = document.querySelectorAll('.translate');
+  const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+  console.log(elements);
+  elements.forEach(element => {
+      const textToTranslate = element.textContent;
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+          method: 'POST'
+      })
+          .then(response => response.json())
+          .then(data => {
+              const translatedText = data.data.translations[0].translatedText;
+              element.textContent = translatedText;
+          })
+          .catch(error => {
+              console.error('Translation error:', error);
+          });
+  });
+}

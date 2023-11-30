@@ -1,4 +1,4 @@
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 
 document.addEventListener("DOMContentLoaded", function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
         this.getElementById('login-nav').textContent = "Login";
     }
 
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
+
     insertinfo();
 });
 
@@ -39,7 +43,7 @@ function createItem(drinkname, json) {
     imageDiv.appendChild(image);
 
     const teaTypesDiv = document.createElement('div');
-    teaTypesDiv.classList.add('col-5', 'p-4');
+    teaTypesDiv.classList.add('col-5', 'p-4', 'translate');
     teaTypesDiv.textContent = drinkname;
 
     const price1Div = document.createElement('div');
@@ -73,7 +77,7 @@ function toppingItem(name, json)
     imageDiv.appendChild(image);
 
     const teaTypesDiv = document.createElement('div');
-    teaTypesDiv.classList.add('col-5', 'p-4');
+    teaTypesDiv.classList.add('col-5', 'p-4', 'translate');
     teaTypesDiv.textContent = name;
 
     const priceDiv = document.createElement('div');
@@ -93,15 +97,15 @@ function createHeaders(name)
     mainDiv.classList.add('row', 'justify-content-evenly', 'bg-light', 'h4', 'p-1');
 
     const milkTeaDiv = document.createElement('div');
-    milkTeaDiv.classList.add('col-6');
+    milkTeaDiv.classList.add('col-6', 'translate');
     milkTeaDiv.textContent = name;
 
     const mediumPriceDiv = document.createElement('div');
-    mediumPriceDiv.classList.add('col');
+    mediumPriceDiv.classList.add('col', 'translate');
     mediumPriceDiv.textContent = 'Medium Price';
 
     const largePriceDiv = document.createElement('div');
-    largePriceDiv.classList.add('col');
+    largePriceDiv.classList.add('col', 'translate');
     largePriceDiv.textContent = 'Large Price';
 
     mainDiv.appendChild(milkTeaDiv);
@@ -117,10 +121,10 @@ function toppingHeader()
     mainDiv.classList.add('row', 'justify-content-evenly', 'bg-light', 'h4', 'p-1');
 
     const milkTeaDiv = document.createElement('div');
-    milkTeaDiv.classList.add('col-7');
+    milkTeaDiv.classList.add('col-7', 'translate');
     milkTeaDiv.textContent = 'Toppings';
 
-    const priceDiv = document.createElement('div');
+    const priceDiv = document.createElement('div', 'translate');
     priceDiv.classList.add('col');
     priceDiv.textContent = 'Price';
 
@@ -183,4 +187,29 @@ async function insertinfo(){
         item = toppingItem(toppingRequest[i].ingredient_name, toppingRequest[i]);
         toppings.appendChild(item);
     }
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
+}
+
+function translateElements2(lang) {
+    var targetLanguage = lang;
+    const elements = document.querySelectorAll('.translate');
+    const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+    console.log(elements);
+    elements.forEach(element => {
+        const textToTranslate = element.textContent;
+        fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(data => {
+                const translatedText = data.data.translations[0].translatedText;
+                element.textContent = translatedText;
+            })
+            .catch(error => {
+                console.error('Translation error:', error);
+            });
+    });
 }

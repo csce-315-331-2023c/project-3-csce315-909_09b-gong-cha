@@ -1,4 +1,4 @@
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 
 /*preset arrays so we can quickly determine ice levels */
 var ice_ary = ["regular", "light", "none"]
@@ -43,6 +43,10 @@ document.addEventListener("DOMContentLoaded", function() {
         this.getElementById('login-nav').textContent = "Login";
     }
 
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
+
     insertinfo();
 });
 
@@ -68,7 +72,9 @@ async function putToppingsinDiv(){
         inputElement.type = "number";
         inputElement.min = "1";
         inputElement.max = "10";
-        var textNode = document.createTextNode(toppings[i].ingredient_name);
+        var textNode = document.createElement("span");
+        textNode.textContent = toppings[i].ingredient_name;
+        textNode.classList = "translate"
         labelElement.appendChild(inputElement);
         var div = document.createElement("div");
         div.id = toppings[i].ingredient_id;
@@ -81,6 +87,9 @@ async function putToppingsinDiv(){
         div.appendChild(price);
 
         toppingDiv.appendChild(div);
+    }
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
     }
 }
 
@@ -113,8 +122,12 @@ function createButton(drinkname, json) {
     button.className = "btn btn-light btn-outline-dark btn-lg";
     const image = document.createElement('img');
     image.src = 'images/teas/' + json.recipe_id + '.png';
+
+    const text = document.createElement('span');
+    text.textContent = drinkname;
+    text.classList = "translate";
     
-    button.textContent = drinkname;
+    button.appendChild(text);
     button.appendChild(image);
 
     button.addEventListener("click", function() {
@@ -133,7 +146,7 @@ function createButton(drinkname, json) {
         //TODO: add edit button to customizeDiv, which will call sendtocheckout(json)
         const checkout = document.createElement("button");
         checkout.type = "button";
-        checkout.className = "btn btn-light btn-outline-dark btn-lg";
+        checkout.className = "btn btn-light btn-outline-dark btn-lg translate";
         checkout.textContent = "Add to Cart";
         //add button to the checkout id
         var checkoutDiv = document.getElementById("checkout");
@@ -240,4 +253,29 @@ async function insertinfo(){
             other.appendChild(button);
         }
     }
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
+}
+
+function translateElements2(lang) {
+    var targetLanguage = lang;
+    const elements = document.querySelectorAll('.translate');
+    const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+    console.log(elements);
+    elements.forEach(element => {
+        const textToTranslate = element.textContent;
+        fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(data => {
+                const translatedText = data.data.translations[0].translatedText;
+                element.textContent = translatedText;
+            })
+            .catch(error => {
+                console.error('Translation error:', error);
+            });
+    });
 }
