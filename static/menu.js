@@ -1,4 +1,4 @@
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 
 document.addEventListener("DOMContentLoaded", function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -39,7 +39,7 @@ function createItem(drinkname, json) {
     imageDiv.appendChild(image);
 
     const teaTypesDiv = document.createElement('div');
-    teaTypesDiv.classList.add('col-5', 'p-4');
+    teaTypesDiv.classList.add('col-5', 'p-4', 'translate');
     teaTypesDiv.textContent = drinkname;
 
     const price1Div = document.createElement('div');
@@ -73,7 +73,7 @@ function toppingItem(name, json)
     imageDiv.appendChild(image);
 
     const teaTypesDiv = document.createElement('div');
-    teaTypesDiv.classList.add('col-5', 'p-4');
+    teaTypesDiv.classList.add('col-5', 'p-4', 'translate');
     teaTypesDiv.textContent = name;
 
     const priceDiv = document.createElement('div');
@@ -93,15 +93,15 @@ function createHeaders(name)
     mainDiv.classList.add('row', 'justify-content-evenly', 'bg-light', 'h4', 'p-1');
 
     const milkTeaDiv = document.createElement('div');
-    milkTeaDiv.classList.add('col-6');
+    milkTeaDiv.classList.add('col-6', 'translate');
     milkTeaDiv.textContent = name;
 
     const mediumPriceDiv = document.createElement('div');
-    mediumPriceDiv.classList.add('col');
+    mediumPriceDiv.classList.add('col', 'translate');
     mediumPriceDiv.textContent = 'Medium Price';
 
     const largePriceDiv = document.createElement('div');
-    largePriceDiv.classList.add('col');
+    largePriceDiv.classList.add('col', 'translate');
     largePriceDiv.textContent = 'Large Price';
 
     mainDiv.appendChild(milkTeaDiv);
@@ -117,10 +117,10 @@ function toppingHeader()
     mainDiv.classList.add('row', 'justify-content-evenly', 'bg-light', 'h4', 'p-1');
 
     const milkTeaDiv = document.createElement('div');
-    milkTeaDiv.classList.add('col-7');
+    milkTeaDiv.classList.add('col-7', 'translate');
     milkTeaDiv.textContent = 'Toppings';
 
-    const priceDiv = document.createElement('div');
+    const priceDiv = document.createElement('div', 'translate');
     priceDiv.classList.add('col');
     priceDiv.textContent = 'Price';
 
