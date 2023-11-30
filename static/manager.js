@@ -6,7 +6,7 @@
 //   url = "https://csce-315-project-3-gong-cha.onrender.com";
 // }
 //get url from index.js
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 
 // This will load all necessary tables/options on startup
 document.addEventListener("DOMContentLoaded", function() {
@@ -43,6 +43,10 @@ document.addEventListener("DOMContentLoaded", function() {
   getIngredients();
   fetchIngredientsAndDisplay('allIngredients');
   fetchIngredientsAndDisplay('allIngredientsAdd');
+
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 });
 
 function showInputBox() {
@@ -53,6 +57,10 @@ function showInputBox() {
   let selectedOption = document.getElementById("options").value;
 
   document.getElementById(`inputBox${selectedOption}`).classList.remove("d-none");
+
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 function showReport() {
@@ -151,6 +159,9 @@ async function modDrinkName() {
     getDrinks();
     getDrinks2();
     drinkTable()
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
+    }
   }, 200);
 }
 
@@ -382,9 +393,13 @@ async function getDrinks() {
           const option = document.createElement('option');
           option.value = index + 1;
           option.textContent = drink.recipe_name;
+          option.classList = "translate";
           select.appendChild(option);
       });
   })
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 async function getDrinks2() {
@@ -399,9 +414,13 @@ async function getDrinks2() {
           const option = document.createElement('option');
           option.value = index + 1;
           option.textContent = drink.recipe_name;
+          option.classList = "translate";
           select.appendChild(option);
       });
   })
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 async function getIngredients() {
@@ -416,9 +435,13 @@ async function getIngredients() {
           const option = document.createElement('option');
           option.value = index + 1;
           option.textContent = drink.ingredient_name;
+          option.classList = "translate";
           select.appendChild(option);
       });
   })
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 async function fetchIngredientsAndDisplay(element) {
@@ -458,6 +481,9 @@ async function fetchIngredientsAndDisplay(element) {
     row.appendChild(col3);
 
     ingredientsListDiv.appendChild(row);
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
+    }
   } catch (error) {
     console.error('Error:', error);
   }
@@ -472,7 +498,7 @@ function createColumn(ingredients) {
     formGroup.classList.add('input-group');
 
     const inputGroupText = document.createElement('label');
-    inputGroupText.classList.add('input-group-text');
+    inputGroupText.classList.add('input-group-text', 'translate');
     inputGroupText.textContent = ingredient.ingredient_name;
 
     const quantityInput = document.createElement('input');
@@ -615,4 +641,26 @@ async function createTableFromJSON(jsonData, tableContainerID) {
      table.appendChild(tr); // Append the table row to the table
   });
   container.appendChild(table) // Append the table to the container element
+}
+
+function translateElements2(lang) {
+  var targetLanguage = lang;
+  const elements = document.querySelectorAll('.translate');
+  const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+  console.log(elements);
+  elements.forEach(element => {
+      const textToTranslate = element.textContent;
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+          method: 'POST'
+      })
+          .then(response => response.json())
+          .then(data => {
+              const translatedText = data.data.translations[0].translatedText;
+              element.textContent = translatedText;
+          })
+          .catch(error => {
+              console.error('Translation error:', error);
+          });
+  });
 }

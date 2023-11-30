@@ -1,4 +1,4 @@
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 
 document.addEventListener('DOMContentLoaded', function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   else {
     this.getElementById('login-nav').textContent = "Login";
+  }
+
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
   }
 
   toggleAuthenticationViews();
@@ -124,4 +128,26 @@ async function createAccount(event) {
       body: JSON.stringify(userData),
     });  
   }
+}
+
+function translateElements2(lang) {
+  var targetLanguage = lang;
+  const elements = document.querySelectorAll('.translate');
+  const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+  console.log(elements);
+  elements.forEach(element => {
+      const textToTranslate = element.textContent;
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+          method: 'POST'
+      })
+          .then(response => response.json())
+          .then(data => {
+              const translatedText = data.data.translations[0].translatedText;
+              element.textContent = translatedText;
+          })
+          .catch(error => {
+              console.error('Translation error:', error);
+          });
+  });
 }

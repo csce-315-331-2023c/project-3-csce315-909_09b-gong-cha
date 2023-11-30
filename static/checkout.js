@@ -1,4 +1,4 @@
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 
 document.addEventListener("DOMContentLoaded", function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -33,6 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
   {
       updatePageDynamically(storedDrinks[i]);
   }
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 });
 
 
@@ -54,7 +57,9 @@ function updatePageDynamically(json) {
   nameColumn.classList.add("col-md-8");
 
   const nameDiv = document.createElement("div");
-  const textNode = document.createTextNode(json.recipe_name);
+  const textNode = document.createElement("span");
+  textNode.textContent = json.recipe_name;
+  textNode.classList = "translate";
   nameDiv.appendChild(textNode);
   nameColumn.appendChild(nameDiv);
 
@@ -233,3 +238,24 @@ async function insertOrderItemTopping(order_item_id, ingredient_id, quantity)
       });
 }
 
+function translateElements2(lang) {
+  var targetLanguage = lang;
+  const elements = document.querySelectorAll('.translate');
+  const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+  console.log(elements);
+  elements.forEach(element => {
+      const textToTranslate = element.textContent;
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+          method: 'POST'
+      })
+          .then(response => response.json())
+          .then(data => {
+              const translatedText = data.data.translations[0].translatedText;
+              element.textContent = translatedText;
+          })
+          .catch(error => {
+              console.error('Translation error:', error);
+          });
+  });
+}
