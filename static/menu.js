@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
         this.getElementById('login-nav').textContent = "Login";
     }
 
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
+
     insertinfo();
 });
 
@@ -183,4 +187,27 @@ async function insertinfo(){
         item = toppingItem(toppingRequest[i].ingredient_name, toppingRequest[i]);
         toppings.appendChild(item);
     }
+    translateElements2('es');
+}
+
+function translateElements2(lang) {
+    var targetLanguage = lang;
+    const elements = document.querySelectorAll('.translate');
+    const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+    console.log(elements);
+    elements.forEach(element => {
+        const textToTranslate = element.textContent;
+        fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(data => {
+                const translatedText = data.data.translations[0].translatedText;
+                element.textContent = translatedText;
+            })
+            .catch(error => {
+                console.error('Translation error:', error);
+            });
+    });
 }

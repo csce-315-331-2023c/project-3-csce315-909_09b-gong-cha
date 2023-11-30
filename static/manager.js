@@ -43,6 +43,10 @@ document.addEventListener("DOMContentLoaded", function() {
   getIngredients();
   fetchIngredientsAndDisplay('allIngredients');
   fetchIngredientsAndDisplay('allIngredientsAdd');
+
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 });
 
 function showInputBox() {
@@ -151,6 +155,7 @@ async function modDrinkName() {
     getDrinks();
     getDrinks2();
     drinkTable()
+    translateElements2('es');
   }, 200);
 }
 
@@ -386,6 +391,7 @@ async function getDrinks() {
           select.appendChild(option);
       });
   })
+  translateElements2('es');
 }
 
 async function getDrinks2() {
@@ -404,6 +410,7 @@ async function getDrinks2() {
           select.appendChild(option);
       });
   })
+  translateElements2('es');
 }
 
 async function getIngredients() {
@@ -422,6 +429,7 @@ async function getIngredients() {
           select.appendChild(option);
       });
   })
+  translateElements2('es');
 }
 
 async function fetchIngredientsAndDisplay(element) {
@@ -464,6 +472,7 @@ async function fetchIngredientsAndDisplay(element) {
   } catch (error) {
     console.error('Error:', error);
   }
+  translateElements2('es');
 }
 
 function createColumn(ingredients) {
@@ -618,4 +627,26 @@ async function createTableFromJSON(jsonData, tableContainerID) {
      table.appendChild(tr); // Append the table row to the table
   });
   container.appendChild(table) // Append the table to the container element
+}
+
+function translateElements2(lang) {
+  var targetLanguage = lang;
+  const elements = document.querySelectorAll('.translate');
+  const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+  console.log(elements);
+  elements.forEach(element => {
+      const textToTranslate = element.textContent;
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+          method: 'POST'
+      })
+          .then(response => response.json())
+          .then(data => {
+              const translatedText = data.data.translations[0].translatedText;
+              element.textContent = translatedText;
+          })
+          .catch(error => {
+              console.error('Translation error:', error);
+          });
+  });
 }

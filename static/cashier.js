@@ -27,7 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
     this.getElementById('login-nav').textContent = "Login";
   }
   
-    insertinfo();
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
+
+  insertinfo();
 });
 
 var drinks = new Array();
@@ -241,7 +245,7 @@ function insertIntoReceipt(json) {
           
         });
         confirm.appendChild(confirmButton);
-
+        translateElements2('es');
     });
 
     labelElement.appendChild(inputElement);
@@ -257,6 +261,8 @@ function insertIntoReceipt(json) {
     
     drinks.push(json);
     itempane.appendChild(itemDiv); 
+
+    translateElements2('es');
   }
 
 /**
@@ -296,6 +302,7 @@ async function insertinfo(){
             other.appendChild(button);
         }
     }
+    translateElements2('es');
 }
 
 function Checkout(){
@@ -468,3 +475,24 @@ async function getToppings(){
     return request;
 }
 
+function translateElements2(lang) {
+  var targetLanguage = lang;
+  const elements = document.querySelectorAll('.translate');
+  const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+  console.log(elements);
+  elements.forEach(element => {
+      const textToTranslate = element.textContent;
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+          method: 'POST'
+      })
+          .then(response => response.json())
+          .then(data => {
+              const translatedText = data.data.translations[0].translatedText;
+              element.textContent = translatedText;
+          })
+          .catch(error => {
+              console.error('Translation error:', error);
+          });
+  });
+}
