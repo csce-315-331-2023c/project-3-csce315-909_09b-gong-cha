@@ -12,7 +12,10 @@ function changeTextSize(size) {
     if (size) {
         changeTextSize(size);
         $('#text-size').val(size);
-    }
+        //get button, and change the text
+        var button = document.getElementById("translate");
+        button.style.fontSize = size;
+    }   
     }
 
     // Call the function on page load
