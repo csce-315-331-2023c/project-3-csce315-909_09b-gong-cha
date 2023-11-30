@@ -43,6 +43,8 @@ function createButton(drinkname, json) {
     button.type = "button";
     button.className = "btn btn-secondary btn-square-lg btn-danger translate";
     button.innerHTML = drinkname;
+    button.style.width = "130px";
+    button.style.height = "130px";
     button.addEventListener("click", function() {
       insertIntoReceipt(json);
     });

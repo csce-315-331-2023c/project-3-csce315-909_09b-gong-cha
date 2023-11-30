@@ -1,8 +1,8 @@
 .btn-square-lg {
-    width: 130px !important;
+    /* width: 130px !important; */
     max-width: 100% !important;
     max-height: 100% !important;
-    height: 130px !important;
+    /* height: 130px !important; */
     text-align: center;
     padding: 0px;
     font-size:18px;
