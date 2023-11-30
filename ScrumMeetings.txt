@@ -214,3 +214,50 @@ Adjust Checkout Button for Cashier View - Ren
 
 Minutes from Previous Meeting
 Task Distribution, User Studies.
+
+SCRUM Meeting 6 for Team 9B
+_________________________________________________
+Prepared by: Brenndan Croteau
+Meeting Date: November 21, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai 
+Meeting Agenda Items
+ Discussion of completed materials
+ Going forward in the next sprint
+ What to research before next sprint
+Accomplishments:
+ Account Creation
+ Menu View
+ Checkout Functionality
+ Transferring data from order to checkout
+
+Tasks Completed:
+Task Description
+ Add account creation functionality - ASSIGNED TO Anton - Completed Yes
+ Make menu view look nice - ASSIGNED TO Reid - Completed Yes
+ Make checkout functionality - ASSIGNED TO Reid - Completed Yes
+ Create front end for customer view - ASSIGNED TO Ren - Completed Yes
+ Implement data transfer from order to checkout - ASSIGNED TO Ren - Completed Yes
+ Make navbar dynamic if you're logged in/out - ASSIGNED TO Brenndan - Completed Yes
+ Create login functionality - ASSIGNED TO Brenndan - Completed Yes
+
+Before The Next Meeting
+Plans:
+ Research OAuth, Google Translate, Weather App, and other accessibility features
+ Brainstorm how to implement features
+
+Task Assignments:
+Task Description
+ Research OAuth - Brenndan and Reid
+ Research Google Translate - Ren
+ Research Weather APIs - Anton and Ren
+
+Minutes from Previous Meeting
+In the previous meeting, we discussed our plans for the remainder of the sprint, went over a guide of bootstrap
+documentation, and distribution of tasks. We discussed how to go about design of the frontend, and what we wanted
+the Login Page to do, and our successes regarding progress in revision of the manager view and implementation of
+the menu view. Along with this, we talked about some details we needed for views, and how we could further refine
+our product.
