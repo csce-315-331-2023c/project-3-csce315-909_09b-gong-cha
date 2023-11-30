@@ -1,6 +1,14 @@
 function translateElements() {
+    var targetLanguage;
+    if (localStorage.getItem('lang') != 'es') {
+        targetLanguage = 'es';
+        localStorage.setItem('lang', 'es');
+    }
+    else {
+        targetLanguage = 'en';
+        localStorage.setItem('lang', 'en');
+    }
     const elements = document.querySelectorAll('.translate');
-    const targetLanguage = 'es';
     const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
 
     console.log(elements);

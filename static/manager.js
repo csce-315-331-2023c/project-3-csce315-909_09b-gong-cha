@@ -382,6 +382,7 @@ async function getDrinks() {
           const option = document.createElement('option');
           option.value = index + 1;
           option.textContent = drink.recipe_name;
+          option.classList = "translate";
           select.appendChild(option);
       });
   })
@@ -399,6 +400,7 @@ async function getDrinks2() {
           const option = document.createElement('option');
           option.value = index + 1;
           option.textContent = drink.recipe_name;
+          option.classList = "translate";
           select.appendChild(option);
       });
   })
@@ -416,6 +418,7 @@ async function getIngredients() {
           const option = document.createElement('option');
           option.value = index + 1;
           option.textContent = drink.ingredient_name;
+          option.classList = "translate";
           select.appendChild(option);
       });
   })
@@ -472,7 +475,7 @@ function createColumn(ingredients) {
     formGroup.classList.add('input-group');
 
     const inputGroupText = document.createElement('label');
-    inputGroupText.classList.add('input-group-text');
+    inputGroupText.classList.add('input-group-text', 'translate');
     inputGroupText.textContent = ingredient.ingredient_name;
 
     const quantityInput = document.createElement('input');
