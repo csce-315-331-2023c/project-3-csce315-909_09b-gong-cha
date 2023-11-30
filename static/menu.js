@@ -187,7 +187,9 @@ async function insertinfo(){
         item = toppingItem(toppingRequest[i].ingredient_name, toppingRequest[i]);
         toppings.appendChild(item);
     }
-    translateElements2('es');
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
 }
 
 function translateElements2(lang) {

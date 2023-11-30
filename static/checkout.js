@@ -26,16 +26,15 @@ document.addEventListener("DOMContentLoaded", function() {
     this.getElementById('login-nav').textContent = "Login";
   }
 
-  if (localStorage.getItem('lang') == 'es') {
-    translateElements2('es');
-  }
-
   var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
   // Call the function to update the page dynamically
   document.getElementById("items-pane").innerHTML = "";
   for(var i = 0; i < storedDrinks.length; i++)
   {
       updatePageDynamically(storedDrinks[i]);
+  }
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
   }
 });
 
@@ -58,7 +57,9 @@ function updatePageDynamically(json) {
   nameColumn.classList.add("col-md-8");
 
   const nameDiv = document.createElement("div");
-  const textNode = document.createTextNode(json.recipe_name);
+  const textNode = document.createElement("span");
+  textNode.textContent = json.recipe_name;
+  textNode.classList = "translate";
   nameDiv.appendChild(textNode);
   nameColumn.appendChild(nameDiv);
 

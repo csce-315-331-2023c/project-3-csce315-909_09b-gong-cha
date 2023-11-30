@@ -245,7 +245,9 @@ function insertIntoReceipt(json) {
           
         });
         confirm.appendChild(confirmButton);
-        translateElements2('es');
+        if (localStorage.getItem('lang') == 'es') {
+          translateElements2('es');
+        }
     });
 
     labelElement.appendChild(inputElement);
@@ -262,7 +264,9 @@ function insertIntoReceipt(json) {
     drinks.push(json);
     itempane.appendChild(itemDiv); 
 
-    translateElements2('es');
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
+    }
   }
 
 /**
@@ -302,7 +306,9 @@ async function insertinfo(){
             other.appendChild(button);
         }
     }
-    translateElements2('es');
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
+    }
 }
 
 function Checkout(){

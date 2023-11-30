@@ -88,7 +88,9 @@ async function putToppingsinDiv(){
 
         toppingDiv.appendChild(div);
     }
-    translateElements2('es');
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
 }
 
 function sendtocheckout(json){
@@ -251,7 +253,9 @@ async function insertinfo(){
             other.appendChild(button);
         }
     }
-    translateElements2('es');
+    if (localStorage.getItem('lang') == 'es') {
+        translateElements2('es');
+    }
 }
 
 function translateElements2(lang) {

@@ -155,7 +155,9 @@ async function modDrinkName() {
     getDrinks();
     getDrinks2();
     drinkTable()
-    translateElements2('es');
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
+    }
   }, 200);
 }
 
@@ -391,7 +393,9 @@ async function getDrinks() {
           select.appendChild(option);
       });
   })
-  translateElements2('es');
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 async function getDrinks2() {
@@ -410,7 +414,9 @@ async function getDrinks2() {
           select.appendChild(option);
       });
   })
-  translateElements2('es');
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 async function getIngredients() {
@@ -429,7 +435,9 @@ async function getIngredients() {
           select.appendChild(option);
       });
   })
-  translateElements2('es');
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 async function fetchIngredientsAndDisplay(element) {
@@ -469,10 +477,12 @@ async function fetchIngredientsAndDisplay(element) {
     row.appendChild(col3);
 
     ingredientsListDiv.appendChild(row);
+    if (localStorage.getItem('lang') == 'es') {
+      translateElements2('es');
+    }
   } catch (error) {
     console.error('Error:', error);
   }
-  translateElements2('es');
 }
 
 function createColumn(ingredients) {
