@@ -57,6 +57,10 @@ function showInputBox() {
   let selectedOption = document.getElementById("options").value;
 
   document.getElementById(`inputBox${selectedOption}`).classList.remove("d-none");
+
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
 }
 
 function showReport() {

@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
 
@@ -419,6 +420,19 @@ app.get('/salesReport/:init_date/:final_date/:init_time/:final_time/:main_recipe
       res.send(query_res.rows);
   })
 });  
+
+const API_KEY = '91bfb4a990ac4b6c806232138232911';
+
+app.get('/weather', async (req, res) => {
+  try {
+    
+    const weatherData = await axios.get(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=College Station&aqi=no`);
+    
+    res.json(weatherData.data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, function(err) {
