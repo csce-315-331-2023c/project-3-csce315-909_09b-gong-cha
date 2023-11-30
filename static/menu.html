@@ -39,6 +39,16 @@
             <li class="nav-item">
               <button type="button" class="btn btn-danger translate" onclick="translateElements()">Translate</button>
             </li>
+            <div class="container mt-3">
+              <div class="" id="text-size-controls">
+                <label for="text-size">Text Size: </label>
+                <select class="form-control" id="text-size" onchange="changeTextSize(this.value)">
+                  <option value="100%">Normal</option>
+                  <option value="150%">Large</option>
+                  <option value="200%">Extra Large</option>
+                </select>
+              </div>
+            </div>
           </ul>
         </div>
     </nav>
@@ -104,6 +114,8 @@
         </div>
 
     <script src="translate.js"></script>
+    <script src="textch.js"></script> 
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 

@@ -40,6 +40,16 @@
             <li class="nav-item">
               <button type="button" class="btn btn-danger translate" onclick="translateElements()">Translate</button>
             </li>
+            <div class="container mt-3">
+              <div class="w-25" id="text-size-controls">
+                <label for="text-size">Text Size: </label>
+                <select class="form-control" id="text-size" onchange="changeTextSize(this.value)">
+                  <option value="100%">Normal</option>
+                  <option value="150%">Large</option>
+                  <option value="200%">Extra Large</option>
+                </select>
+              </div>
+            </div>
             <li class="nav-item">
               <a class="nav-link" href="checkout.html">
                 <i class="fa-solid fa-cart-shopping fa-bounce fa-2xl"></i>
@@ -220,5 +230,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
     <script src="cashier.js"></script> 
     <script src="translate.js"></script>
+    <script src="textch.js"></script> 
+
 </body>
 </html>
