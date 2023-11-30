@@ -37,7 +37,7 @@ var drinks_edit = new Array();
 function createButton(drinkname, json) {
     var button = document.createElement("button");
     button.type = "button";
-    button.className = "btn btn-secondary btn-square-lg btn-danger";
+    button.className = "btn btn-secondary btn-square-lg btn-danger translate";
     button.innerHTML = drinkname;
     button.addEventListener("click", function() {
       insertIntoReceipt(json);
@@ -82,7 +82,9 @@ function insertIntoReceipt(json) {
 
     buttonElement.appendChild(iconElement);
 
-    const textNode = document.createTextNode(json.recipe_name);
+    const textNode = document.createElement("span");
+    textNode.classList = "translate";
+    textNode.textContent = json.recipe_name;
 
     innerDiv1.appendChild(buttonElement);
     innerDiv1.appendChild(textNode);
@@ -136,7 +138,9 @@ function insertIntoReceipt(json) {
             inputElement.type = "number";
             inputElement.min = "1";
             inputElement.max = "10";
-            var textNode = document.createTextNode(toppings[i].ingredient_name);
+            var textNode = document.createElement("span");
+            textNode.classList = "translate";
+            textNode.textContent = toppings[i].ingredient_name;
             labelElement.appendChild(inputElement);
             var div = document.createElement("div");
             div.id = toppings[i].ingredient_id;
@@ -155,7 +159,7 @@ function insertIntoReceipt(json) {
         confirm.innerHTML = "";
         var confirmButton = document.createElement("button");
         confirmButton.type = "button";
-        confirmButton.className = "btn btn-danger w-100 h-10";
+        confirmButton.className = "btn btn-danger w-100 h-10 translate";
         confirmButton.innerHTML = "Confirm";
         confirmButton.addEventListener("click", function(){
           //TODO: update the json, update receipt, close the editDrink page
