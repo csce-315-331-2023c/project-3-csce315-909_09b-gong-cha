@@ -1,5 +1,8 @@
 const url = 'http://localhost:5000';
 
+/**
+ * @fileoverview This file contains all the functions that are used to display the cashier page.
+ */
 //onload for body, run makeRecipeButtons
 document.addEventListener("DOMContentLoaded", function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -37,7 +40,12 @@ document.addEventListener("DOMContentLoaded", function() {
 var drinks = new Array();
 var drinks_edit = new Array();
 
-
+/** Helper function to dynamically create the menu items on the menu page. Accesses the file of the drink in the teas folder.
+ * 
+ * @param {string} drinkname 
+ * @param {json} json 
+ * @returns Button element
+ */
 function createButton(drinkname, json) {
     var button = document.createElement("button");
     button.type = "button";
@@ -53,6 +61,8 @@ function createButton(drinkname, json) {
   
 /**
  * actionlistener for the buttons, adds the item to the receipt
+ * @param {json} json
+ * @returns void
  */
 function insertIntoReceipt(json) {
     
@@ -272,7 +282,7 @@ function insertIntoReceipt(json) {
   }
 
 /**
- * reads from database and populates tabs with buttons
+ * Function that reads from database and populates tabs with buttons
  */
 async function insertinfo(){
     var request = await fetch(url + "/recipe").then((res) => res.json());
@@ -313,6 +323,10 @@ async function insertinfo(){
     }
 }
 
+/**
+ * Function that gathers current items in the reciept, prompts the user to confirm the order, and sends the order to the database.
+ * @returns void
+ */
 function Checkout(){
     //gather all info from the receipt, request for tip
     document.getElementById("RecipeButtons").style.display = "none";
@@ -328,6 +342,10 @@ function Checkout(){
 
 }
 
+/**
+ * Takes the tip amount from the button and updates the receipt.
+ * @param {int} id 
+ */
 function getTipAmount(id)
 {
     document.getElementById("tip").innerHTML = ((parseInt(id) / 100) * parseFloat(subtotal.innerHTML)).toFixed(2);
@@ -337,6 +355,9 @@ function getTipAmount(id)
 
 }
 
+/**
+ * Function that Processes the tip amount and sends the order to the database, should the user specify a different tip amount.
+ */
 function otherTip()
 {
     var input = document.getElementById("otherAmount");
@@ -346,6 +367,9 @@ function otherTip()
     document.getElementById("ConfirmCheckout").style.display = "initial";
 }
 
+/**
+ * Function that sends the order to the database and clears the receipt.
+ */
 async function confirmCheckout()
 {
     var username = "68164488";
@@ -406,6 +430,15 @@ async function confirmCheckout()
     clearOrder()
 }
 
+/**
+ * Function that handles backend insertion of the order into the database. Takes in the username, order_id, date, time, subtotal, and tip.
+ * @param {*} username 
+ * @param {*} order_id 
+ * @param {*} date 
+ * @param {*} time 
+ * @param {*} subtotal 
+ * @param {*} tip 
+ */
 async function insertOrder(username, order_id, date, time, subtotal, tip)
 {
     var pair = {
@@ -425,6 +458,16 @@ async function insertOrder(username, order_id, date, time, subtotal, tip)
       });
 }
 
+/**
+ * Function that handles backend insertion of the order item into the database. Takes in the order_item_id, recipe_id, order_id, is_medium, ice, sugar, and price.
+ * @param {*} order_item_id 
+ * @param {*} recipe_id 
+ * @param {*} order_id 
+ * @param {*} is_medium 
+ * @param {*} ice 
+ * @param {*} sugar 
+ * @param {*} price 
+ */
 async function insertOrderItem(order_item_id, recipe_id, order_id, is_medium, ice, sugar, price)
 {
     var pair = {
@@ -445,6 +488,12 @@ async function insertOrderItem(order_item_id, recipe_id, order_id, is_medium, ic
       });
 }
 
+/**
+ * Function that handles backend insertion of the order item topping into the database. Takes in the order_item_id, ingredient_id, and quantity.
+ * @param {*} order_item_id 
+ * @param {*} ingredient_id 
+ * @param {*} quantity 
+ */
 async function insertOrderItemTopping(order_item_id, ingredient_id, quantity)
 {
     var pair = {
@@ -461,6 +510,9 @@ async function insertOrderItemTopping(order_item_id, ingredient_id, quantity)
       });
 }
 
+/**
+ * Function that clears the reciept on the page and resets the page to the original state.
+ */
 function clearOrder()
 {
     drinks.splice(0, drinks.length);
@@ -478,11 +530,19 @@ function clearOrder()
 //update the receipt'
 //close the dropdown menu
 
+/**
+ * Function that uses api call to access the toppings from the database.  
+ * @returns json
+ */
 async function getToppings(){
     var request = await fetch(url + "/toppings").then((res) => res.json());
     return request;
 }
 
+/** Function to translate the elements on the menu page. Iteratews through all elements with class translate and translates them to the target language.
+ * 
+ * @param {string} lang 
+ */
 function translateElements2(lang) {
   var targetLanguage = lang;
   const elements = document.querySelectorAll('.translate');

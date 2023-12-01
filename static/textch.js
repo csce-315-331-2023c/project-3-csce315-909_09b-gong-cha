@@ -1,4 +1,8 @@
 // Function to change text size
+/** This function changes the text size of all elements with the class translate based on the selected option. 
+ * 
+ * @param {string} size 
+ */
 function changeTextSize(size) {
     const elements = document.querySelectorAll('.translate'); //selects all elements with class translate
     elements.forEach(element => {
@@ -57,7 +61,10 @@ function changeTextSize(size) {
     document.cookie = `textSize=${size}; path=/`;
     }
 
-    // Retrieve the user's preferred text size from the cookie on page load
+    // 
+    /** Retrieve the user's preferred text size from the cookie on page load
+     * 
+     */
     function getSavedTextSize() {
     const size = document.cookie.replace(/(?:(?:^|.*;\s*)textSize\s*=\s*([^;]*).*$)|^.*$/, "$1");
     if (size) {

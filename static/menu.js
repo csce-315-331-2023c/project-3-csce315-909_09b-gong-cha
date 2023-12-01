@@ -1,5 +1,7 @@
 const url = 'http://localhost:5000';
-
+/**
+ * @fileoverview This file contains all the functions that are used to display the menu page.
+ */
 document.addEventListener("DOMContentLoaded", function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const isEmployee = localStorage.getItem('isEmployee');
@@ -29,6 +31,12 @@ document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
 });
 
+/** Helper function to dynamically create the menu items on the menu page. Accesses the file of the drink in the teas folder.
+ * 
+ * @param {string} drinkname 
+ * @param {json} json 
+ * @returns Div element
+ */
 function createItem(drinkname, json) {
     const mainDiv = document.createElement('div');
     mainDiv.classList.add('row', 'bg-light', 'h5');
@@ -62,6 +70,12 @@ function createItem(drinkname, json) {
     return mainDiv;
 }
 
+/** Creates the topping items on the menu page. Accesses the file of the topping in the toppings folder. 
+ * 
+ * @param {string} name 
+ * @param {json} json 
+ * @returns Div element
+ */
 function toppingItem(name, json)
 {
     const mainDiv = document.createElement('div');
@@ -91,6 +105,11 @@ function toppingItem(name, json)
     return mainDiv;
 }
 
+/** Creates the headers for the menu page.
+ * 
+ * @param {string} name 
+ * @returns Div element
+ */
 function createHeaders(name)
 {
     const mainDiv = document.createElement('div');
@@ -115,6 +134,10 @@ function createHeaders(name)
     return mainDiv;
 }
 
+/** Creates the headers for the toppings.
+ * 
+ * @returns Div element
+ */
 function toppingHeader()
 {
     const mainDiv = document.createElement('div');
@@ -134,7 +157,9 @@ function toppingHeader()
     return mainDiv;
 }
 
-
+/**
+ * Inserts the information from the database into the menu page. Accesses the drinks and toppings through api call to the database.
+ */
 async function insertinfo(){
     var drinkRequest = await fetch(url + "/recipe").then((res) => res.json());
     var toppingRequest = await fetch(url + "/toppings").then((res) => res.json());
@@ -192,6 +217,10 @@ async function insertinfo(){
     }
 }
 
+/** Function to translate the elements on the menu page. Iteratews through all elements with class translate and translates them to the target language.
+ * 
+ * @param {string} lang 
+ */
 function translateElements2(lang) {
     var targetLanguage = lang;
     const elements = document.querySelectorAll('.translate');
