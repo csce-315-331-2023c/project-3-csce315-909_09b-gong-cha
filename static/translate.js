@@ -1,3 +1,8 @@
+/**
+ * Translates elements with a specific class to a target language using Google Translate API.
+ * If the target language in local storage is not 'es', it translates to Spanish ('es') and sets the language in local storage.
+ * If the target language is 'es', it translates to English ('en') and updates the language in local storage.
+ */
 function translateElements() {
     var targetLanguage;
     if (localStorage.getItem('lang') != 'es') {

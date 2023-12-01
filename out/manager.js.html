@@ -1,4 +1,32 @@
-// let url = ""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: manager.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: manager.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// let url = ""
 // if (process.env.NODE_ENV === "development"){
 //   url = "http://localhost:10000"
 // }
@@ -53,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
  *  Hide or show input boxes based on the selected option.
  */
 function showInputBox() {
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i &lt;= 4; i++) {
     document.getElementById(`inputBox${i}`).classList.add("d-none"); // Reset input boxes to be hidden
   }
 
@@ -70,7 +98,7 @@ function showInputBox() {
  * Hide or show reports based on selected option
  */
 function showReport() {
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i &lt;= 3; i++) {
     document.getElementById(`report${i}`).classList.add("d-none"); // Reset report to be hidden
   }
 
@@ -82,7 +110,7 @@ function showReport() {
 
 /**
  * Adds a drink to the database.
- * @returns {Promise<void>} A Promise that resolves once the drink is added.
+ * @returns {Promise&lt;void>} A Promise that resolves once the drink is added.
  */
 async function addDrink() {
 
@@ -115,7 +143,7 @@ async function addDrink() {
 
 /**
  * Adds an ingredient to the database.
- * @returns {Promise<void>} A Promise that resolves once the ingredient is added.
+ * @returns {Promise&lt;void>} A Promise that resolves once the ingredient is added.
  */
 async function addIngredient() {
 
@@ -149,7 +177,7 @@ async function addIngredient() {
 
 /**
  * Modifies the name of a drink given its drinkID.
- * @returns {Promise<void>} A Promise that resolves once the drink name is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the drink name is modified.
  */
 async function modDrinkName() {
   var select = document.getElementById('drinkList');
@@ -182,7 +210,7 @@ async function modDrinkName() {
 
 /**
  * Modifies ingredients and quantities of a drink given its drinkID.
- * @returns {Promise<void>} A Promise that resolves once the drink's ingredients and quantities are modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the drink's ingredients and quantities are modified.
  */
 async function modDrinkIngredients() {
   var select = document.getElementById('drinkList');
@@ -213,7 +241,7 @@ async function modDrinkIngredients() {
 
 /**
  * Modifies the medium price of a drink given its drinkID.
- * @returns {Promise<void>} A Promise that resolves once the medium price of the drink is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the medium price of the drink is modified.
  */
 async function modDrinkMediumPrice() {
   var select = document.getElementById('drinkList');
@@ -241,7 +269,7 @@ async function modDrinkMediumPrice() {
 
 /**
  * Modifies the large price of a drink given its drinkID.
- * @returns {Promise<void>} A Promise that resolves once the large price of the drink is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the large price of the drink is modified.
  */
 async function modDrinkLargePrice() {
   var select = document.getElementById('drinkList');
@@ -269,7 +297,7 @@ async function modDrinkLargePrice() {
 
 /**
  * Modifies the recipe price of a drink given its drinkID.
- * @returns {Promise<void>} A Promise that resolves once the recipe price of the drink is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the recipe price of the drink is modified.
  */
 async function modDrinkRecipePrice() {
   var select = document.getElementById('drinkList');
@@ -296,7 +324,7 @@ async function modDrinkRecipePrice() {
 
 /**
  * Modifies an ingredient name given its ingredientID.
- * @returns {Promise<void>} A Promise that resolves once the ingredient name is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the ingredient name is modified.
  */
 async function modIngredientName() {
   var pair = {
@@ -325,7 +353,7 @@ async function modIngredientName() {
 
 /**
  * Modifies an ingredient unit price given its ingredientID.
- * @returns {Promise<void>} A Promise that resolves once the ingredient unit price is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the ingredient unit price is modified.
  */
 async function modIngredientUnitPrice() {
 
@@ -352,7 +380,7 @@ async function modIngredientUnitPrice() {
 
 /**
  * Modifies an ingredient stock given its ingredientID.
- * @returns {Promise<void>} A Promise that resolves once the ingredient stock is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the ingredient stock is modified.
  */
 async function modIngredientStock() {
   var pair = {
@@ -378,7 +406,7 @@ async function modIngredientStock() {
 
 /**
  * Modifies the minimum stock of an ingredient given its ingredientID.
- * @returns {Promise<void>} A Promise that resolves once the minimum stock of the ingredient is modified.
+ * @returns {Promise&lt;void>} A Promise that resolves once the minimum stock of the ingredient is modified.
  */
 async function modIngredientMinStock() {
   var pair = {
@@ -404,7 +432,7 @@ async function modIngredientMinStock() {
 
 /**
  * Generates a table that will hold all the ingredients.
- * @returns {Promise<void>} A Promise that resolves once the ingredient table is generated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the ingredient table is generated.
  */
 async function ingredientTable() {
   var request = await fetch(url + "/manager/ingredients").then((res => res.json()));
@@ -416,7 +444,7 @@ async function ingredientTable() {
 
 /**
  * Generates a table that will hold all the drinks.
- * @returns {Promise<void>} A Promise that resolves once the drink table is generated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the drink table is generated.
  */
 async function drinkTable() {
   var request = await fetch(url + "/recipe").then((res => res.json()));
@@ -428,7 +456,7 @@ async function drinkTable() {
 
 /**
  * Retrieves and populates the drinks select list.
- * @returns {Promise<void>} A Promise that resolves once the drinks list is populated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the drinks list is populated.
  */
 async function getDrinks() {
   var select = document.getElementById('drinkList');
@@ -453,7 +481,7 @@ async function getDrinks() {
 
 /**
  * Retrieves and populates the second drinks select list.
- * @returns {Promise<void>} A Promise that resolves once the second drinks list is populated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the second drinks list is populated.
  */
 async function getDrinks2() {
   var select = document.getElementById('drinkList2');
@@ -478,7 +506,7 @@ async function getDrinks2() {
 
 /**
  * Retrieves and populates the ingredients select list.
- * @returns {Promise<void>} A Promise that resolves once the ingredients list is populated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the ingredients list is populated.
  */
 async function getIngredients() {
   var select = document.getElementById('ingredientList');
@@ -504,7 +532,7 @@ async function getIngredients() {
 /**
  * Fetches ingredients and displays them in a specified element.
  * @param {string} element - The ID of the element where ingredients will be displayed.
- * @returns {Promise<void>} A Promise that resolves once ingredients are fetched and displayed.
+ * @returns {Promise&lt;void>} A Promise that resolves once ingredients are fetched and displayed.
  */
 async function fetchIngredientsAndDisplay(element) {
   try {
@@ -614,7 +642,7 @@ function gatherValues(element) {
 
 /**
  * Generates a restock report and creates a table from the retrieved data.
- * @returns {Promise<void>} A Promise that resolves once the restock report table is generated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the restock report table is generated.
  */
 async function generateRestockReport() {
   var request = await fetch(url + "/restockReport").then((res => res.json()));
@@ -624,7 +652,7 @@ async function generateRestockReport() {
 
 /**
  * Generates an excess report within a specified date and time range and creates a table from the retrieved data.
- * @returns {Promise<void>} A Promise that resolves once the excess report table is generated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the excess report table is generated.
  */
 async function generateExcessReport() {
   var start_date = document.getElementById('start-date2').value;
@@ -649,7 +677,7 @@ async function generateExcessReport() {
 
 /**
  * Generates a sales report within a specified date and time range and for a specific drink, creating a table from the retrieved data.
- * @returns {Promise<void>} A Promise that resolves once the sales report table is generated.
+ * @returns {Promise&lt;void>} A Promise that resolves once the sales report table is generated.
  */
 async function generateSalesReport() {
   var init_date = document.getElementById('start-date').value;
@@ -679,7 +707,7 @@ async function generateSalesReport() {
  * Creates a table from JSON data and inserts it into a specified container element.
  * @param {Object[]} jsonData - JSON data to be converted into a table.
  * @param {string} tableContainerID - The ID of the container element where the table will be inserted.
- * @returns {Promise<void>} A Promise that resolves once the table is created and inserted into the container.
+ * @returns {Promise&lt;void>} A Promise that resolves once the table is created and inserted into the container.
  */
 async function createTableFromJSON(jsonData, tableContainerID) {
   // Get the container element where the table will be inserted
@@ -739,7 +767,7 @@ function translateElements2(lang) {
   console.log(elements);
   elements.forEach(element => {
       const textToTranslate = element.textContent;
-      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&amp;q=${encodeURIComponent(textToTranslate)}&amp;target=${targetLanguage}`, {
           method: 'POST'
       })
           .then(response => response.json())
@@ -751,4 +779,26 @@ function translateElements2(lang) {
               console.error('Translation error:', error);
           });
   });
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDrink">addDrink</a></li><li><a href="global.html#addIngredient">addIngredient</a></li><li><a href="global.html#checkLoginInfo">checkLoginInfo</a></li><li><a href="global.html#createAccount">createAccount</a></li><li><a href="global.html#createTableFromJSON">createTableFromJSON</a></li><li><a href="global.html#drinkTable">drinkTable</a></li><li><a href="global.html#fetchIngredientsAndDisplay">fetchIngredientsAndDisplay</a></li><li><a href="global.html#gatherValues">gatherValues</a></li><li><a href="global.html#generateExcessReport">generateExcessReport</a></li><li><a href="global.html#generateRestockReport">generateRestockReport</a></li><li><a href="global.html#generateSalesReport">generateSalesReport</a></li><li><a href="global.html#getDrinks">getDrinks</a></li><li><a href="global.html#getDrinks2">getDrinks2</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#ingredientTable">ingredientTable</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#modDrinkIngredients">modDrinkIngredients</a></li><li><a href="global.html#modDrinkLargePrice">modDrinkLargePrice</a></li><li><a href="global.html#modDrinkMediumPrice">modDrinkMediumPrice</a></li><li><a href="global.html#modDrinkName">modDrinkName</a></li><li><a href="global.html#modDrinkRecipePrice">modDrinkRecipePrice</a></li><li><a href="global.html#modIngredientMinStock">modIngredientMinStock</a></li><li><a href="global.html#modIngredientName">modIngredientName</a></li><li><a href="global.html#modIngredientStock">modIngredientStock</a></li><li><a href="global.html#modIngredientUnitPrice">modIngredientUnitPrice</a></li><li><a href="global.html#showInputBox">showInputBox</a></li><li><a href="global.html#showReport">showReport</a></li><li><a href="global.html#toggleAuthenticationViews">toggleAuthenticationViews</a></li><li><a href="global.html#toggleForm">toggleForm</a></li><li><a href="global.html#translateElements">translateElements</a></li><li><a href="global.html#translateElements2">translateElements2</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Dec 01 2023 14:14:33 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
