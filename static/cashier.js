@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000';
+const url = 'https://icespicefanclub.onrender.com';
 
 //onload for body, run makeRecipeButtons
 document.addEventListener("DOMContentLoaded", function() {

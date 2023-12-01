@@ -6,7 +6,7 @@
 //   url = "https://csce-315-project-3-gong-cha.onrender.com";
 // }
 //get url from index.js
-const url = 'http://localhost:5000';
+const url = 'https://icespicefanclub.onrender.com';
 
 // This will load all necessary tables/options on startup
 document.addEventListener("DOMContentLoaded", function() {

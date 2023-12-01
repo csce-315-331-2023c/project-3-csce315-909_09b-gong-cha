@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000';
+const url = 'https://icespicefanclub.onrender.com';
 
 /*preset arrays so we can quickly determine ice levels */
 var ice_ary = ["regular", "light", "none"]

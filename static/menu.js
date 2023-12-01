@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000';
+const url = 'https://icespicefanclub.onrender.com';
 
 document.addEventListener("DOMContentLoaded", function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
