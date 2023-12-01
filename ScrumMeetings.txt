@@ -301,3 +301,53 @@ Minutes from Previous Meeting
 In the previous meeting, we finalized our product for sprint 2 and started to assign items to research for the next sprint.
  We decided to use Google Cloud for our translate API and OAuth. We decided on parts of our website that might need refinement.
   These include things like button placement and website appeal.
+
+
+SCRUM Meeting 8 for Team 9B
+_________________________________________________
+Prepared by: Ren Mai
+Meeting Date: December 1, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai 
+
+Meeting Agenda Items
+ Discussion of completed tasks and polishing up the product.
+ Preparation for presentation and Finalization of web application.
+ Conversation on documentation, and preparation for final stages
+Accomplishments:
+ Google Translate functionality
+ Weather Application Widget on About page
+ Accessibility and button/text sizing for webpage
+
+Tasks Completed:
+Task Description
+ Implement OAuth - ASSIGNED TO Anton - Completed No
+ Implement Google Translate - ASSIGNED TO Brenndan - Completed Yes
+ Implement Weather Application - ASSIGNED TO Reid - Completed Yes
+ Implement Accessibility Features - ASSIGNED TO Ren - Completed Yes
+
+Before The Next Meeting
+Plans:
+ Finish up OAuth
+ Complete the remaining documents.
+ Complete documentation for JavaScript Files.
+
+
+Task Assignments:
+Task Description
+ Documentation for about.js
+ Documentation for cashier.js
+ Documentation for checkout.js
+ Documentation for customer.js
+ Documentation for login.js
+ Documentation for manager.js
+ Documentation for menu.js
+ Documentation for textch.js
+ Documentation for translate.js
+ Documentation for index.js
+
+Minutes from Previous Meeting
+In the previous meeting, we discussed distribution of the last tasks for the web application, some technical details regarding implementation of apis, such as obtaining keys and JavaScript implementation. We focused on what polishing was needed for the website, and what things we could do to improve our project.
