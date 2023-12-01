@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This file contains functions that changes the text size of the page and buttons for accessibility.
+ */
 // Function to change text size
 /** This function changes the text size of all elements with the class translate based on the selected option. 
  * 
