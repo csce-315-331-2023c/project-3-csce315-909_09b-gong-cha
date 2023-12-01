@@ -261,3 +261,43 @@ documentation, and distribution of tasks. We discussed how to go about design of
 the Login Page to do, and our successes regarding progress in revision of the manager view and implementation of
 the menu view. Along with this, we talked about some details we needed for views, and how we could further refine
 our product.
+
+SCRUM Meeting 7 for Team 9B
+_________________________________________________
+Prepared by: Brenndan Croteau
+Meeting Date: November 29, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai 
+Meeting Agenda Items
+ Distribute last tasks for the website
+Accomplishments:
+ First scrum of sprint, none really
+
+Tasks Completed:
+Task Description
+ Researching OAuth - ASSIGNED TO Anton - Completed Yes
+ Researching Weather API - ASSIGNED TO Reid - Completed Yes
+ Researching Accessibility Features - ASSIGNED TO Ren - Completed Yes
+ Researching Google Translate - ASSIGNED TO Brenndan - Completed Yes
+
+Before The Next Meeting
+Plans:
+ Begin implementation of all remaining features of OAuth, Weather, Translate, and Accessibility
+ Plan website documentation
+
+Task Assignments:
+Task Description
+ Implement OAuth - Anton
+ Implement Google Translate - Brenndan
+ Implement Weather Application - Reid
+ Implement Accessibility Features - Ren
+
+
+
+Minutes from Previous Meeting
+In the previous meeting, we finalized our product for sprint 2 and started to assign items to research for the next sprint.
+ We decided to use Google Cloud for our translate API and OAuth. We decided on parts of our website that might need refinement.
+  These include things like button placement and website appeal.
