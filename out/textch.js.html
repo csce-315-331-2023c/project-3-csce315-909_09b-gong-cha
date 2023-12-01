@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: translate.js</title>
+    <title>JSDoc: Source: textch.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: translate.js</h1>
+    <h1 class="page-title">Source: textch.js</h1>
 
     
 
@@ -27,39 +27,95 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Translates elements with a specific class to a target language using Google Translate API.
- * If the target language in local storage is not 'es', it translates to Spanish ('es') and sets the language in local storage.
- * If the target language is 'es', it translates to English ('en') and updates the language in local storage.
+ * @fileoverview This file contains functions that changes the text size of the page and buttons for accessibility.
  */
-function translateElements() {
-    var targetLanguage;
-    if (localStorage.getItem('lang') != 'es') {
-        targetLanguage = 'es';
-        localStorage.setItem('lang', 'es');
-    }
-    else {
-        targetLanguage = 'en';
-        localStorage.setItem('lang', 'en');
-    }
-    const elements = document.querySelectorAll('.translate');
-    const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
-
-    console.log(elements);
+// Function to change text size
+/** This function changes the text size of all elements with the class translate based on the selected option. 
+ * 
+ * @param {string} size 
+ */
+function changeTextSize(size) {
+    const elements = document.querySelectorAll('.translate'); //selects all elements with class translate
     elements.forEach(element => {
-        const textToTranslate = element.textContent;
-        fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&amp;q=${encodeURIComponent(textToTranslate)}&amp;target=${targetLanguage}`, {
-            method: 'POST'
-        })
-            .then(response => response.json())
-            .then(data => {
-                const translatedText = data.data.translations[0].translatedText;
-                element.textContent = translatedText;
-            })
-            .catch(error => {
-                console.error('Translation error:', error);
-            });
+        if (size == '100%') {
+            element.style.removeProperty('font-size');
+        } else {
+        element.style.fontSize = size;
+        }
     });
-}</code></pre>
+    
+    const span = document.querySelectorAll('span');
+    span.forEach(element => {
+        if (size == '100%') {
+            element.style.removeProperty('font-size');
+        } else {
+        element.style.fontSize = size;
+        }
+    });
+
+    const buttons = document.querySelectorAll('.btn-square-lg');
+    buttons.forEach(function (button) {
+        // Calculate the width based on text length
+        if (size == '100%') {
+            button.style.width = 130 + 'px';
+            button.style.height = 130 + 'px';
+        }
+        else if (size == '150%') {
+
+            // Set the button dimensions
+            button.style.width = 130 * 3 + 'px';
+            button.style.height = 130 * 3 + 'px';
+        }
+        else{
+            button.style.width = 130 * 4 + 'px';
+            button.style.height = 130 * 4 + 'px';
+        }
+      });
+
+      const btn_tip = document.querySelectorAll('.btn-tip');
+        btn_tip.forEach(function (button) {
+            if (size == '100%') {
+                button.style.removeProperty('font-size');
+            } else {
+                button.style.fontSize = size;
+            }
+        });
+
+        const table = document.querySelectorAll('table');
+        table.forEach(function (button) {
+            if (size == '100%') {
+                button.style.removeProperty('font-size');
+            } else {
+                button.style.fontSize = size;
+            }
+        });
+    document.cookie = `textSize=${size}; path=/`;
+    }
+
+    // 
+    /** Retrieve the user's preferred text size from the cookie on page load
+     * 
+     */
+    function getSavedTextSize() {
+    const size = document.cookie.replace(/(?:(?:^|.*;\s*)textSize\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    if (size) {
+        //replace the selected option with the saved option
+        document.getElementById('text-size').value = size;
+        //iterate through all dynamically generated items and change their text size
+        // const elements = document.querySelectorAll('.translate'); //selects all elements with class translate
+        // elements.forEach(element => {
+        //     element.style.fontSize = size;
+        // });
+
+        changeTextSize(size);
+
+    }   
+    }
+
+// Call the function on page load
+document.addEventListener('DOMContentLoaded', getSavedTextSize);
+
+</code></pre>
         </article>
     </section>
 
