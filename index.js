@@ -6,7 +6,19 @@ const dotenv = require('dotenv').config();
 // Create express app
 const app = express();
 const port = 5000;
+const { auth } = require('express-openid-connect');
 
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: 'a long, randomly-generated string stored in env',
+  baseURL: 'https://icespicefanclub.onrender.com',
+  clientID: 'xjPfV42qAKbt0CwIJSGxJ6okeUT0FJRH',
+  issuerBaseURL: 'https://dev-qw070slmzci4lh5g.us.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
 // Create pool 
 const pool = new Pool({
     user: process.env.PSQL_USER,
@@ -42,6 +54,8 @@ app.use(express.static('static'));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+
   });
 
 app.get('/manager/ingredients', (req, res) => {
