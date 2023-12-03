@@ -2,7 +2,7 @@ const url = 'https://icespicefanclub.onrender.com';
 document.addEventListener("DOMContentLoaded", function() {
   alert("Logged in Successfully!");
   checkManager();
-
+  localStorage.setItem('isLoggedIn', 'true');
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   
   if (isLoggedIn == 'true') {
