@@ -64,8 +64,6 @@ $('.carousel').carousel({
 
 
 async function checkManager(){
-  alert("do i even go here");
-
   var userData = {
     'username': '',
     'password': ''
