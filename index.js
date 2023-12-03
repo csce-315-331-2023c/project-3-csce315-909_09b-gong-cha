@@ -2,10 +2,21 @@ const express = require('express');
 const axios = require('axios');
 const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
+const { auth } = require('express-openid-connect');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUER
+};
 
 // Create express app
 const app = express();
 const port = 5000;
+app.use(auth(config));
 
 // Create pool 
 const pool = new Pool({
@@ -39,11 +50,18 @@ process.on('SIGINT', function() {
 
 //make it use the static folder
 app.use(express.static('static'));
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
   });
 
+
+app.get('/testLogin', (req, res) => {
+  res.redirect('/');
+  console.log(req.oidc.isAuthenticated());
+});
+  
 app.get('/manager/ingredients', (req, res) => {
     pool
     .query('SELECT * FROM ingredient;')
@@ -52,7 +70,6 @@ app.get('/manager/ingredients', (req, res) => {
     });
   });
 
-app.use(express.json());
 //view all recipes
 
 app.get('/recipe', async (req, res) => {
