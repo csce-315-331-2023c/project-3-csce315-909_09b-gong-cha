@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000';
+const url = 'https://icespicefanclub.onrender.com';
 
 /*preset arrays so we can quickly determine ice levels */
 var ice_ary = ["regular", "light", "none"]
@@ -37,11 +37,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     if (isLoggedIn == 'true') {
-        this.getElementById('login-nav').textContent = "Logout";
-    }
-    else {
-        this.getElementById('login-nav').textContent = "Login";
-    }
+        this.getElementById('oauth').textContent = "Logout-OAUTH";
+        this.getElementById('oauth').href = "/logout";
+      }
+      else {
+        this.getElementById('oauth').textContent = "Login-OAUTH";
+        this.getElementById('oauth').href = "/login";
+      }
 
     if (localStorage.getItem('lang') == 'es') {
         translateElements2('es');

@@ -1,22 +1,10 @@
 const url = 'https://icespicefanclub.onrender.com';
 document.addEventListener("DOMContentLoaded", function() {
+  alert("Logged in Successfully!");
+  checkManager();
+
   const isLoggedIn = localStorage.getItem('isLoggedIn');
-  const isEmployee = localStorage.getItem('isEmployee');
-  const isManager = localStorage.getItem('isManager');
-
-  if (isLoggedIn == null) {
-    localStorage.setItem('isLoggedIn', 'false');
-  }
-  if (isEmployee == null) {
-    localStorage.setItem('isEmployee', 'false');
-  }
-  if (isManager == null) {
-    localStorage.setItem('isManager', 'false');
-  }
-
-  if (localStorage.getItem('lang') == 'es') {
-    translateElements2('es');
-  }
+  
   if (isLoggedIn == 'true') {
     this.getElementById('oauth').textContent = "Logout-OAUTH";
     this.getElementById('oauth').href = "/logout";
@@ -24,6 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
   else {
     this.getElementById('oauth').textContent = "Login-OAUTH";
     this.getElementById('oauth').href = "/login";
+  }
+
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
   }
   const weatherInfo = document.getElementById('weather-info');
 
@@ -68,4 +60,49 @@ $('.carousel').carousel({
                 console.error('Translation error:', error);
             });
     });
+}
+
+
+async function checkManager(){
+  alert("do i even go here");
+
+  var userData = {
+    'username': '',
+    'password': ''
+  }
+
+  const response = await fetch(url + "/getAccount", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+
+  const response_2 = await fetch(url + "/userEmail", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  var email = await response_2.text();
+  console.log("response"+ email);
+  if (response.ok) {
+    const responseData = await response.json();
+    // Resource exists
+    localStorage.setItem('isLoggedIn', 'true');
+
+    // change this criteria ideally
+    if (email.includes('employee')) {
+      localStorage.setItem('isEmployee', 'true');
+    }
+    if (responseData[0].is_manager == true) {
+      localStorage.setItem('isManager', 'true');
+      localStorage.setItem('isEmployee', 'true');
+    }
+  }
+
+
+
 }

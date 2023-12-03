@@ -10,14 +10,14 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.html">GongCha</a>
+    <a class="navbar-brand" href="about.html">GongCha</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link translate" href="index.html">About</span></a>
+          <a class="nav-link translate" href="about.html">About</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link translate" href="menu.html">Menu</a>
@@ -25,14 +25,17 @@
         <li class="nav-item">
           <a class="nav-link translate" href="cashier.html">Cashier</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link translate" href="login.html" id="login-nav">Login</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link translate" href="manager.html">Manager</a>
         </li>
         <li class="nav-item">
           <a class="nav-link translate" href="customer.html">Order</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link translate" id = "oauth" href="/login">Login-OAUTH</a>
         </li>
         <li class="nav-item">
           <button type="button" id="translate-button" class="btn btn-danger translate" onclick="translateElements()">Translate</button>
@@ -61,8 +64,14 @@
     <li class="nav-item">
       <a class="nav-link translate" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Reports</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link translate" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Management</a>
+    </li>
   </ul>
 
+  
+
+  
   <div class="tab-content" id="myTabContent">
 
     <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
@@ -295,6 +304,17 @@
       </div>
 
     </div>
+
+    <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">  
+      <div class="container">
+          <label for="add-ingredient-name" class="translate">Add New Manager:</label>
+        <input type="text" class="form-control" id="Manager-Email" name="add-ingredient-name">
+
+        <button type="submit" class="btn btn-primary translate" onclick="createManager()">Add Manager</button>
+      </div>
+      
+    </div>
+
 
   </div>
 

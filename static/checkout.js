@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000';
+const url = 'https://icespicefanclub.onrender.com';
 
 document.addEventListener("DOMContentLoaded", function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (isLoggedIn == 'true') {
-    this.getElementById('login-nav').textContent = "Logout";
+    this.getElementById('oauth').textContent = "Logout-OAUTH";
+    this.getElementById('oauth').href = "/logout";
   }
   else {
-    this.getElementById('login-nav').textContent = "Login";
+    this.getElementById('oauth').textContent = "Login-OAUTH";
+    this.getElementById('oauth').href = "/login";
   }
 
   var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
@@ -179,6 +181,7 @@ async function checkout()
         }
     }
     localStorage.removeItem('drinks');
+    alert("successfully ordered!");
     document.getElementById("items-pane").innerHTML = "";
     document.getElementById("subtotal").innerHTML = "0.00";
 }

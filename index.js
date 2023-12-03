@@ -2,22 +2,30 @@ const express = require('express');
 const axios = require('axios');
 const { Pool } = require('pg');
 const dotenv = require('dotenv').config();
-const { auth } = require('express-openid-connect');
-
+const { auth, requiresAuth } = require('express-openid-connect');
+var cur_email = '';
+// Create express app
+const app = express();
+const port = 5000;
 const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.SECRET,
   baseURL: process.env.BASEURL,
   clientID: process.env.CLIENTID,
-  issuerBaseURL: process.env.ISSUER
+  issuerBaseURL: process.env.ISSUER,
+  routes:{
+    login: false,
+    postLogoutRedirect: '/postlogout.html' // custom logout page
+  }
+
+
 };
 
-// Create express app
-const app = express();
-const port = 5000;
 app.use(auth(config));
-
+//make it use the static folder
+app.use(express.static('static'));
+app.use(express.json());
 // Create pool 
 const pool = new Pool({
     user: process.env.PSQL_USER,
@@ -48,20 +56,32 @@ process.on('SIGINT', function() {
 //   }
 // });
 
-//make it use the static folder
-app.use(express.static('static'));
-app.use(express.json());
-
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
   });
 
 
-app.get('/testLogin', (req, res) => {
-  res.redirect('/');
-  console.log(req.oidc.isAuthenticated());
-});
+app.get('/login', (req, res) =>
+  res.oidc.login({
+    returnTo: '/postLogin',
+  })
+);
+
+app.get('/postLogin', (req, res) =>{
+  cur_email = req.oidc.user.email;
+  console.log(cur_email) 
+  res.redirect('/postlogin.html');
+  }
+);
   
+
+app.post('/userEmail', (req, res) =>{
+  console.log("received");
+  res.send(cur_email);
+  console.log("naur");
+  }
+);
+
 app.get('/manager/ingredients', (req, res) => {
     pool
     .query('SELECT * FROM ingredient;')
@@ -81,11 +101,15 @@ app.get('/recipe', async (req, res) => {
 })
 
 app.post('/getAccount', async (req, res) => {
-  const username = req.body['username'];
-  const password = req.body['password'];
+  var username = req.body['username'];
+  var password = req.body['password'];
+
+  if (cur_email != null){
+    username = cur_email;
+  }
 
   pool
-      .query("SELECT * FROM users WHERE username = '" + username + "' AND password_ = '" + password + "';")
+      .query("SELECT * FROM users WHERE username = '" + username + "';")
       .then(query_res => {
           console.log(query_res.rows);
           res.send(query_res.rows);
@@ -96,6 +120,17 @@ app.post('/createAccount', async (req, res) => {
   username = req.body['new-username'];
   password = req.body['new-password'];
   is_manager = false;
+  pool
+      .query("INSERT INTO users VALUES('" + username + "', '" + password + "', '"+ is_manager + "');")
+      .then(query_res => {
+          console.log("rachel zegler stan");
+      });
+})
+
+app.post('/createManager', async (req, res) => {
+  username = req.body['new-username'];
+  password = req.body['new-password'];
+  is_manager = true;
   pool
       .query("INSERT INTO users VALUES('" + username + "', '" + password + "', '"+ is_manager + "');")
       .then(query_res => {
