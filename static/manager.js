@@ -575,6 +575,11 @@ async function fetchIngredientsAndDisplay(element) {
   }
 }
 
+/**
+ * Creates a column of input fields for ingredients.
+ * @param {Array<Object>} ingredients - The list of ingredients to create input fields for.
+ * @returns {HTMLElement} - The column containing input fields for each ingredient.
+ */
 function createColumn(ingredients) {
   const column = document.createElement('div');
   column.classList.add('mb-3');

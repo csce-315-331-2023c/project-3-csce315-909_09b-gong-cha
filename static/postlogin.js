@@ -44,6 +44,11 @@ $('.carousel').carousel({
     interval: 5000 //have it cycle
   })
 
+
+  /**
+   * Translates elements with a specific class to a specified language.
+   * @param {string} lang - The target language for translation.
+   */
   function translateElements2(lang) {
     var targetLanguage = lang;
     const elements = document.querySelectorAll('.translate');
@@ -66,7 +71,13 @@ $('.carousel').carousel({
     });
 }
 
-
+/**
+ * Asynchronously checks the manager status for a user.
+ * Makes POST requests to retrieve account information and user email.
+ * Sets local storage items based on user's manager and employee status.
+ * @param {string} url - The base URL for API requests.
+ * @returns {Promise<void>} - A Promise indicating the completion of the check.
+ */
 async function checkManager(){
   var userData = {
     'username': '',

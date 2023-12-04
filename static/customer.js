@@ -12,7 +12,9 @@ function ToggleVis(divName_vis, divName_hide){
     divName_vis.style.display = "block";
 }
 
-//TODO: reset the forms with id size, sugarlevel, and icelevel back to default
+/**
+ * Resets form elements for Size, Sugar Level, and Ice Level selects to their default values.
+ */
 function resetForms(){
       // Reset the Size select
       document.getElementById('size').selectedIndex = 0;
@@ -56,11 +58,19 @@ document.addEventListener("DOMContentLoaded", function() {
     insertinfo();
 });
 
+/**
+ * Asynchronously fetches toppings from the provided URL.
+ * @returns {Promise<Array<Object>>} - A Promise resolving to an array of toppings.
+ */
 async function getToppings(){
     var request = await fetch(url + "/toppings").then((res) => res.json());
     return request;
 }
 
+/**
+ * Populates the topping div with topping options fetched from getToppings().
+ * Updates the UI with topping selection and customization options.
+ */
 async function putToppingsinDiv(){
     var toppings = await getToppings();
     //change visiblility of #editDrink
@@ -99,6 +109,10 @@ async function putToppingsinDiv(){
     }
 }
 
+/**
+ * Sends drink data to the shopping cart.
+ * @param {Object} json - JSON object representing the drink data.
+ */
 function sendtocheckout(json){
     var jsonData = json;
 
@@ -120,6 +134,12 @@ function sendtocheckout(json){
 var img_change = document.getElementById("img");
 var name_change = document.getElementById("name");
 
+/**
+ * Creates a button element with drink information.
+ * @param {string} drinkname - The name of the drink.
+ * @param {Object} json - JSON object representing the drink data.
+ * @returns {HTMLElement} - The created button element.
+ */
 function createButton(drinkname, json) {
     var button = document.createElement("button");
     // <button type="button" class="btn btn-light btn-outline-dark btn-lg"><img src="images/teas/1.png">Milk Tea Series</button>
@@ -220,6 +240,9 @@ function createButton(drinkname, json) {
     return button;
 }
 
+/**
+ * Asynchronously fetches recipe information and populates the UI with drink buttons.
+ */
 async function insertinfo(){
     var request = await fetch(url + "/recipe").then((res) => res.json());
     
@@ -264,6 +287,10 @@ async function insertinfo(){
     }
 }
 
+/**
+ * Translates elements to a specified language using Google Translate API.
+ * @param {string} lang - The target language for translation.
+ */
 function translateElements2(lang) {
     var targetLanguage = lang;
     const elements = document.querySelectorAll('.translate');

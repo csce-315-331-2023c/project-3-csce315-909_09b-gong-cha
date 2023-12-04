@@ -45,7 +45,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// Function to update the page dynamically
+/**
+ * Updates the page dynamically with item information.
+ * @param {Object} json - JSON object representing item information.
+ */
 function updatePageDynamically(json) {
   var itempane = document.getElementById("items-pane"); 
   const itemDiv = document.createElement("div");
@@ -120,6 +123,10 @@ function updatePageDynamically(json) {
   itempane.appendChild(itemDiv);
 }
 
+/**
+ * Calculates tip based on a percentage.
+ * @param {number} tipPercentage - The tip percentage to calculate.
+ */
 function calculateTip(tipPercentage) {
   let subtotal = parseFloat(document.getElementById("subtotal").innerText);
   let tipAmount = (subtotal * tipPercentage) / 100;
@@ -128,6 +135,9 @@ function calculateTip(tipPercentage) {
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
+/**
+ * Handles the checkout process.
+ */
 async function checkout()
 {
     var username = "68164488";
@@ -190,6 +200,15 @@ async function checkout()
     document.getElementById("subtotal").innerHTML = "0.00";
 }
 
+/**
+ * Inserts an order into the database.
+ * @param {string} username - The username associated with the order.
+ * @param {number} order_id - The order ID.
+ * @param {string} date - The date of the order.
+ * @param {string} time - The time of the order.
+ * @param {number} subtotal - The subtotal of the order.
+ * @param {number} tip - The tip amount for the order.
+ */
 async function insertOrder(username, order_id, date, time, subtotal, tip)
 {
     var pair = {
@@ -209,6 +228,16 @@ async function insertOrder(username, order_id, date, time, subtotal, tip)
       });
 }
 
+/**
+ * Inserts an order item into the database.
+ * @param {number} order_item_id - The order item ID.
+ * @param {number} recipe_id - The recipe ID associated with the order item.
+ * @param {number} order_id - The order ID associated with the order item.
+ * @param {boolean} is_medium - Flag indicating if the item is medium-sized.
+ * @param {string} ice - The type of ice for the order item.
+ * @param {string} sugar - The sugar level for the order item.
+ * @param {number} price - The price of the order item.
+ */
 async function insertOrderItem(order_item_id, recipe_id, order_id, is_medium, ice, sugar, price)
 {
     var pair = {
@@ -229,6 +258,12 @@ async function insertOrderItem(order_item_id, recipe_id, order_id, is_medium, ic
       });
 }
 
+/**
+ * Inserts order item topping information into the database.
+ * @param {number} order_item_id - The order item ID associated with the topping.
+ * @param {number} ingredient_id - The ingredient ID of the topping.
+ * @param {number} quantity - The quantity of the topping.
+ */
 async function insertOrderItemTopping(order_item_id, ingredient_id, quantity)
 {
     var pair = {
@@ -245,6 +280,10 @@ async function insertOrderItemTopping(order_item_id, ingredient_id, quantity)
       });
 }
 
+/**
+ * Translates elements to a specified language using Google Translate API.
+ * @param {string} lang - The target language for translation.
+ */
 function translateElements2(lang) {
   var targetLanguage = lang;
   const elements = document.querySelectorAll('.translate');

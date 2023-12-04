@@ -65,10 +65,10 @@ function changeTextSize(size) {
     }
 
     // 
-    /** Retrieve the user's preferred text size from the cookie on page load
-     * 
-     */
-    function getSavedTextSize() {
+/** Retrieve the user's preferred text size from the cookie on page load
+ * 
+ */
+function getSavedTextSize() {
     const size = document.cookie.replace(/(?:(?:^|.*;\s*)textSize\s*=\s*([^;]*).*$)|^.*$/, "$1");
     if (size) {
         //replace the selected option with the saved option
@@ -82,7 +82,7 @@ function changeTextSize(size) {
         changeTextSize(size);
 
     }   
-    }
+}
 
 // Call the function on page load
 document.addEventListener('DOMContentLoaded', getSavedTextSize);
