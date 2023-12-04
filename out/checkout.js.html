@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: checkout.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: checkout.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview This file contains functions for checking out
+ */
+
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
+
+document.addEventListener("DOMContentLoaded", function() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const isEmployee = localStorage.getItem('isEmployee');
+  const isManager = localStorage.getItem('isManager');
+
+  if (isLoggedIn == null) {
+    localStorage.setItem('isLoggedIn', 'false');
+  }
+  if (isEmployee == null) {
+    localStorage.setItem('isEmployee', 'false');
+  }
+  if (isManager == null) {
+    localStorage.setItem('isManager', 'false');
+  }
+
+  if (isLoggedIn == 'false') {
+    window.location.href = 'login.html';
+  }
+
+  if (isLoggedIn == 'true') {
+    this.getElementById('oauth').textContent = "Logout-OAUTH";
+    this.getElementById('oauth').href = "/logout";
+  }
+  else {
+    this.getElementById('oauth').textContent = "Login-OAUTH";
+    this.getElementById('oauth').href = "/login";
+  }
+
+  var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
+  // Call the function to update the page dynamically
+  document.getElementById("items-pane").innerHTML = "";
+  for(var i = 0; i &lt; storedDrinks.length; i++)
+  {
+      updatePageDynamically(storedDrinks[i]);
+  }
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
+  }
+});
+
+
+/**
+ * Updates the page dynamically with item information.
+ * @param {Object} json - JSON object representing item information.
+ */
+function updatePageDynamically(json) {
+  var itempane = document.getElementById("items-pane"); 
+  const itemDiv = document.createElement("div");
+  itemDiv.classList.add("row", "item");
+
+  const imageColumn = document.createElement("div");
+  imageColumn.classList.add("col-md-2");
+
+  const imgElement = document.createElement("img");
+  imgElement.setAttribute("src", "images/teas/" + json.recipe_id + ".png");
+  imgElement.classList.add("img-fluid");
+  imageColumn.appendChild(imgElement);
+
+  const nameColumn = document.createElement("div");
+  nameColumn.classList.add("col-md-8");
+
+  const nameDiv = document.createElement("div");
+  const textNode = document.createElement("span");
+  textNode.textContent = json.recipe_name;
+  textNode.classList = "translate";
+  nameDiv.appendChild(textNode);
+  nameColumn.appendChild(nameDiv);
+
+  const buttonColumn = document.createElement("div");
+  buttonColumn.classList.add("col-md-1");
+
+  const buttonElement = document.createElement("button");
+  buttonElement.setAttribute("type", "button");
+  buttonElement.classList.add("btn", "rounded-5");
+
+  const iconElement = document.createElement("i");
+  iconElement.classList.add("fa-regular", "fa-circle-xmark", "fa-lg");
+
+  iconElement.addEventListener("click", function () {
+    if (itemDiv.parentNode) {
+      itemDiv.parentNode.removeChild(itemDiv);
+      document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) - parseFloat(priceTextNode.data)).toFixed(2);
+      document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
+      var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
+
+      for(i = 0; i &lt; storedDrinks.length; i++)
+      {
+        console.log(storedDrinks[i].recipe_name);
+        console.log(itemDiv.children[1].children[0].textContent);
+        if(storedDrinks[i].recipe_name == itemDiv.children[1].children[0].textContent)
+        {
+          console.log("equals");
+            storedDrinks.splice(i, 1);
+            localStorage.setItem('drinks', JSON.stringify(storedDrinks));
+            break;
+        }
+      }
+    }
+  });
+
+  buttonElement.appendChild(iconElement);
+  buttonColumn.appendChild(buttonElement);
+
+  const priceDiv = document.createElement("div");
+
+  const priceTextNode = document.createTextNode(json.cur_price);
+  priceDiv.appendChild(priceTextNode);
+  nameColumn.appendChild(priceDiv);
+
+  itemDiv.appendChild(imageColumn);
+  itemDiv.appendChild(nameColumn);
+  itemDiv.appendChild(buttonColumn);
+
+  document.getElementById("subtotal").innerHTML = (parseFloat(document.getElementById("subtotal").innerHTML) + parseFloat(priceTextNode.data)).toFixed(2);
+  document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
+
+  itempane.appendChild(itemDiv);
+}
+
+/**
+ * Calculates tip based on a percentage.
+ * @param {number} tipPercentage - The tip percentage to calculate.
+ */
+function calculateTip(tipPercentage) {
+  let subtotal = parseFloat(document.getElementById("subtotal").innerText);
+  let tipAmount = (subtotal * tipPercentage) / 100;
+  document.getElementById("tip").innerText = tipAmount.toFixed(2);
+  let total = subtotal + tipAmount;
+  document.getElementById("total").innerText = total.toFixed(2);
+}
+
+/**
+ * Handles the checkout process.
+ */
+async function checkout()
+{
+    var username = "68164488";
+    var getDate = new Date();
+    var date = getDate.getFullYear() + "-" + (getDate.getMonth() + 1) + "-" + getDate.getDate();
+    var time = getDate.getHours() + ":" + getDate.getMinutes() + ":" + getDate.getSeconds();
+    var last_order_id = await fetch(url + "/orderid").then((res) => res.json());
+
+    var new_order_id = last_order_id[0].order_id + 1;
+    var subtotal = document.getElementById("subtotal").innerHTML;
+    var tip = document.getElementById("tip").innerHTML;
+
+    insertOrder(username, new_order_id, date, time, subtotal, tip);
+
+    var last_order_item_id = await fetch(url + "/orderitemid").then((res) => res.json());
+    var new_order_item_id = last_order_item_id[0].order_item_id;
+    var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
+    for(i = 0; i &lt; storedDrinks.length; i++) 
+    {
+
+        new_order_item_id += 1;
+        var recipe_id = storedDrinks[i].recipe_id;
+        var isMedium = true;
+        var ice = "regular";
+        var sugar = "100%";
+        var edit_info = storedDrinks[i].edit_info;
+        if(edit_info != null)
+        {
+          for(var j = 0; j &lt; edit_info.length; j++){
+            if(edit_info[j].is_medium != null){
+              isMedium = edit_info[j].is_medium;
+            }
+            else if(edit_info[j].ice != null){
+              ice = edit_info[j].ice;
+            }
+            else if(edit_info[j].sugar != null){
+              sugar = edit_info[j].sugar;
+            }
+          }
+
+        }
+
+        var price = storedDrinks[i].med_price;
+
+        insertOrderItem(new_order_item_id, recipe_id, new_order_id, isMedium, ice, sugar, price);
+
+        var topping_info = storedDrinks[i].topping_info;
+        if(topping_info != null){
+          //for each topping, insert into orderitemtoppings
+          for(var j = 0; j &lt; topping_info.length; j++){
+            ingredient_id = topping_info[j].ingredient_id;
+            quantity_used = topping_info[j].quantity;
+            insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
+          }
+        }
+    }
+    localStorage.removeItem('drinks');
+    alert("successfully ordered!");
+    document.getElementById("items-pane").innerHTML = "";
+    document.getElementById("subtotal").innerHTML = "0.00";
+}
+
+/**
+ * Inserts an order into the database.
+ * @param {string} username - The username associated with the order.
+ * @param {number} order_id - The order ID.
+ * @param {string} date - The date of the order.
+ * @param {string} time - The time of the order.
+ * @param {number} subtotal - The subtotal of the order.
+ * @param {number} tip - The tip amount for the order.
+ */
+async function insertOrder(username, order_id, date, time, subtotal, tip)
+{
+    var pair = {
+        'username': username,
+        'order_id': order_id,
+        'date': date,
+        'subtotal': subtotal,
+        'tip': tip,
+        'time': time
+      };
+      const response = await fetch(url + "/order", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+      });
+}
+
+/**
+ * Inserts an order item into the database.
+ * @param {number} order_item_id - The order item ID.
+ * @param {number} recipe_id - The recipe ID associated with the order item.
+ * @param {number} order_id - The order ID associated with the order item.
+ * @param {boolean} is_medium - Flag indicating if the item is medium-sized.
+ * @param {string} ice - The type of ice for the order item.
+ * @param {string} sugar - The sugar level for the order item.
+ * @param {number} price - The price of the order item.
+ */
+async function insertOrderItem(order_item_id, recipe_id, order_id, is_medium, ice, sugar, price)
+{
+    var pair = {
+        'order_item_id': order_item_id,
+        'recipe_id': recipe_id,
+        'order_id': order_id,
+        'is_medium': is_medium,
+        'ice': ice,
+        'sugar': sugar,
+        'price': price
+      };
+      const response = await fetch(url + "/orderitem", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+      });
+}
+
+/**
+ * Inserts order item topping information into the database.
+ * @param {number} order_item_id - The order item ID associated with the topping.
+ * @param {number} ingredient_id - The ingredient ID of the topping.
+ * @param {number} quantity - The quantity of the topping.
+ */
+async function insertOrderItemTopping(order_item_id, ingredient_id, quantity)
+{
+    var pair = {
+        'order_item_id': order_item_id,
+        'ingredient_id': ingredient_id,
+        'quantity': quantity,
+      };
+      const response = await fetch(url + "/orderitemtoppings", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+      });
+}
+
+/**
+ * Translates elements to a specified language using Google Translate API.
+ * @param {string} lang - The target language for translation.
+ */
+function translateElements2(lang) {
+  var targetLanguage = lang;
+  const elements = document.querySelectorAll('.translate');
+  const apiKey = 'AIzaSyCCT13ZuFYfFyH8H-DX195b8F6lSr0CESc';
+
+  console.log(elements);
+  elements.forEach(element => {
+      const textToTranslate = element.textContent;
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&amp;q=${encodeURIComponent(textToTranslate)}&amp;target=${targetLanguage}`, {
+          method: 'POST'
+      })
+          .then(response => response.json())
+          .then(data => {
+              const translatedText = data.data.translations[0].translatedText;
+              element.textContent = translatedText;
+          })
+          .catch(error => {
+              console.error('Translation error:', error);
+          });
+  });
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Checkout">Checkout</a></li><li><a href="global.html#addDrink">addDrink</a></li><li><a href="global.html#addIngredient">addIngredient</a></li><li><a href="global.html#calculateTip">calculateTip</a></li><li><a href="global.html#changeTextSize">changeTextSize</a></li><li><a href="global.html#checkLoginInfo">checkLoginInfo</a></li><li><a href="global.html#checkManager">checkManager</a></li><li><a href="global.html#checkout">checkout</a></li><li><a href="global.html#clearOrder">clearOrder</a></li><li><a href="global.html#confirmCheckout">confirmCheckout</a></li><li><a href="global.html#createAccount">createAccount</a></li><li><a href="global.html#createButton">createButton</a></li><li><a href="global.html#createColumn">createColumn</a></li><li><a href="global.html#createHeaders">createHeaders</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#createManager">createManager</a></li><li><a href="global.html#createTableFromJSON">createTableFromJSON</a></li><li><a href="global.html#drinkTable">drinkTable</a></li><li><a href="global.html#fetchIngredientsAndDisplay">fetchIngredientsAndDisplay</a></li><li><a href="global.html#gatherValues">gatherValues</a></li><li><a href="global.html#generateExcessReport">generateExcessReport</a></li><li><a href="global.html#generateRestockReport">generateRestockReport</a></li><li><a href="global.html#generateSalesReport">generateSalesReport</a></li><li><a href="global.html#getDrinks">getDrinks</a></li><li><a href="global.html#getDrinks2">getDrinks2</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getSavedTextSize">getSavedTextSize</a></li><li><a href="global.html#getTipAmount">getTipAmount</a></li><li><a href="global.html#getToppings">getToppings</a></li><li><a href="global.html#ingredientTable">ingredientTable</a></li><li><a href="global.html#insertIntoReceipt">insertIntoReceipt</a></li><li><a href="global.html#insertOrder">insertOrder</a></li><li><a href="global.html#insertOrderItem">insertOrderItem</a></li><li><a href="global.html#insertOrderItemTopping">insertOrderItemTopping</a></li><li><a href="global.html#insertinfo">insertinfo</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#modDrinkIngredients">modDrinkIngredients</a></li><li><a href="global.html#modDrinkLargePrice">modDrinkLargePrice</a></li><li><a href="global.html#modDrinkMediumPrice">modDrinkMediumPrice</a></li><li><a href="global.html#modDrinkName">modDrinkName</a></li><li><a href="global.html#modDrinkRecipePrice">modDrinkRecipePrice</a></li><li><a href="global.html#modIngredientMinStock">modIngredientMinStock</a></li><li><a href="global.html#modIngredientName">modIngredientName</a></li><li><a href="global.html#modIngredientStock">modIngredientStock</a></li><li><a href="global.html#modIngredientUnitPrice">modIngredientUnitPrice</a></li><li><a href="global.html#otherTip">otherTip</a></li><li><a href="global.html#putToppingsinDiv">putToppingsinDiv</a></li><li><a href="global.html#resetForms">resetForms</a></li><li><a href="global.html#sendtocheckout">sendtocheckout</a></li><li><a href="global.html#showInputBox">showInputBox</a></li><li><a href="global.html#showReport">showReport</a></li><li><a href="global.html#toggleAuthenticationViews">toggleAuthenticationViews</a></li><li><a href="global.html#toggleForm">toggleForm</a></li><li><a href="global.html#toppingHeader">toppingHeader</a></li><li><a href="global.html#toppingItem">toppingItem</a></li><li><a href="global.html#translateElements">translateElements</a></li><li><a href="global.html#translateElements2">translateElements2</a></li><li><a href="global.html#updatePageDynamically">updatePageDynamically</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Dec 03 2023 19:22:17 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -26,7 +26,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const url = 'http://localhost:5000';
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview This file contains functions that provide login functionality.
+ */
+
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 document.addEventListener('DOMContentLoaded', function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -42,11 +46,14 @@ document.addEventListener('DOMContentLoaded', function() {
   if (isManager == null) {
     localStorage.setItem('isManager', 'false');
   }
+
   if (isLoggedIn == 'true') {
-    this.getElementById('login-nav').textContent = "Logout";
+    this.getElementById('oauth').textContent = "Logout-OAUTH";
+    this.getElementById('oauth').href = "/logout";
   }
   else {
-    this.getElementById('login-nav').textContent = "Login";
+    this.getElementById('oauth').textContent = "Login-OAUTH";
+    this.getElementById('oauth').href = "/login";
   }
 
   if (localStorage.getItem('lang') == 'es') {
@@ -208,13 +215,13 @@ function translateElements2(lang) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Checkout">Checkout</a></li><li><a href="global.html#addDrink">addDrink</a></li><li><a href="global.html#addIngredient">addIngredient</a></li><li><a href="global.html#changeTextSize">changeTextSize</a></li><li><a href="global.html#checkLoginInfo">checkLoginInfo</a></li><li><a href="global.html#clearOrder">clearOrder</a></li><li><a href="global.html#confirmCheckout">confirmCheckout</a></li><li><a href="global.html#createAccount">createAccount</a></li><li><a href="global.html#createButton">createButton</a></li><li><a href="global.html#createHeaders">createHeaders</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#createTableFromJSON">createTableFromJSON</a></li><li><a href="global.html#drinkTable">drinkTable</a></li><li><a href="global.html#fetchIngredientsAndDisplay">fetchIngredientsAndDisplay</a></li><li><a href="global.html#gatherValues">gatherValues</a></li><li><a href="global.html#generateExcessReport">generateExcessReport</a></li><li><a href="global.html#generateRestockReport">generateRestockReport</a></li><li><a href="global.html#generateSalesReport">generateSalesReport</a></li><li><a href="global.html#getDrinks">getDrinks</a></li><li><a href="global.html#getDrinks2">getDrinks2</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getSavedTextSize">getSavedTextSize</a></li><li><a href="global.html#getTipAmount">getTipAmount</a></li><li><a href="global.html#getToppings">getToppings</a></li><li><a href="global.html#ingredientTable">ingredientTable</a></li><li><a href="global.html#insertIntoReceipt">insertIntoReceipt</a></li><li><a href="global.html#insertOrder">insertOrder</a></li><li><a href="global.html#insertOrderItem">insertOrderItem</a></li><li><a href="global.html#insertOrderItemTopping">insertOrderItemTopping</a></li><li><a href="global.html#insertinfo">insertinfo</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#modDrinkIngredients">modDrinkIngredients</a></li><li><a href="global.html#modDrinkLargePrice">modDrinkLargePrice</a></li><li><a href="global.html#modDrinkMediumPrice">modDrinkMediumPrice</a></li><li><a href="global.html#modDrinkName">modDrinkName</a></li><li><a href="global.html#modDrinkRecipePrice">modDrinkRecipePrice</a></li><li><a href="global.html#modIngredientMinStock">modIngredientMinStock</a></li><li><a href="global.html#modIngredientName">modIngredientName</a></li><li><a href="global.html#modIngredientStock">modIngredientStock</a></li><li><a href="global.html#modIngredientUnitPrice">modIngredientUnitPrice</a></li><li><a href="global.html#otherTip">otherTip</a></li><li><a href="global.html#showInputBox">showInputBox</a></li><li><a href="global.html#showReport">showReport</a></li><li><a href="global.html#toggleAuthenticationViews">toggleAuthenticationViews</a></li><li><a href="global.html#toggleForm">toggleForm</a></li><li><a href="global.html#toppingHeader">toppingHeader</a></li><li><a href="global.html#toppingItem">toppingItem</a></li><li><a href="global.html#translateElements">translateElements</a></li><li><a href="global.html#translateElements2">translateElements2</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Checkout">Checkout</a></li><li><a href="global.html#addDrink">addDrink</a></li><li><a href="global.html#addIngredient">addIngredient</a></li><li><a href="global.html#calculateTip">calculateTip</a></li><li><a href="global.html#changeTextSize">changeTextSize</a></li><li><a href="global.html#checkLoginInfo">checkLoginInfo</a></li><li><a href="global.html#checkManager">checkManager</a></li><li><a href="global.html#checkout">checkout</a></li><li><a href="global.html#clearOrder">clearOrder</a></li><li><a href="global.html#confirmCheckout">confirmCheckout</a></li><li><a href="global.html#createAccount">createAccount</a></li><li><a href="global.html#createButton">createButton</a></li><li><a href="global.html#createColumn">createColumn</a></li><li><a href="global.html#createHeaders">createHeaders</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#createManager">createManager</a></li><li><a href="global.html#createTableFromJSON">createTableFromJSON</a></li><li><a href="global.html#drinkTable">drinkTable</a></li><li><a href="global.html#fetchIngredientsAndDisplay">fetchIngredientsAndDisplay</a></li><li><a href="global.html#gatherValues">gatherValues</a></li><li><a href="global.html#generateExcessReport">generateExcessReport</a></li><li><a href="global.html#generateRestockReport">generateRestockReport</a></li><li><a href="global.html#generateSalesReport">generateSalesReport</a></li><li><a href="global.html#getDrinks">getDrinks</a></li><li><a href="global.html#getDrinks2">getDrinks2</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getSavedTextSize">getSavedTextSize</a></li><li><a href="global.html#getTipAmount">getTipAmount</a></li><li><a href="global.html#getToppings">getToppings</a></li><li><a href="global.html#ingredientTable">ingredientTable</a></li><li><a href="global.html#insertIntoReceipt">insertIntoReceipt</a></li><li><a href="global.html#insertOrder">insertOrder</a></li><li><a href="global.html#insertOrderItem">insertOrderItem</a></li><li><a href="global.html#insertOrderItemTopping">insertOrderItemTopping</a></li><li><a href="global.html#insertinfo">insertinfo</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#modDrinkIngredients">modDrinkIngredients</a></li><li><a href="global.html#modDrinkLargePrice">modDrinkLargePrice</a></li><li><a href="global.html#modDrinkMediumPrice">modDrinkMediumPrice</a></li><li><a href="global.html#modDrinkName">modDrinkName</a></li><li><a href="global.html#modDrinkRecipePrice">modDrinkRecipePrice</a></li><li><a href="global.html#modIngredientMinStock">modIngredientMinStock</a></li><li><a href="global.html#modIngredientName">modIngredientName</a></li><li><a href="global.html#modIngredientStock">modIngredientStock</a></li><li><a href="global.html#modIngredientUnitPrice">modIngredientUnitPrice</a></li><li><a href="global.html#otherTip">otherTip</a></li><li><a href="global.html#putToppingsinDiv">putToppingsinDiv</a></li><li><a href="global.html#resetForms">resetForms</a></li><li><a href="global.html#sendtocheckout">sendtocheckout</a></li><li><a href="global.html#showInputBox">showInputBox</a></li><li><a href="global.html#showReport">showReport</a></li><li><a href="global.html#toggleAuthenticationViews">toggleAuthenticationViews</a></li><li><a href="global.html#toggleForm">toggleForm</a></li><li><a href="global.html#toppingHeader">toppingHeader</a></li><li><a href="global.html#toppingItem">toppingItem</a></li><li><a href="global.html#translateElements">translateElements</a></li><li><a href="global.html#translateElements2">translateElements2</a></li><li><a href="global.html#updatePageDynamically">updatePageDynamically</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Dec 01 2023 16:34:22 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Dec 03 2023 19:22:17 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
