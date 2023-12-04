@@ -351,3 +351,52 @@ Task Description
 
 Minutes from Previous Meeting
 In the previous meeting, we discussed distribution of the last tasks for the web application, some technical details regarding implementation of apis, such as obtaining keys and JavaScript implementation. We focused on what polishing was needed for the website, and what things we could do to improve our project.
+
+
+SCRUM Meeting 9 for Team 9B
+_________________________________________________
+Prepared by: Ren Mai
+Meeting Date: December 3, 2023
+Meeting Attendees
+ Anton Hugo Ramirez
+ Reid Jenkins
+ Brenndan Croteau
+ Ren Mai 
+
+Meeting Agenda Items
+ Discussion of completed tasks, completion of documentation.
+ Testing of OAuth feature following development.
+ Conversation on recording of presentation, and preparation for demo.
+
+Accomplishments:
+ OAuth Functionality
+ Partial completion of documentation
+ Proper hosting of the final product.
+
+Tasks Completed:
+Task Description
+ Documentation for about.js - ASSIGNED TO Reid - Completed No
+ Documentation for cashier.js - ASSIGNED TO Ren - Completed Yes
+ Documentation for checkout.js - ASSIGNED TO Reid - Completed No
+ Documentation for customer.js - ASSIGNED TO Anton - Completed Yes
+ Documentation for login.js - ASSIGNED TO Brenndan - Completed Yes
+ Documentation for manager.js - ASSIGNED TO Brenndan - Completed Yes
+ Documentation for menu.js - ASSIGNED TO Ren - Completed Yes
+ Documentation for textch.js - ASSIGNED TO Ren - Completed Yes
+ Documentation for translate.js- ASSIGNED TO Brenndan - Completed Yes
+ Documentation for index.js - ASSIGNED TO Anton - Completed Yes
+ Implement OAuth - ASSIGNED TO Anton - Completed Yes
+ 
+
+Before The Next Meeting
+Plans:
+ Finish up documents
+ Record Video Presentation
+
+
+Task Assignments:
+Task Description
+ None! We are finished with this project.
+
+Minutes from Previous Meeting
+In the previous meeting, we discusssed completion of our tasks, polishing up the project. We had a conversation on documentation, what to do in our preparation for final steps, and what we need to do in order to finalize our web application.
