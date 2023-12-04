@@ -1,11 +1,7 @@
-// let url = ""
-// if (process.env.NODE_ENV === "development"){
-//   url = "http://localhost:10000"
-// }
-// else{
-//   url = "https://csce-315-project-3-gong-cha.onrender.com";
-// }
-//get url from index.js
+/**
+ * @fileoverview This file contains functions that provide functionality for the manager page
+ */
+
 const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 // This will load all necessary tables/options on startup
