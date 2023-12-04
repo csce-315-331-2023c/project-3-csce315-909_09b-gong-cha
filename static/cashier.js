@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 /**
  * @fileoverview This file contains all the functions that are used to display the cashier page.
@@ -20,16 +20,18 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (isEmployee == 'false') {
-    window.location.href = 'login.html';
+    alert("no access 🤪");
+    window.location.href = 'about.html';
   }
   
   if (isLoggedIn == 'true') {
-    this.getElementById('login-nav').textContent = "Logout";
+    this.getElementById('oauth').textContent = "Logout-OAUTH";
+    this.getElementById('oauth').href = "/logout";
   }
   else {
-    this.getElementById('login-nav').textContent = "Login";
+    this.getElementById('oauth').textContent = "Login-OAUTH";
+    this.getElementById('oauth').href = "/login";
   }
-  
   if (localStorage.getItem('lang') == 'es') {
     translateElements2('es');
   }
@@ -339,7 +341,6 @@ function Checkout(){
         document.getElementById(amounts[i]).innerHTML = amounts[i] + "%\n(" + ((parseFloat(amounts[i]) / 100) * (parseFloat(subtotal.innerHTML))).toFixed(2) + ")";
     }
     document.getElementById("TipButtons").style.display = "initial";
-
 }
 
 /**

@@ -6,7 +6,7 @@
 //   url = "https://csce-315-project-3-gong-cha.onrender.com";
 // }
 //get url from index.js
-const url = 'http://localhost:5000';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 // This will load all necessary tables/options on startup
 document.addEventListener("DOMContentLoaded", function() {
@@ -25,14 +25,17 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (isEmployee == 'false' || isManager == 'false') {
-    window.location.href = 'login.html';
+    alert("no access 🤪");
+    window.location.href = '/about.html';
   }
 
   if (isLoggedIn == 'true') {
-    this.getElementById('login-nav').textContent = "Logout";
+    this.getElementById('oauth').textContent = "Logout-OAUTH";
+    this.getElementById('oauth').href = "/logout";
   }
   else {
-    this.getElementById('login-nav').textContent = "Login";
+    this.getElementById('oauth').textContent = "Login-OAUTH";
+    this.getElementById('oauth').href = "/login";
   }
 
   ingredientTable();
@@ -112,6 +115,31 @@ async function addDrink() {
 
   drinkTable()
 }
+
+/**
+ * Creates a new user account by extracting information from HTML elements and adding them to the database.
+ * @param {Event} event - The event triggered by submitting the create account form.
+ * @returns {boolean} Returns false if passwords do not match; otherwise, returns true.
+ */
+async function createManager(event) {
+  username = document.getElementById('Manager-Email').value;
+  password = 'password'
+  alert("Account successfully created. ");
+
+  var userData = {
+    'new-username': username,
+    'new-password': password,
+  }
+
+  const response = await fetch(url + "/createManager", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });  
+}
+
 
 /**
  * Adds an ingredient to the database.

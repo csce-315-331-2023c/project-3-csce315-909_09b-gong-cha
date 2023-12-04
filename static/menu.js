@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 /**
  * @fileoverview This file contains all the functions that are used to display the menu page.
  */
@@ -18,11 +18,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     if (isLoggedIn == 'true') {
-        this.getElementById('login-nav').textContent = "Logout";
-    }
-    else {
-        this.getElementById('login-nav').textContent = "Login";
-    }
+        this.getElementById('oauth').textContent = "Logout-OAUTH";
+        this.getElementById('oauth').href = "/logout";
+      }
+      else {
+        this.getElementById('oauth').textContent = "Login-OAUTH";
+        this.getElementById('oauth').href = "/login";
+      }
 
     if (localStorage.getItem('lang') == 'es') {
         translateElements2('es');

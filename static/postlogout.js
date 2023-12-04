@@ -1,22 +1,11 @@
 const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 document.addEventListener("DOMContentLoaded", function() {
-  const isLoggedIn = localStorage.getItem('isLoggedIn');
-  const isEmployee = localStorage.getItem('isEmployee');
-  const isManager = localStorage.getItem('isManager');
+  alert("Logged out!");
+  localStorage.setItem('isLoggedIn', 'False');
+  localStorage.setItem('isEmployee', 'false');
+  localStorage.setItem('isManager', 'false');
 
-  if (isLoggedIn == null) {
-    localStorage.setItem('isLoggedIn', 'false');
-  }
-  if (isEmployee == null) {
-    localStorage.setItem('isEmployee', 'false');
-  }
-  if (isManager == null) {
-    localStorage.setItem('isManager', 'false');
-  }
 
-  if (localStorage.getItem('lang') == 'es') {
-    translateElements2('es');
-  }
   if (isLoggedIn == 'true') {
     this.getElementById('oauth').textContent = "Logout-OAUTH";
     this.getElementById('oauth').href = "/logout";
@@ -24,6 +13,10 @@ document.addEventListener("DOMContentLoaded", function() {
   else {
     this.getElementById('oauth').textContent = "Login-OAUTH";
     this.getElementById('oauth').href = "/login";
+  }
+
+  if (localStorage.getItem('lang') == 'es') {
+    translateElements2('es');
   }
   const weatherInfo = document.getElementById('weather-info');
 
