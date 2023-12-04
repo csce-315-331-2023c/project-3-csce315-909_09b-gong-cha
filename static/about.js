@@ -2,7 +2,7 @@
  * @fileoverview This file contains functions for the about page
  */
 
-const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com';
 document.addEventListener("DOMContentLoaded", function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   const isEmployee = localStorage.getItem('isEmployee');

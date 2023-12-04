@@ -2,7 +2,7 @@
  * @fileoverview This file contains functions that provide functionality for the manager page
  */
 
-const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com';
 
 // This will load all necessary tables/options on startup
 document.addEventListener("DOMContentLoaded", function() {
