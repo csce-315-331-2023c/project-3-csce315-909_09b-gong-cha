@@ -18,11 +18,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     if (isLoggedIn == 'true') {
-        this.getElementById('oauth').textContent = "Logout-OAUTH";
+        this.getElementById('oauth').textContent = "Logout";
         this.getElementById('oauth').href = "/logout";
       }
       else {
-        this.getElementById('oauth').textContent = "Login-OAUTH";
+        this.getElementById('oauth').textContent = "Login";
         this.getElementById('oauth').href = "/login";
       }
 

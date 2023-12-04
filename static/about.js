@@ -22,11 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
     translateElements2('es');
   }
   if (isLoggedIn == 'true') {
-    this.getElementById('oauth').textContent = "Logout-OAUTH";
+    this.getElementById('oauth').textContent = "Logout";
     this.getElementById('oauth').href = "/logout";
   }
   else {
-    this.getElementById('oauth').textContent = "Login-OAUTH";
+    this.getElementById('oauth').textContent = "Login";
     this.getElementById('oauth').href = "/login";
   }
   const weatherInfo = document.getElementById('weather-info');

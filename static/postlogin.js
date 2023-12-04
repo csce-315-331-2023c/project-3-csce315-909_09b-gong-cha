@@ -10,11 +10,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   
   if (isLoggedIn == 'true') {
-    this.getElementById('oauth').textContent = "Logout-OAUTH";
+    this.getElementById('oauth').textContent = "Logout";
     this.getElementById('oauth').href = "/logout";
   }
   else {
-    this.getElementById('oauth').textContent = "Login-OAUTH";
+    this.getElementById('oauth').textContent = "Login";
     this.getElementById('oauth').href = "/login";
   }
 
