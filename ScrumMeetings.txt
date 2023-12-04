@@ -371,6 +371,7 @@ Meeting Agenda Items
 Accomplishments:
  OAuth Functionality
  Partial completion of documentation
+ Proper hosting of the final product.
 
 Tasks Completed:
 Task Description
@@ -398,4 +399,4 @@ Task Description
  None! We are finished with this project.
 
 Minutes from Previous Meeting
-In the previous meeting, we discussed distribution of the last tasks for the web application, some technical details regarding implementation of apis, such as obtaining keys and JavaScript implementation. We focused on what polishing was needed for the website, and what things we could do to improve our project.
+In the previous meeting, we discusssed completion of our tasks, polishing up the project. We had a conversation on documentation, what to do in our preparation for final steps, and what we need to do in order to finalize our web application.
