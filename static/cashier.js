@@ -1,4 +1,4 @@
-const url = 'https://icespicefanclub.onrender.com';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 /**
  * @fileoverview This file contains all the functions that are used to display the cashier page.

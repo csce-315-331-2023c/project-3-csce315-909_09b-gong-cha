@@ -1,4 +1,4 @@
-const url = 'https://icespicefanclub.onrender.com';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 /*preset arrays so we can quickly determine ice levels */
 var ice_ary = ["regular", "light", "none"]
