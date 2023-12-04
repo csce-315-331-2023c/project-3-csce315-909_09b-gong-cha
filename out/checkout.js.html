@@ -1,8 +1,36 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: checkout.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: checkout.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @fileoverview This file contains functions for checking out
  */
 
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 document.addEventListener("DOMContentLoaded", function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -35,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
   // Call the function to update the page dynamically
   document.getElementById("items-pane").innerHTML = "";
-  for(var i = 0; i < storedDrinks.length; i++)
+  for(var i = 0; i &lt; storedDrinks.length; i++)
   {
       updatePageDynamically(storedDrinks[i]);
   }
@@ -89,7 +117,7 @@ function updatePageDynamically(json) {
       document.getElementById("total").innerHTML = document.getElementById("subtotal").innerHTML;
       var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
 
-      for(i = 0; i < storedDrinks.length; i++)
+      for(i = 0; i &lt; storedDrinks.length; i++)
       {
         console.log(storedDrinks[i].recipe_name);
         console.log(itemDiv.children[1].children[0].textContent);
@@ -155,7 +183,7 @@ async function checkout()
     var last_order_item_id = await fetch(url + "/orderitemid").then((res) => res.json());
     var new_order_item_id = last_order_item_id[0].order_item_id;
     var storedDrinks = JSON.parse(localStorage.getItem('drinks')) || [];
-    for(i = 0; i < storedDrinks.length; i++) 
+    for(i = 0; i &lt; storedDrinks.length; i++) 
     {
 
         new_order_item_id += 1;
@@ -166,7 +194,7 @@ async function checkout()
         var edit_info = storedDrinks[i].edit_info;
         if(edit_info != null)
         {
-          for(var j = 0; j < edit_info.length; j++){
+          for(var j = 0; j &lt; edit_info.length; j++){
             if(edit_info[j].is_medium != null){
               isMedium = edit_info[j].is_medium;
             }
@@ -187,7 +215,7 @@ async function checkout()
         var topping_info = storedDrinks[i].topping_info;
         if(topping_info != null){
           //for each topping, insert into orderitemtoppings
-          for(var j = 0; j < topping_info.length; j++){
+          for(var j = 0; j &lt; topping_info.length; j++){
             ingredient_id = topping_info[j].ingredient_id;
             quantity_used = topping_info[j].quantity;
             insertOrderItemTopping(new_order_item_id, ingredient_id, quantity_used);
@@ -292,7 +320,7 @@ function translateElements2(lang) {
   console.log(elements);
   elements.forEach(element => {
       const textToTranslate = element.textContent;
-      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+      fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&amp;q=${encodeURIComponent(textToTranslate)}&amp;target=${targetLanguage}`, {
           method: 'POST'
       })
           .then(response => response.json())
@@ -304,4 +332,26 @@ function translateElements2(lang) {
               console.error('Translation error:', error);
           });
   });
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Checkout">Checkout</a></li><li><a href="global.html#addDrink">addDrink</a></li><li><a href="global.html#addIngredient">addIngredient</a></li><li><a href="global.html#calculateTip">calculateTip</a></li><li><a href="global.html#changeTextSize">changeTextSize</a></li><li><a href="global.html#checkLoginInfo">checkLoginInfo</a></li><li><a href="global.html#checkManager">checkManager</a></li><li><a href="global.html#checkout">checkout</a></li><li><a href="global.html#clearOrder">clearOrder</a></li><li><a href="global.html#confirmCheckout">confirmCheckout</a></li><li><a href="global.html#createAccount">createAccount</a></li><li><a href="global.html#createButton">createButton</a></li><li><a href="global.html#createColumn">createColumn</a></li><li><a href="global.html#createHeaders">createHeaders</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#createManager">createManager</a></li><li><a href="global.html#createTableFromJSON">createTableFromJSON</a></li><li><a href="global.html#drinkTable">drinkTable</a></li><li><a href="global.html#fetchIngredientsAndDisplay">fetchIngredientsAndDisplay</a></li><li><a href="global.html#gatherValues">gatherValues</a></li><li><a href="global.html#generateExcessReport">generateExcessReport</a></li><li><a href="global.html#generateRestockReport">generateRestockReport</a></li><li><a href="global.html#generateSalesReport">generateSalesReport</a></li><li><a href="global.html#getDrinks">getDrinks</a></li><li><a href="global.html#getDrinks2">getDrinks2</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getSavedTextSize">getSavedTextSize</a></li><li><a href="global.html#getTipAmount">getTipAmount</a></li><li><a href="global.html#getToppings">getToppings</a></li><li><a href="global.html#ingredientTable">ingredientTable</a></li><li><a href="global.html#insertIntoReceipt">insertIntoReceipt</a></li><li><a href="global.html#insertOrder">insertOrder</a></li><li><a href="global.html#insertOrderItem">insertOrderItem</a></li><li><a href="global.html#insertOrderItemTopping">insertOrderItemTopping</a></li><li><a href="global.html#insertinfo">insertinfo</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#modDrinkIngredients">modDrinkIngredients</a></li><li><a href="global.html#modDrinkLargePrice">modDrinkLargePrice</a></li><li><a href="global.html#modDrinkMediumPrice">modDrinkMediumPrice</a></li><li><a href="global.html#modDrinkName">modDrinkName</a></li><li><a href="global.html#modDrinkRecipePrice">modDrinkRecipePrice</a></li><li><a href="global.html#modIngredientMinStock">modIngredientMinStock</a></li><li><a href="global.html#modIngredientName">modIngredientName</a></li><li><a href="global.html#modIngredientStock">modIngredientStock</a></li><li><a href="global.html#modIngredientUnitPrice">modIngredientUnitPrice</a></li><li><a href="global.html#otherTip">otherTip</a></li><li><a href="global.html#putToppingsinDiv">putToppingsinDiv</a></li><li><a href="global.html#resetForms">resetForms</a></li><li><a href="global.html#sendtocheckout">sendtocheckout</a></li><li><a href="global.html#showInputBox">showInputBox</a></li><li><a href="global.html#showReport">showReport</a></li><li><a href="global.html#toggleAuthenticationViews">toggleAuthenticationViews</a></li><li><a href="global.html#toggleForm">toggleForm</a></li><li><a href="global.html#toppingHeader">toppingHeader</a></li><li><a href="global.html#toppingItem">toppingItem</a></li><li><a href="global.html#translateElements">translateElements</a></li><li><a href="global.html#translateElements2">translateElements2</a></li><li><a href="global.html#updatePageDynamically">updatePageDynamically</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Dec 03 2023 19:22:17 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

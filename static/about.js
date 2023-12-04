@@ -52,6 +52,10 @@ $('.carousel').carousel({
     interval: 5000 //have it cycle
   })
 
+  /**
+   * Translates elements with a specific class to a specified language.
+   * @param {string} lang - The target language for translation.
+   */
   function translateElements2(lang) {
     var targetLanguage = lang;
     const elements = document.querySelectorAll('.translate');

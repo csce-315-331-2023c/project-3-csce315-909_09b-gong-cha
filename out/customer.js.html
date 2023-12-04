@@ -1,8 +1,36 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: customer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: customer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @fileoverview This file contains functions for the customer page
  */
 
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'https://csce-315-project-3-gong-cha.onrender.com/';
 
 /*preset arrays so we can quickly determine ice levels */
 var ice_ary = ["regular", "light", "none"]
@@ -60,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /**
  * Asynchronously fetches toppings from the provided URL.
- * @returns {Promise<Array<Object>>} - A Promise resolving to an array of toppings.
+ * @returns {Promise&lt;Array&lt;Object>>} - A Promise resolving to an array of toppings.
  */
 async function getToppings(){
     var request = await fetch(url + "/toppings").then((res) => res.json());
@@ -79,7 +107,7 @@ async function putToppingsinDiv(){
     //insert into toppingDiv
     var toppingDiv = document.getElementById("toppingDiv");
     toppingDiv.innerHTML = "";
-    for (var i = 0; i < toppings.length; i++){
+    for (var i = 0; i &lt; toppings.length; i++){
         //use above format
         var labelElement = document.createElement("label");
         labelElement.setAttribute("for", "quantity");
@@ -142,7 +170,7 @@ var name_change = document.getElementById("name");
  */
 function createButton(drinkname, json) {
     var button = document.createElement("button");
-    // <button type="button" class="btn btn-light btn-outline-dark btn-lg"><img src="images/teas/1.png">Milk Tea Series</button>
+    // &lt;button type="button" class="btn btn-light btn-outline-dark btn-lg">&lt;img src="images/teas/1.png">Milk Tea Series&lt;/button>
     
     button.type = "button";
     button.className = "btn btn-light btn-outline-dark btn-lg";
@@ -258,7 +286,7 @@ async function insertinfo(){
     tea.innerHTML = "";
     other.innerHTML = "";
     //insert the json into the div
-    for (var i = 0; i < request.length; i++){
+    for (var i = 0; i &lt; request.length; i++){
         button = createButton(request[i].recipe_name, request[i]);
         let name = request[i].recipe_name;
         if(request[i].is_slush){
@@ -299,7 +327,7 @@ function translateElements2(lang) {
     console.log(elements);
     elements.forEach(element => {
         const textToTranslate = element.textContent;
-        fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&q=${encodeURIComponent(textToTranslate)}&target=${targetLanguage}`, {
+        fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}&amp;q=${encodeURIComponent(textToTranslate)}&amp;target=${targetLanguage}`, {
             method: 'POST'
         })
             .then(response => response.json())
@@ -311,4 +339,26 @@ function translateElements2(lang) {
                 console.error('Translation error:', error);
             });
     });
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Checkout">Checkout</a></li><li><a href="global.html#addDrink">addDrink</a></li><li><a href="global.html#addIngredient">addIngredient</a></li><li><a href="global.html#calculateTip">calculateTip</a></li><li><a href="global.html#changeTextSize">changeTextSize</a></li><li><a href="global.html#checkLoginInfo">checkLoginInfo</a></li><li><a href="global.html#checkManager">checkManager</a></li><li><a href="global.html#checkout">checkout</a></li><li><a href="global.html#clearOrder">clearOrder</a></li><li><a href="global.html#confirmCheckout">confirmCheckout</a></li><li><a href="global.html#createAccount">createAccount</a></li><li><a href="global.html#createButton">createButton</a></li><li><a href="global.html#createColumn">createColumn</a></li><li><a href="global.html#createHeaders">createHeaders</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#createManager">createManager</a></li><li><a href="global.html#createTableFromJSON">createTableFromJSON</a></li><li><a href="global.html#drinkTable">drinkTable</a></li><li><a href="global.html#fetchIngredientsAndDisplay">fetchIngredientsAndDisplay</a></li><li><a href="global.html#gatherValues">gatherValues</a></li><li><a href="global.html#generateExcessReport">generateExcessReport</a></li><li><a href="global.html#generateRestockReport">generateRestockReport</a></li><li><a href="global.html#generateSalesReport">generateSalesReport</a></li><li><a href="global.html#getDrinks">getDrinks</a></li><li><a href="global.html#getDrinks2">getDrinks2</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getSavedTextSize">getSavedTextSize</a></li><li><a href="global.html#getTipAmount">getTipAmount</a></li><li><a href="global.html#getToppings">getToppings</a></li><li><a href="global.html#ingredientTable">ingredientTable</a></li><li><a href="global.html#insertIntoReceipt">insertIntoReceipt</a></li><li><a href="global.html#insertOrder">insertOrder</a></li><li><a href="global.html#insertOrderItem">insertOrderItem</a></li><li><a href="global.html#insertOrderItemTopping">insertOrderItemTopping</a></li><li><a href="global.html#insertinfo">insertinfo</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#modDrinkIngredients">modDrinkIngredients</a></li><li><a href="global.html#modDrinkLargePrice">modDrinkLargePrice</a></li><li><a href="global.html#modDrinkMediumPrice">modDrinkMediumPrice</a></li><li><a href="global.html#modDrinkName">modDrinkName</a></li><li><a href="global.html#modDrinkRecipePrice">modDrinkRecipePrice</a></li><li><a href="global.html#modIngredientMinStock">modIngredientMinStock</a></li><li><a href="global.html#modIngredientName">modIngredientName</a></li><li><a href="global.html#modIngredientStock">modIngredientStock</a></li><li><a href="global.html#modIngredientUnitPrice">modIngredientUnitPrice</a></li><li><a href="global.html#otherTip">otherTip</a></li><li><a href="global.html#putToppingsinDiv">putToppingsinDiv</a></li><li><a href="global.html#resetForms">resetForms</a></li><li><a href="global.html#sendtocheckout">sendtocheckout</a></li><li><a href="global.html#showInputBox">showInputBox</a></li><li><a href="global.html#showReport">showReport</a></li><li><a href="global.html#toggleAuthenticationViews">toggleAuthenticationViews</a></li><li><a href="global.html#toggleForm">toggleForm</a></li><li><a href="global.html#toppingHeader">toppingHeader</a></li><li><a href="global.html#toppingItem">toppingItem</a></li><li><a href="global.html#translateElements">translateElements</a></li><li><a href="global.html#translateElements2">translateElements2</a></li><li><a href="global.html#updatePageDynamically">updatePageDynamically</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Dec 03 2023 19:22:17 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
