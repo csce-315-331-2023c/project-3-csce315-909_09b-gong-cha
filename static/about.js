@@ -2,7 +2,7 @@
  * @fileoverview This file contains functions for the about page
  */
 
-const url = 'https://csce-315-project-3-gong-cha.onrender.com';
+const url = 'http://localhost:5000';
 document.addEventListener("DOMContentLoaded", function() {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   const isEmployee = localStorage.getItem('isEmployee');
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const { current } = data;
       const tempF = current.temp_f;
 
-      weatherInfo.innerHTML = `Weather: ${tempF}°F`;
+      weatherInfo.innerHTML = `Weather: ${tempF}°F in College Station, TX`;
       if (localStorage.getItem('lang') == 'es') {
         translateElements2('es');
       }
