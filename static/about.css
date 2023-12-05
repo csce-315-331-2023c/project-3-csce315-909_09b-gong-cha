@@ -1,4 +1,10 @@
 #weather-info {
-color: white; 
+    color: white; 
 }
+.navbar-brand {
+    padding-left: 10px !important;
+}
+#weather-info {
+    white-space: nowrap;
+  }
 
